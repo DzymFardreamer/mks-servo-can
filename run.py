@@ -1,7 +1,9 @@
 import can
 import time
  
+from mks_servo import MksServo
 from can_commands import MksServo 
+from can_set import MksServo
 
 # Stock slcan firmware on Windows
 bus = can.interface.Bus(bustype='slcan', channel='COM3', bitrate=500000)
@@ -58,5 +60,5 @@ print(servo.run_motor_relative_motion_by_pulses(MksServo.Direction.CW, 400, 2, 0
 #else:
 #    print("No se recibió una respuesta válida")
     
-
+servo.d()
 bus.shutdown()
