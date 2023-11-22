@@ -14,21 +14,21 @@ from mks_enums import EndStopLevel
 from mks_enums import GoHomeResult, Mode0
 
 # TODO: It is a continuous call until result is 1 or 2?
-def CalibrateEncoder(self):
-    rslt = self.SetGeneric(0x80, 0x00)
+def calibrate_encoder(self):
+    rslt = self.set_generic(0x80, 0x00)
     try:
         rslt.status = CalibrationResult(rslt.status)
     except ValueError:
         print(f"No enum member with value {rslt.status}")     
         return None                   
     return rslt    
-MksServo = CalibrateEncoder(MksServo)
+MksServo = calibrate_encoder(MksServo)
 
-def SetWorkMode(self, mode: WorkMode):
-    return self.SetGenericStatus(0x82, mode)
-MksServo = SetWorkMode(MksServo)
+def set_work_mode(self, mode: WorkMode):
+    return self.set_generic_status(0x82, mode)
+MksServo = set_work_mode(MksServo)
 
-def SetWorkingCurrent(self, current):
+def set_working_current(self, current):
     if current < 0 or current > 5200:
         print("Invalid current")
         return None    
@@ -68,83 +68,83 @@ def SetWorkingCurrent(self, current):
                         return None
             else:
                 print("Invalid message CRC") 
-MksServo = SetWorkingCurrent(MksServo)
+MksServo = set_working_current(MksServo)
 
-def SetHoldingCurrent(self, strength: HoldingStrength):
-    return self.SetGenericStatus(0x9B, strength)    
-MksServo = SetHoldingCurrent(MksServo)
+def set_holding_current(self, strength: HoldingStrength):
+    return self.set_generic_status(0x9B, strength)    
+MksServo = set_holding_current(MksServo)
 
-def SetSubDivision(self, mstep):
-    return self.SetGenericStatus(0x84, mstep)    
-MksServo = SetSubDivision(MksServo)
+def set_subdivision(self, mstep):
+    return self.set_generic_status(0x84, mstep)    
+MksServo = set_subdivision(MksServo)
 
-def SetEnPinConfig(self, enable: EnPinEnable):
-    return self.SetGenericStatus(0x85, enable)     
-MksServo = SetEnPinConfig(MksServo)
+def set_en_pin_config(self, enable: EnPinEnable):
+    return self.set_generic_status(0x85, enable)     
+MksServo = set_en_pin_config(MksServo)
 
-def SetMotorRototationDirection(self, direction: Direction):
-    return self.SetGenericStatus(0x86, direction)
-MksServo = SetMotorRototationDirection(MksServo)
+def set_motor_rotation_direction(self, direction: Direction):
+    return self.set_generic_status(0x86, direction)
+MksServo = set_motor_rotation_direction(MksServo)
 
-def SetAutoTurnOffScreen(self, enable: Enable):
-    return self.SetGenericStatus(0x87, enable)
-MksServo = SetAutoTurnOffScreen(MksServo)
+def set_auto_turn_off_screen(self, enable: Enable):
+    return self.set_generic_status(0x87, enable)
+MksServo = set_auto_turn_off_screen(MksServo)
 
-def SetMotorShaftLockedRotorProtection(self, enable: Enable):
-    return self.SetGenericStatus(0x88, enable)
-MksServo = SetAutoTurnOffScreen(MksServo)
+def set_motor_shaft_locked_rotor_protection(self, enable: Enable):
+    return self.set_generic_status(0x88, enable)
+MksServo = set_auto_turn_off_screen(MksServo)
 
-def SetSubDivisionInterpolation(self, enable: Enable):
-    return self.SetGenericStatus(0x89, enable)
-MksServo = SetSubDivisionInterpolation(MksServo)
+def set_subdivision_interpolation(self, enable: Enable):
+    return self.set_generic_status(0x89, enable)
+MksServo = set_subdivision_interpolation(MksServo)
 
-def SetCanBitrate(self, bitrate: CanBitrate):
-    return self.SetGenericStatus(0x8A, bitrate)
-MksServo = SetCanBitrate(MksServo)
+def set_can_bitrate(self, bitrate: CanBitrate):
+    return self.set_generic_status(0x8A, bitrate)
+MksServo = set_can_bitrate(MksServo)
 
-def SetCanId(self, can_id):
-    return self.SetGenericStatus(0x8B, [(can_id >> 8) & 0xF, can_id & 0xFF])
-MksServo = SetCanId(MksServo)
+def set_can_id(self, can_id):
+    return self.set_generic_status(0x8B, [(can_id >> 8) & 0xF, can_id & 0xFF])
+MksServo = set_can_id(MksServo)
 
-def SetSlaveRespondActive(self):
+def set_slave_respond_active(self):
     print ("Not implemented")
-MksServo = SetSlaveRespondActive(MksServo)
+MksServo = set_slave_respond_active(MksServo)
 
-def SetKeyLockEnable(self, enable: Enable):
-    return self.SetGenericStatus(0x8F, enable)
-MksServo = SetCanBitrate(MksServo)
+def set_key_lock_enable(self, enable: Enable):
+    return self.set_generic_status(0x8F, enable)
+MksServo = set_can_bitrate(MksServo)
 
-def SetGroupId(self, group_id):
-    return self.SetGenericStatus(0x8D, [(group_id >> 8) & 0xF, group_id & 0xFF])
-MksServo = SetCanId(MksServo)
+def set_group_id(self, group_id):
+    return self.set_generic_status(0x8D, [(group_id >> 8) & 0xF, group_id & 0xFF])
+MksServo = set_can_id(MksServo)
 
-def SetHome(self, homeTrig : EndStopLevel, homeDir: Direction, homeSpeed, endLimit: Enable):
-    return self.SetGenericStatus(0x90, [homeTrig, homeDir, (homeSpeed >> 8) & 0xF, homeSpeed & 0xFF, endLimit])
-MksServo = SetHome(MksServo)
+def set_home(self, homeTrig : EndStopLevel, homeDir: Direction, homeSpeed, endLimit: Enable):
+    return self.set_generic_status(0x90, [homeTrig, homeDir, (homeSpeed >> 8) & 0xF, homeSpeed & 0xFF, endLimit])
+MksServo = set_home(MksServo)
 
-def GoHome(self):
-    rslt = self.SetGeneric(0x91)
+def go_home(self):
+    rslt = self.set_generic(0x91)
     try:
         rslt.status = GoHomeResult(rslt.status)
     except ValueError:
         print(f"No enum member with value {rslt.status}")     
         return None                   
     return rslt    
-MksServo = GoHome(MksServo)
+MksServo = go_home(MksServo)
 
-def SetCurrentAxisToZero(self):
-    return self.SetGenericStatus(0x92)   
-MksServo = GoHome(MksServo)
+def set_current_axis_to_zero(self):
+    return self.set_generic_status(0x92)   
+MksServo = go_home(MksServo)
 
-def SetLimitPortRemap(self, enable: Enable):
-    return self.SetGenericStatus(0x9E, enable)   
-MksServo = GoHome(MksServo)    
+def set_limit_port_remap(self, enable: Enable):
+    return self.set_generic_status(0x9E, enable)   
+MksServo = go_home(MksServo)    
 
-def SetMode0(self, mode : Mode0, enable : Enable, speed, direction: Direction):
+def set_mode0(self, mode : Mode0, enable : Enable, speed, direction: Direction):
     cmd = [mode, enable, speed, direction]
-    return self.SetGenericStatus(0x3F, [mode, enable, speed, direction])   
-MksServo = SetMode0(MksServo)    
+    return self.set_generic_status(0x3F, [mode, enable, speed, direction])   
+MksServo = set_mode0(MksServo)    
 
-def RestoreDefaultParameters(self):
-    return self.SetGenericStatus(0x3F)   
-MksServo = RestoreDefaultParameters(MksServo)    
+def restore_default_parameters(self):
+    return self.set_generic_status(0x3F)   
+MksServo = restore_default_parameters(MksServo)    

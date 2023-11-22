@@ -74,4 +74,23 @@ class Mode0(Enum):
     Disable = 0
     DirMode = 1
     NearMode = 2
+
+class SaveCleanState(Enum):
+    Save = 0xC8
+    Clean = 0xCA
+
+class RunMotorResult(Enum):
+    RunFail = 0
+    RunStarting = 1
+    RunComplete = 2
+    RunEndLimitStoped = 3
+
+class MotorStatus(Enum):
+    Fail = 0
+    MotorStop = 1
+    MotorSpeedUp = 2
+    MotorSpeedDown = 3
+    MotorFullSpeed = 4
+    MotorHoming = 5
+    MotorIsCalibrating = 6
     
