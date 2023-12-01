@@ -1,6 +1,5 @@
 import time
 import can
-from mks_servo import MksServo
 
 def read_encoder_value_carry(self):
     """
@@ -39,7 +38,6 @@ def read_encoder_value_carry(self):
         return {'carry': carry, 'value': value}
     
     return None          
-MksServo = read_encoder_value_carry(MksServo)
 
 # Command 02: 
 def read_encoder_value_addition(self):    
@@ -52,7 +50,6 @@ def read_encoder_value_addition(self):
         value = int.from_bytes(data[1:7], byteorder='big', signed=True)                        
         return {'value': value}    
     return None  
-MksServo = read_encoder_value_addition(MksServo)
 
 # Command 3
 def read_motor_speed(self):
@@ -66,7 +63,6 @@ def read_motor_speed(self):
         return {'speed': speed} 
     return None  
 
-MksServo = read_motor_speed(MksServo)
 
 # Command 04
 def read_num_pulses_received(self): 
@@ -80,7 +76,6 @@ def read_num_pulses_received(self):
         return {'pulses': pulses}
     return None  
 
-MksServo = read_num_pulses_received(MksServo)
 
 # Command 06
 def read_io_port_status(self):
@@ -93,7 +88,6 @@ def read_io_port_status(self):
         status = int.from_bytes(data[1:2], byteorder='big')                        
         return {'status': status}
     return None  
-MksServo = read_io_port_status(MksServo)
 
 def read_motor_shaft_angle_error(self):
     op_code = 0x39
@@ -105,7 +99,6 @@ def read_motor_shaft_angle_error(self):
         error = int.from_bytes(data[1:5], byteorder='big', signed=True)                        
         return {'error': error}
     return None  
-MksServo = read_motor_shaft_angle_error(MksServo)
 
 # command 6
 def read_en_pins_status(self):
@@ -118,7 +111,6 @@ def read_en_pins_status(self):
         enable = int.from_bytes(data[1:2], byteorder='big')                        
         return {'enable': enable}
     return None            
-MksServo = read_en_pins_status(MksServo)
 
 def read_go_back_to_zero_status_when_power_on(self):
     op_code = 0x3B
@@ -130,7 +122,6 @@ def read_go_back_to_zero_status_when_power_on(self):
         status = int.from_bytes(data[1:2], byteorder='big')                        
         return {'status': status}
     return None   
-MksServo = read_go_back_to_zero_status_when_power_on(MksServo)
 
 def release_motor_shaft_locked_protection_state(self):
     op_code = 0x3D
@@ -142,7 +133,6 @@ def release_motor_shaft_locked_protection_state(self):
         status = int.from_bytes(data[1:2], byteorder='big')                        
         return {'status': status}
     return None   
-MksServo = release_motor_shaft_locked_protection_state(MksServo)
 
 def read_motor_shaft_protection_state(self):
     op_code = 0x3E
@@ -154,4 +144,3 @@ def read_motor_shaft_protection_state(self):
         enable = int.from_bytes(data[1:2], byteorder='big')                        
         return {'enable': enable}
     return None             
-MksServo = read_motor_shaft_protection_state(MksServo)

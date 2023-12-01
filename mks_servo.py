@@ -27,6 +27,94 @@ class InvalidResponseError(Exception):
     pass
 
 class MksServo:
+    from can_commands import (
+        read_encoder_value_carry,
+        read_encoder_value_addition,
+        read_motor_speed,
+        read_num_pulses_received,
+        read_io_port_status,
+        read_motor_shaft_angle_error,
+        read_en_pins_status,
+        read_go_back_to_zero_status_when_power_on,
+        release_motor_shaft_locked_protection_state,
+        read_motor_shaft_protection_state
+    )
+
+    from can_motor import (
+        QUERY_MOTOR_STATUS_COMMAND,
+        ENABLE_MOTOR_COMMAND,
+        EMERGENCY_STOP_COMMAND,
+        RUN_MOTOR_SPEED_MODE_COMMAND,
+        SAVE_CLEAN_IN_SPEED_MODE_COMMAND,
+        RUN_MOTOR_RELATIVE_MOTION_BY_PULSES_COMMAND,
+        RUN_MOTOR_RELATIVE_MOTION_BY_AXIS_COMMAND,
+        RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND,
+        MAX_SPEED,
+        MAX_ACCELERATION,
+        MAX_PULSES,
+        invalid_direction_error,
+        invalid_speed_error,
+        invalid_aceleration_error,
+        invalid_pulses_error,
+        motor_status_error,
+        _validate_direction,
+        _validate_speed,
+        _validate_acceleration,
+        _validate_pulses,
+        query_motor_status,
+        enable_motor,
+        emergency_stop_motor,
+        run_motor_in_speed_mode,
+        save_clean_in_speed_mode,
+        run_motor_relative_motion_by_pulses,
+        run_motor_relative_motion_by_axis,
+        run_motor_absolute_motion_by_axis
+    )
+    from can_set import (
+        _validate_current,
+        calibrate_encoder,
+        set_work_mode,
+        set_working_current,
+        set_holding_current,
+        set_subdivision,
+        set_en_pin_config,
+        set_motor_rotation_direction,
+        set_auto_turn_off_screen,
+        set_motor_shaft_locked_rotor_protection,
+        set_subdivision_interpolation,
+        set_can_bitrate,
+        set_can_id,
+        set_slave_respond_active,
+        set_key_lock_enable,
+        set_group_id,
+        set_home,
+        go_home,
+        set_current_axis_to_zero,
+        set_limit_port_remap,
+        set_mode0,
+        restore_default_parameters
+    )
+
+    from mks_enums import (
+        Direction,
+        Enable,
+        SuccessStatus,
+        StatusCommand7,
+        StatusCommand8,
+        StatusCommand9,
+        CalibrationResult,
+        WorkMode,
+        HoldingStrength,
+        EnPinEnable,
+        CanBitrate,
+        EndStopLevel,
+        GoHomeResult,
+        Mode0,
+        SaveCleanState,
+        RunMotorResult,
+        MotorStatus
+    )
+
     """Controls MKS Servo via CAN messages.
 
     This class provides functionality to send commands to and receive responses from 
@@ -42,7 +130,7 @@ class MksServo:
     GENERIC_RESPONSE_LENGTH = 3
     DEFAULT_TIMEOUT = 1
 
-    def __init__ (self, bus, id):
+    def __init__ (self, bus, notifier, id):
         """Inits MksServo with the CAN bus and servo ID.
 
         Args:
@@ -51,8 +139,26 @@ class MksServo:
         """        
         self.can_id = id
         self.bus = bus
+        self.notifier = notifier
         self.timeout = MksServo.DEFAULT_TIMEOUT
 
+    def _bool_to_int(self, value):
+        """
+        Checks if the input is a boolean. If yes, returns 1 for True and 0 for False.
+        If the input is not a boolean, the value is returned.
+
+        Args:
+        - value: The value to be checked and converted.
+
+        Returns:
+        - int: 1 if value is True, 0 if value is False, value otherwise
+        - str: A message if the value is not a boolean.
+        """
+        if isinstance(value, bool):
+            return [1] if value else [0]
+        else:
+            return value
+            
     def create_can_msg(self, msg):
         """Creates a CAN message with a CRC byte appended at the end.
 
@@ -67,7 +173,7 @@ class MksServo:
         crc = (self.can_id + sum(msg)) & 0xFF
         write_data = bytearray(msg) + bytes([crc])
         
-        can_message = can.Message(arbitration_id=self.self.can_id, data=write_data, is_extended_id=False)            
+        can_message = can.Message(arbitration_id=self.can_id, data=write_data, is_extended_id=False)            
         logging.debug(f"CAN Message Created: {can_message}")
 
         return can_message
@@ -100,9 +206,16 @@ class MksServo:
 
         Returns:
             dict: A dictionary with 'status' key if successful, None otherwise.
-        """        
-        msg = self.create_can_msg(self.can_id, [op_code] + data)
+        """      
 
+        # Check if data is an integer and convert it to a list if it is
+        if isinstance(data, int):
+            data = [data]
+        elif isinstance(data, bool):
+            # Assuming _bool_to_int is a method that converts a boolean to an integer
+            data = self._bool_to_int(data)
+                    
+        msg = self.create_can_msg([op_code] + data)
         # Flag to indicate whether the response has been received
         status = None
 
@@ -116,13 +229,12 @@ class MksServo:
                         if not (message.data[0] == op_code and len(message.data) == response_length):
                             logging.error(f"Unexpected response length or opcode.")
                         
-                        status = int.from_bytes(message.data, byteorder='big')                                         
-                        self.bus.remove_listener(receive_message)
+                        status = message.data                                                                
                 except InvalidCRCError:
                     logging.error(f"CRC check failed for the message: {e}")            
 
         try:        
-            self.bus.add_listener(receive_message)
+            self.notifier.add_listener(receive_message)
             self.bus.send(msg)
         except can.CanError as e:
             raise CanMessageError(f"Error sending message: {e}")            
@@ -131,7 +243,7 @@ class MksServo:
         start_time = time.time()
         while time.time() - start_time < self.timeout and not status:
             time.sleep(0.1)  # Small sleep to prevent busy waiting
-        self.bus.remove_listener(receive_message)
+        self.notifier.remove_listener(receive_message)
 
         return status
                       
@@ -145,12 +257,14 @@ class MksServo:
         Returns:
             dict: Modified result dictionary with 'status' key, None on error.
         """        
-        result = self.set_generic(op_code, MksServo.GENERIC_RESPONSE_LENGTH, data)
-        status_int = int.from_bytes(result[1:2], byteorder='big')  
-        try:
-            result.status = SuccessStatus(result.status)
+        tmp = self.set_generic(op_code, MksServo.GENERIC_RESPONSE_LENGTH, data)
+        status_int = int.from_bytes(tmp[1:2], byteorder='big')  
+
+        result = {}
+        try:            
+            result['status'] = SuccessStatus(status_int)
         except ValueError:
-            raise InvalidResponseError(f"No enum member with value {result['status']}")
+            raise InvalidResponseError(f"No enum member with value {status_int}")
                
         return result
     

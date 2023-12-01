@@ -7,7 +7,7 @@ class Direction(Enum):
 
 class Enable(Enum):
     Disabled = 0
-    Eenabled = 1
+    Enabled = 1
 
 class SuccessStatus(Enum):
     Fail = 0
