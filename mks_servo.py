@@ -174,7 +174,7 @@ class MksServo:
                         print("New message")
                         print(message, flush=True)                                       
             except InvalidCRCError:
-                logging.error(f"CRC check failed for the message: {e}")                    
+                logging.error(f"CRC check failed for the message")                    
             return True
                    
         self.can_id = id
@@ -310,3 +310,11 @@ class MksServo:
             return result
         return None
     
+    def specialized_state(self, op_code, status_enum, status_enum_exception):
+        tmp = self.set_generic(op_code, self.GENERIC_RESPONSE_LENGTH, [op_code])  
+        status_int = int.from_bytes(tmp[1:2], byteorder='big')  
+        try:
+            return status_enum(status_int)
+        except ValueError:
+            raise status_enum_exception(f"No enum member with value {status_int}")                     
+        

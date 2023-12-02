@@ -1,19 +1,35 @@
 from enum import Enum
 
+class MksCommands(Enum):
+    READ_ENCODER_VALUE_CARRY = 0x30
+    READ_ENCODED_VALUE_ADDITION = 0x31
+    READ_MOTOR_SPEED = 0x32
+    READ_NUM_PULSES_RECEIVED = 0x33
+    READ_IO_PORT_STATUS = 0x34
+    READ_MOTOR_SHAFT_ANGLE_ERROR = 0x39
+    READ_EN_PINS_STATUS = 0x3A
+    READ_GO_BACK_TO_ZERO_STATUS_WHEN_POWER_ON = 0x3B
+    RELEASE_MOTOR_SHAFT_LOCKED_PROTECTION_STATE = 0x3D
+    READ_MOTOR_SHAFT_PROTECTION_STATE = 0x3E
+
 
 class Direction(Enum):
     CW = 1  # Clockwise
     CCW = 2  # Counter-Clockwise
 
 class Enable(Enum):
+    Disable = 0
+    Enable = 1
+
+class EnableStatus(Enum):
     Disabled = 0
-    Enabled = 1
+    Enabled = 1    
 
 class SuccessStatus(Enum):
     Fail = 0
     Success = 1    
 
-class StatusCommand7:
+class GoBackToZeroStatus(Enum):
     GoingToZero = 0
     GoBackToZeroSuccess = 1
     GoBackToZeroFail = 2
@@ -94,4 +110,7 @@ class MotorStatus(Enum):
     MotorFullSpeed = 4
     MotorHoming = 5
     MotorIsCalibrating = 6
-    
+
+class MotorShaftProtectionStatus(Enum):
+    Protected = 1
+    NotProtected = 0
