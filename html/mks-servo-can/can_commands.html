@@ -1,0 +1,878 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>mks-servo-can.can_commands API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>mks-servo-can.can_commands</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import time
+import can
+from mks_enums import MksCommands, MotorShaftProtectionStatus, SuccessStatus, GoBackToZeroStatus, EnableStatus
+
+class motor_shaft_protection_status_error(Exception):
+    &#34;&#34;&#34;Exception raised for invalid motor shaft protection status.&#34;&#34;&#34;
+    pass
+
+class success_status_error(Exception):
+    &#34;&#34;&#34;Exception raised for invalid motor shaft protection status.&#34;&#34;&#34;
+    pass
+
+class go_back_to_zero_status_error(Exception):
+    &#34;&#34;&#34;Exception raised for invalid motor shaft protection status.&#34;&#34;&#34;
+    pass
+
+class enable_status_error(Exception):
+    &#34;&#34;&#34;Exception raised for invalid motor shaft protection status.&#34;&#34;&#34;
+    pass
+
+def read_encoder_value_carry(self):
+    &#34;&#34;&#34;
+    Reads the encoder value
+
+    Returns:
+        dict or None: If successful, returns a dictionary with &#39;carry&#39; and &#39;value&#39; from the encoder. 
+    Returns None if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+    invalid.
+
+    Keyword Returns:
+        &lt;carry&gt; int: The carry value of the encoder. 
+            When value is greather than 0x3FFF, carry += 1. 
+            When value is less than 0, carry -= 1
+          
+        &lt;value&gt; int: The current value of the encoder (range from 0 to 0x3FFF).
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+
+    Examples:
+        if the current carry is 0 and value is 0x3FF0, after one turn CCW, the carry is 1 and value is 0x3FF0.
+        if the current carry is 0 and value is 0x3FF0, after one turn CW, the carry is -1 and value is 0x3FF0.
+    &#34;&#34;&#34;
+    op_code = MksCommands.READ_ENCODER_VALUE_CARRY
+    response_length = 8
+
+    data = self.set_generic(op_code, response_length, [op_code])
+
+    if data:
+        carry = int.from_bytes(data[1:5], byteorder=&#39;big&#39;, signed=True)
+        value = int.from_bytes(data[5:7], byteorder=&#39;big&#39;, signed=True)
+        return {&#39;carry&#39;: carry, &#39;value&#39;: value}
+    
+    return None          
+
+def read_encoder_value_addition(self): 
+    &#34;&#34;&#34;
+    Reads the encoder value in addition mode
+
+    Returns:
+        int: If successful, returns the current value of the encoder (range from 0 to +-0x7FFFFFFFFFFF).
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+
+    Examples:
+        if the current value is 0x3FF0, after one turn CCW, the carry is 1 and value is 0x7FF0.
+        if the current value is 0x3FF0, after one turn CW, the carry is -1 and value is -0x10.
+    &#34;&#34;&#34;       
+    op_code = MksCommands.READ_ENCODED_VALUE_ADDITION
+    response_length = 8
+
+    data = self.set_generic(op_code, response_length, [op_code])
+
+    if data:
+        return int.from_bytes(data[1:7], byteorder=&#39;big&#39;, signed=True)                                
+    return None  
+
+def read_motor_speed(self):
+    &#34;&#34;&#34;
+    Read the real-time speed of the motor (RPM).
+
+    Returns:
+        int: If successful, returns the current speed of the motor in RPM.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+
+    Note:
+        If it runs CCW, the speed is positive.
+        If it runs CW, the speed is negative.
+    &#34;&#34;&#34;          
+    op_code = MksCommands.READ_MOTOR_SPEED
+    response_length = 4
+
+    data = self.set_generic(op_code, response_length, [op_code])
+
+    # TODO: Raise an exception here  if there is a problem parsing the response
+    if data:
+        return int.from_bytes(data[1:3], byteorder=&#39;big&#39;, signed=True)                                
+    return None  
+
+def read_num_pulses_received(self): 
+    &#34;&#34;&#34;
+    Reads the number of pulses received
+
+    Returns:
+        int: If successful, returns the number of pulses received.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    &#34;&#34;&#34;          
+    op_code = MksCommands.READ_NUM_PULSES_RECEIVED
+    response_length = 6
+
+    data = self.set_generic(op_code, response_length, [op_code])
+
+    # TODO: Raise an exception here  if there is a problem parsing the response
+    if data:
+        return int.from_bytes(data[1:5], byteorder=&#39;big&#39;, signed=True)                                
+    return None  
+
+def read_io_port_status(self):
+    &#34;&#34;&#34;
+    Reads the IO Ports status
+
+    Returns:
+        int: If successful, returns the port status as Bit[0] is IN_1, Bit[1] is IN_2, Bit[2] is OUT_1, Bit[3] is OUT_2
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    &#34;&#34;&#34;        
+    op_code = MksCommands.READ_NUM_PULSES_RECEIVED
+    response_length = 3
+    data = self.set_generic(op_code, response_length, [op_code])
+
+    # TODO: Parse the response and return the data in a dictionary for each of the pins
+    if data:
+        return int.from_bytes(data[1:2], byteorder=&#39;big&#39;)                                
+    return None  
+
+def read_motor_shaft_angle_error(self):
+    &#34;&#34;&#34;
+    Reads the error on the motor shaft angle.
+
+    The error is the difference between the angle you want to control minus the real-time angle of the motor.
+
+    Returns:
+        int: If successful, returns the error of the motor shaft angle.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+
+    Note:
+        0 to 51200 corresponds to 0 to 360º.
+
+    Example:
+        When the angle error is 1º, the return error is 51200/360 = 142.
+    &#34;&#34;&#34;     
+    op_code = MksCommands.READ_MOTOR_SHAFT_ANGLE_ERROR
+    response_length = 6
+    data = self.set_generic(op_code, response_length, [op_code])
+
+    # TODO: Raise an exception here  if there is a problem parsing the response
+    if data:
+        return int.from_bytes(data[1:5], byteorder=&#39;big&#39;, signed=True)                                
+    return None  
+
+def read_en_pins_status(self):
+    &#34;&#34;&#34;
+    Reads the En pins status
+
+    Returns:
+        int: If successful, returns the enable pin status.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    &#34;&#34;&#34;     
+    return self.specialized_state(self.READ_EN_PINS_STATUS, 
+        EnableStatus, enable_status_error)                   
+
+def read_go_back_to_zero_status_when_power_on(self):
+    &#34;&#34;&#34;
+    Reads the go back to zero status when power on
+
+    Returns:
+        int: If successful, returns the go back to zero status.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    &#34;&#34;&#34;    
+    return self.specialized_state(self.READ_GO_BACK_TO_ZERO_STATUS_WHEN_POWER_ON, 
+        GoBackToZeroStatus, go_back_to_zero_status_error) 
+
+def release_motor_shaft_locked_protection_state(self):
+    &#34;&#34;&#34;
+    Release the motor shaft locked-rotor protection state.
+
+    Returns:
+        int: If successful, returns the release motor shaft locked protection state.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    &#34;&#34;&#34;        
+    return self.specialized_state(self.RELEASE_MOTOR_SHAFT_LOCKED_PROTECTION_STATE, 
+        SuccessStatus, success_status_error) 
+
+def read_motor_shaft_protection_state(self):
+    &#34;&#34;&#34;
+    Read the motor shaft protection state.
+
+    Returns:
+        int: If successful, returns the motor shaft protection state.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    &#34;&#34;&#34;                 
+    return self.specialized_state(self.READ_MOTOR_SHAFT_PROTECTION_STATE, 
+        MotorShaftProtectionStatus, motor_shaft_protection_status_error)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="mks-servo-can.can_commands.read_en_pins_status"><code class="name flex">
+<span>def <span class="ident">read_en_pins_status</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads the En pins status</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the enable pin status.</dd>
+<dt><code>None</code></dt>
+<dd>if there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_en_pins_status(self):
+    &#34;&#34;&#34;
+    Reads the En pins status
+
+    Returns:
+        int: If successful, returns the enable pin status.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    &#34;&#34;&#34;     
+    return self.specialized_state(self.READ_EN_PINS_STATUS, 
+        EnableStatus, enable_status_error)                   </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.can_commands.read_encoder_value_addition"><code class="name flex">
+<span>def <span class="ident">read_encoder_value_addition</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads the encoder value in addition mode</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the current value of the encoder (range from 0 to +-0x7FFFFFFFFFFF).</dd>
+<dt><code>None</code></dt>
+<dd>if there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<p>if the current value is 0x3FF0, after one turn CCW, the carry is 1 and value is 0x7FF0.
+if the current value is 0x3FF0, after one turn CW, the carry is -1 and value is -0x10.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_encoder_value_addition(self): 
+    &#34;&#34;&#34;
+    Reads the encoder value in addition mode
+
+    Returns:
+        int: If successful, returns the current value of the encoder (range from 0 to +-0x7FFFFFFFFFFF).
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+
+    Examples:
+        if the current value is 0x3FF0, after one turn CCW, the carry is 1 and value is 0x7FF0.
+        if the current value is 0x3FF0, after one turn CW, the carry is -1 and value is -0x10.
+    &#34;&#34;&#34;       
+    op_code = MksCommands.READ_ENCODED_VALUE_ADDITION
+    response_length = 8
+
+    data = self.set_generic(op_code, response_length, [op_code])
+
+    if data:
+        return int.from_bytes(data[1:7], byteorder=&#39;big&#39;, signed=True)                                
+    return None  </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.can_commands.read_encoder_value_carry"><code class="name flex">
+<span>def <span class="ident">read_encoder_value_carry</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads the encoder value</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code> or <code>None</code></dt>
+<dd>If successful, returns a dictionary with 'carry' and 'value' from the encoder. </dd>
+</dl>
+<p>Returns None if there's an error in sending the message, a self.timeout occurs, or the response is
+invalid.</p>
+<p>Keyword Returns:
+<carry> int: The carry value of the encoder.
+When value is greather than 0x3FFF, carry += 1.
+When value is less than 0, carry -= 1</p>
+<pre><code>&lt;value&gt; int: The current value of the encoder (range from 0 to 0x3FFF).
+</code></pre>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<p>if the current carry is 0 and value is 0x3FF0, after one turn CCW, the carry is 1 and value is 0x3FF0.
+if the current carry is 0 and value is 0x3FF0, after one turn CW, the carry is -1 and value is 0x3FF0.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_encoder_value_carry(self):
+    &#34;&#34;&#34;
+    Reads the encoder value
+
+    Returns:
+        dict or None: If successful, returns a dictionary with &#39;carry&#39; and &#39;value&#39; from the encoder. 
+    Returns None if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+    invalid.
+
+    Keyword Returns:
+        &lt;carry&gt; int: The carry value of the encoder. 
+            When value is greather than 0x3FFF, carry += 1. 
+            When value is less than 0, carry -= 1
+          
+        &lt;value&gt; int: The current value of the encoder (range from 0 to 0x3FFF).
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+
+    Examples:
+        if the current carry is 0 and value is 0x3FF0, after one turn CCW, the carry is 1 and value is 0x3FF0.
+        if the current carry is 0 and value is 0x3FF0, after one turn CW, the carry is -1 and value is 0x3FF0.
+    &#34;&#34;&#34;
+    op_code = MksCommands.READ_ENCODER_VALUE_CARRY
+    response_length = 8
+
+    data = self.set_generic(op_code, response_length, [op_code])
+
+    if data:
+        carry = int.from_bytes(data[1:5], byteorder=&#39;big&#39;, signed=True)
+        value = int.from_bytes(data[5:7], byteorder=&#39;big&#39;, signed=True)
+        return {&#39;carry&#39;: carry, &#39;value&#39;: value}
+    
+    return None          </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.can_commands.read_go_back_to_zero_status_when_power_on"><code class="name flex">
+<span>def <span class="ident">read_go_back_to_zero_status_when_power_on</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads the go back to zero status when power on</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the go back to zero status.</dd>
+<dt><code>None</code></dt>
+<dd>if there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_go_back_to_zero_status_when_power_on(self):
+    &#34;&#34;&#34;
+    Reads the go back to zero status when power on
+
+    Returns:
+        int: If successful, returns the go back to zero status.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    &#34;&#34;&#34;    
+    return self.specialized_state(self.READ_GO_BACK_TO_ZERO_STATUS_WHEN_POWER_ON, 
+        GoBackToZeroStatus, go_back_to_zero_status_error) </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.can_commands.read_io_port_status"><code class="name flex">
+<span>def <span class="ident">read_io_port_status</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads the IO Ports status</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the port status as Bit[0] is IN_1, Bit[1] is IN_2, Bit[2] is OUT_1, Bit[3] is OUT_2</dd>
+<dt><code>None</code></dt>
+<dd>if there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_io_port_status(self):
+    &#34;&#34;&#34;
+    Reads the IO Ports status
+
+    Returns:
+        int: If successful, returns the port status as Bit[0] is IN_1, Bit[1] is IN_2, Bit[2] is OUT_1, Bit[3] is OUT_2
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    &#34;&#34;&#34;        
+    op_code = MksCommands.READ_NUM_PULSES_RECEIVED
+    response_length = 3
+    data = self.set_generic(op_code, response_length, [op_code])
+
+    # TODO: Parse the response and return the data in a dictionary for each of the pins
+    if data:
+        return int.from_bytes(data[1:2], byteorder=&#39;big&#39;)                                
+    return None  </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.can_commands.read_motor_shaft_angle_error"><code class="name flex">
+<span>def <span class="ident">read_motor_shaft_angle_error</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads the error on the motor shaft angle.</p>
+<p>The error is the difference between the angle you want to control minus the real-time angle of the motor.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the error of the motor shaft angle.</dd>
+<dt><code>None</code></dt>
+<dd>if there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl>
+<h2 id="note">Note</h2>
+<p>0 to 51200 corresponds to 0 to 360º.</p>
+<h2 id="example">Example</h2>
+<p>When the angle error is 1º, the return error is 51200/360 = 142.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_motor_shaft_angle_error(self):
+    &#34;&#34;&#34;
+    Reads the error on the motor shaft angle.
+
+    The error is the difference between the angle you want to control minus the real-time angle of the motor.
+
+    Returns:
+        int: If successful, returns the error of the motor shaft angle.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+
+    Note:
+        0 to 51200 corresponds to 0 to 360º.
+
+    Example:
+        When the angle error is 1º, the return error is 51200/360 = 142.
+    &#34;&#34;&#34;     
+    op_code = MksCommands.READ_MOTOR_SHAFT_ANGLE_ERROR
+    response_length = 6
+    data = self.set_generic(op_code, response_length, [op_code])
+
+    # TODO: Raise an exception here  if there is a problem parsing the response
+    if data:
+        return int.from_bytes(data[1:5], byteorder=&#39;big&#39;, signed=True)                                
+    return None  </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.can_commands.read_motor_shaft_protection_state"><code class="name flex">
+<span>def <span class="ident">read_motor_shaft_protection_state</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Read the motor shaft protection state.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the motor shaft protection state.</dd>
+<dt><code>None</code></dt>
+<dd>if there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_motor_shaft_protection_state(self):
+    &#34;&#34;&#34;
+    Read the motor shaft protection state.
+
+    Returns:
+        int: If successful, returns the motor shaft protection state.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    &#34;&#34;&#34;                 
+    return self.specialized_state(self.READ_MOTOR_SHAFT_PROTECTION_STATE, 
+        MotorShaftProtectionStatus, motor_shaft_protection_status_error)</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.can_commands.read_motor_speed"><code class="name flex">
+<span>def <span class="ident">read_motor_speed</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Read the real-time speed of the motor (RPM).</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the current speed of the motor in RPM.</dd>
+<dt><code>None</code></dt>
+<dd>if there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl>
+<h2 id="note">Note</h2>
+<p>If it runs CCW, the speed is positive.
+If it runs CW, the speed is negative.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_motor_speed(self):
+    &#34;&#34;&#34;
+    Read the real-time speed of the motor (RPM).
+
+    Returns:
+        int: If successful, returns the current speed of the motor in RPM.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+
+    Note:
+        If it runs CCW, the speed is positive.
+        If it runs CW, the speed is negative.
+    &#34;&#34;&#34;          
+    op_code = MksCommands.READ_MOTOR_SPEED
+    response_length = 4
+
+    data = self.set_generic(op_code, response_length, [op_code])
+
+    # TODO: Raise an exception here  if there is a problem parsing the response
+    if data:
+        return int.from_bytes(data[1:3], byteorder=&#39;big&#39;, signed=True)                                
+    return None  </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.can_commands.read_num_pulses_received"><code class="name flex">
+<span>def <span class="ident">read_num_pulses_received</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads the number of pulses received</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the number of pulses received.</dd>
+<dt><code>None</code></dt>
+<dd>if there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_num_pulses_received(self): 
+    &#34;&#34;&#34;
+    Reads the number of pulses received
+
+    Returns:
+        int: If successful, returns the number of pulses received.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    &#34;&#34;&#34;          
+    op_code = MksCommands.READ_NUM_PULSES_RECEIVED
+    response_length = 6
+
+    data = self.set_generic(op_code, response_length, [op_code])
+
+    # TODO: Raise an exception here  if there is a problem parsing the response
+    if data:
+        return int.from_bytes(data[1:5], byteorder=&#39;big&#39;, signed=True)                                
+    return None  </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.can_commands.release_motor_shaft_locked_protection_state"><code class="name flex">
+<span>def <span class="ident">release_motor_shaft_locked_protection_state</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Release the motor shaft locked-rotor protection state.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the release motor shaft locked protection state.</dd>
+<dt><code>None</code></dt>
+<dd>if there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def release_motor_shaft_locked_protection_state(self):
+    &#34;&#34;&#34;
+    Release the motor shaft locked-rotor protection state.
+
+    Returns:
+        int: If successful, returns the release motor shaft locked protection state.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    &#34;&#34;&#34;        
+    return self.specialized_state(self.RELEASE_MOTOR_SHAFT_LOCKED_PROTECTION_STATE, 
+        SuccessStatus, success_status_error) </code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="mks-servo-can.can_commands.enable_status_error"><code class="flex name class">
+<span>class <span class="ident">enable_status_error</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Exception raised for invalid motor shaft protection status.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class enable_status_error(Exception):
+    &#34;&#34;&#34;Exception raised for invalid motor shaft protection status.&#34;&#34;&#34;
+    pass</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="mks-servo-can.can_commands.go_back_to_zero_status_error"><code class="flex name class">
+<span>class <span class="ident">go_back_to_zero_status_error</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Exception raised for invalid motor shaft protection status.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class go_back_to_zero_status_error(Exception):
+    &#34;&#34;&#34;Exception raised for invalid motor shaft protection status.&#34;&#34;&#34;
+    pass</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="mks-servo-can.can_commands.motor_shaft_protection_status_error"><code class="flex name class">
+<span>class <span class="ident">motor_shaft_protection_status_error</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Exception raised for invalid motor shaft protection status.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class motor_shaft_protection_status_error(Exception):
+    &#34;&#34;&#34;Exception raised for invalid motor shaft protection status.&#34;&#34;&#34;
+    pass</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="mks-servo-can.can_commands.success_status_error"><code class="flex name class">
+<span>class <span class="ident">success_status_error</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Exception raised for invalid motor shaft protection status.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class success_status_error(Exception):
+    &#34;&#34;&#34;Exception raised for invalid motor shaft protection status.&#34;&#34;&#34;
+    pass</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="mks-servo-can" href="index.html">mks-servo-can</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="mks-servo-can.can_commands.read_en_pins_status" href="#mks-servo-can.can_commands.read_en_pins_status">read_en_pins_status</a></code></li>
+<li><code><a title="mks-servo-can.can_commands.read_encoder_value_addition" href="#mks-servo-can.can_commands.read_encoder_value_addition">read_encoder_value_addition</a></code></li>
+<li><code><a title="mks-servo-can.can_commands.read_encoder_value_carry" href="#mks-servo-can.can_commands.read_encoder_value_carry">read_encoder_value_carry</a></code></li>
+<li><code><a title="mks-servo-can.can_commands.read_go_back_to_zero_status_when_power_on" href="#mks-servo-can.can_commands.read_go_back_to_zero_status_when_power_on">read_go_back_to_zero_status_when_power_on</a></code></li>
+<li><code><a title="mks-servo-can.can_commands.read_io_port_status" href="#mks-servo-can.can_commands.read_io_port_status">read_io_port_status</a></code></li>
+<li><code><a title="mks-servo-can.can_commands.read_motor_shaft_angle_error" href="#mks-servo-can.can_commands.read_motor_shaft_angle_error">read_motor_shaft_angle_error</a></code></li>
+<li><code><a title="mks-servo-can.can_commands.read_motor_shaft_protection_state" href="#mks-servo-can.can_commands.read_motor_shaft_protection_state">read_motor_shaft_protection_state</a></code></li>
+<li><code><a title="mks-servo-can.can_commands.read_motor_speed" href="#mks-servo-can.can_commands.read_motor_speed">read_motor_speed</a></code></li>
+<li><code><a title="mks-servo-can.can_commands.read_num_pulses_received" href="#mks-servo-can.can_commands.read_num_pulses_received">read_num_pulses_received</a></code></li>
+<li><code><a title="mks-servo-can.can_commands.release_motor_shaft_locked_protection_state" href="#mks-servo-can.can_commands.release_motor_shaft_locked_protection_state">release_motor_shaft_locked_protection_state</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="mks-servo-can.can_commands.enable_status_error" href="#mks-servo-can.can_commands.enable_status_error">enable_status_error</a></code></h4>
+</li>
+<li>
+<h4><code><a title="mks-servo-can.can_commands.go_back_to_zero_status_error" href="#mks-servo-can.can_commands.go_back_to_zero_status_error">go_back_to_zero_status_error</a></code></h4>
+</li>
+<li>
+<h4><code><a title="mks-servo-can.can_commands.motor_shaft_protection_status_error" href="#mks-servo-can.can_commands.motor_shaft_protection_status_error">motor_shaft_protection_status_error</a></code></h4>
+</li>
+<li>
+<h4><code><a title="mks-servo-can.can_commands.success_status_error" href="#mks-servo-can.can_commands.success_status_error">success_status_error</a></code></h4>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

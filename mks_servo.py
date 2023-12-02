@@ -28,7 +28,6 @@ class InvalidResponseError(Exception):
 
 class MksServo:
     from can_commands import (
-        QUERY_READ_ENCODED_VALUE_ADDITION_COMMAND,
         read_encoder_value_carry,
         read_encoder_value_addition,
         read_motor_speed,
@@ -42,14 +41,6 @@ class MksServo:
     )
 
     from can_motor import (
-        QUERY_MOTOR_STATUS_COMMAND,
-        ENABLE_MOTOR_COMMAND,
-        EMERGENCY_STOP_COMMAND,
-        RUN_MOTOR_SPEED_MODE_COMMAND,
-        SAVE_CLEAN_IN_SPEED_MODE_COMMAND,
-        RUN_MOTOR_RELATIVE_MOTION_BY_PULSES_COMMAND,
-        RUN_MOTOR_RELATIVE_MOTION_BY_AXIS_COMMAND,
-        RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND,
         MAX_SPEED,
         MAX_ACCELERATION,
         MAX_PULSES,
@@ -75,7 +66,6 @@ class MksServo:
         run_motor_absolute_motion_by_axis
     )
     from can_set import (
-        MOTOR_CALIBRATION_COMMAND,
         _validate_current,
         nb_calibrate_encoder,
         b_calibrate_encoder,
@@ -83,7 +73,7 @@ class MksServo:
         set_work_mode,
         set_working_current,
         set_holding_current,
-        set_subdivision,
+        set_subdivisions,
         set_en_pin_config,
         set_motor_rotation_direction,
         set_auto_turn_off_screen,
@@ -92,7 +82,7 @@ class MksServo:
         set_can_bitrate,
         set_can_id,
         set_slave_respond_active,
-        set_key_lock_enable,
+        set_key_lock,
         set_group_id,
         set_home,
         go_home,
@@ -106,7 +96,6 @@ class MksServo:
         Direction,
         Enable,
         SuccessStatus,
-        StatusCommand7,
         StatusCommand8,
         StatusCommand9,
         CalibrationResult,

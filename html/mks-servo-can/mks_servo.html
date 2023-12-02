@@ -1,0 +1,3705 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>mks-servo-can.mks_servo API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>mks-servo-can.mks_servo</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import can
+import time
+import logging
+
+from mks_enums import Enable, SuccessStatus
+
+class CanMessageError(Exception):
+    &#34;&#34;&#34;Raised for errors related to CAN messaging.&#34;&#34;&#34;
+    pass
+
+class InvalidCRCError(Exception):
+    &#34;&#34;&#34;Raised when CRC check fails.&#34;&#34;&#34;
+    pass
+
+class ResponseTimeoutError(Exception):
+    &#34;&#34;&#34;Raised when response is not received within the expected timeout.&#34;&#34;&#34;
+    pass
+
+class UnexpectedResponseLengthError(Exception):
+    &#34;&#34;&#34;Raised for unexpected response data length.&#34;&#34;&#34;
+    pass
+
+class InvalidResponseError(Exception):
+    &#34;&#34;&#34;Raised for invalid response.&#34;&#34;&#34;
+    pass
+
+class MksServo:
+    from can_commands import (
+        read_encoder_value_carry,
+        read_encoder_value_addition,
+        read_motor_speed,
+        read_num_pulses_received,
+        read_io_port_status,
+        read_motor_shaft_angle_error,
+        read_en_pins_status,
+        read_go_back_to_zero_status_when_power_on,
+        release_motor_shaft_locked_protection_state,
+        read_motor_shaft_protection_state
+    )
+
+    from can_motor import (
+        MAX_SPEED,
+        MAX_ACCELERATION,
+        MAX_PULSES,
+        invalid_direction_error,
+        invalid_speed_error,
+        invalid_aceleration_error,
+        invalid_pulses_error,
+        motor_status_error,
+        _validate_direction,
+        _validate_speed,
+        _validate_acceleration,
+        _validate_pulses,
+        query_motor_status,
+        enable_motor,
+        emergency_stop_motor,
+        run_motor_in_speed_mode,
+        save_clean_in_speed_mode,
+        is_motor_running,
+        wait_for_motor_idle,        
+        run_motor_relative_motion_by_pulses,
+        run_motor_absolute_motion_by_pulses,
+        run_motor_relative_motion_by_axis,
+        run_motor_absolute_motion_by_axis
+    )
+    from can_set import (
+        _validate_current,
+        nb_calibrate_encoder,
+        b_calibrate_encoder,
+        wait_for_calibration,
+        set_work_mode,
+        set_working_current,
+        set_holding_current,
+        set_subdivisions,
+        set_en_pin_config,
+        set_motor_rotation_direction,
+        set_auto_turn_off_screen,
+        set_motor_shaft_locked_rotor_protection,
+        set_subdivision_interpolation,
+        set_can_bitrate,
+        set_can_id,
+        set_slave_respond_active,
+        set_key_lock,
+        set_group_id,
+        set_home,
+        go_home,
+        set_current_axis_to_zero,
+        set_limit_port_remap,
+        set_mode0,
+        restore_default_parameters
+    )
+
+    from mks_enums import (
+        Direction,
+        Enable,
+        SuccessStatus,
+        StatusCommand8,
+        StatusCommand9,
+        CalibrationResult,
+        WorkMode,
+        HoldingStrength,
+        EnPinEnable,
+        CanBitrate,
+        EndStopLevel,
+        GoHomeResult,
+        Mode0,
+        SaveCleanState,
+        RunMotorResult,
+        MotorStatus
+    )
+
+    &#34;&#34;&#34;Controls MKS Servo via CAN messages.
+
+    This class provides functionality to send commands to and receive responses from 
+    an MKS Servo using CAN bus communication.
+
+    Attributes:
+        GENERIC_RESPONSE_LENGTH (int): Expected length of the generic response message.
+        DEFAULT_TIMEOUT (int): Default timeout for waiting for a response in seconds.
+        can_id (int): The CAN ID for this servo.
+        bus (can.interface.Bus): The CAN bus instance to be used.
+        timeout (int): Timeout for waiting for a response in seconds.
+    &#34;&#34;&#34;
+    GENERIC_RESPONSE_LENGTH = 3
+    DEFAULT_TIMEOUT = 1
+    MAX_CALIBRATION_TIME = 20
+
+    _calibration_status = CalibrationResult.Unkown
+    _motor_run_status = RunMotorResult.RunComplete
+
+    def __init__ (self, bus, notifier, id):
+        &#34;&#34;&#34;Inits MksServo with the CAN bus and servo ID.
+
+        Args:
+            bus (can.interface.Bus): The CAN bus instance to be used.
+            can_id (int): The CAN ID for this servo.
+        &#34;&#34;&#34;     
+
+        def monitor_incomming_messages(message):
+            try:
+                if message.arbitration_id == self.can_id:
+                    self.check_msg_crc(message)
+
+                    if (message.data[0] == self.MOTOR_CALIBRATION_COMMAND and len(message.data) == self.GENERIC_RESPONSE_LENGTH):
+                        status_int = int.from_bytes(message.data[1:2], byteorder=&#39;big&#39;)  
+                        try:
+                            self._calibration_status = self.CalibrationResult(status_int)                            
+                        except ValueError:
+                            logging.warning(f&#34;No enum member with value {status_int}&#34;)                                                       
+                    elif (message.data[0] == self.RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND and len(message.data) == self.GENERIC_RESPONSE_LENGTH):
+                        status_int = int.from_bytes(message.data[1:2], byteorder=&#39;big&#39;)  
+                        try:
+                            self._motor_run_status = self.RunMotorResult(status_int)                            
+                        except ValueError:
+                            logging.warning(f&#34;No enum member with value {status_int}&#34;)                                                       
+                    elif message.data[0] == self.QUERY_MOTOR_STATUS_COMMAND:
+                        a = 1
+                    elif message.data[0] == self.QUERY_READ_ENCODED_VALUE_ADDITION_COMMAND:
+                        a = 1                       
+                    else:                    
+                        print(&#34;New message&#34;)
+                        print(message, flush=True)                                       
+            except InvalidCRCError:
+                logging.error(f&#34;CRC check failed for the message&#34;)                    
+            return True
+                   
+        self.can_id = id
+        self.bus = bus
+        self.notifier = notifier
+        self.timeout = MksServo.DEFAULT_TIMEOUT
+        self.notifier.add_listener(monitor_incomming_messages)
+
+    def _bool_to_int(self, value):
+        &#34;&#34;&#34;
+        Checks if the input is a boolean. If yes, returns 1 for True and 0 for False.
+        If the input is not a boolean, the value is returned.
+
+        Args:
+        - value: The value to be checked and converted.
+
+        Returns:
+        - int: 1 if value is True, 0 if value is False, value otherwise
+        - str: A message if the value is not a boolean.
+        &#34;&#34;&#34;
+        if isinstance(value, bool):
+            return [1] if value else [0]
+        else:
+            return value
+
+    
+    def create_can_msg(self, msg):
+        &#34;&#34;&#34;Creates a CAN message with a CRC byte appended at the end.
+
+        Args:
+            msg (bytearray or list of bytes): The message data to which the CRC byte will be appended.
+
+        Returns:
+            can.Message: A CAN message object with the specified ID and data including the CRC byte.
+        &#34;&#34;&#34;
+
+        # Calculate CRC and append to message
+        crc = (self.can_id + sum(msg)) &amp; 0xFF
+        write_data = bytearray(msg) + bytes([crc])
+        
+        can_message = can.Message(arbitration_id=self.can_id, data=write_data, is_extended_id=False)            
+        logging.debug(f&#34;CAN Message Created: {can_message}&#34;)
+
+        return can_message
+
+    def check_msg_crc(self, msg):
+        &#34;&#34;&#34;Checks the CRC byte of a given CAN message for validity.
+
+        Args:
+            msg (can.Message): A CAN message object with an arbitration ID and data.
+
+        Returns:
+            bool: True if the last byte of the message data matches the calculated CRC, False otherwise.
+        &#34;&#34;&#34;
+
+        logging.debug(f&#34;Checking CRC for message: {msg}&#34;)
+
+        # Calculate expected CRC and compare with the last byte of the message data
+        crc = (msg.arbitration_id + sum(msg.data[:-1])) &amp; 0xFF
+        if msg.data[-1] != crc:
+            raise InvalidCRCError(&#34;CRC check failed for the message.&#34;)    
+            
+        return True
+    
+    def set_generic(self, op_code, response_length, data = []):
+        &#34;&#34;&#34;Sends a generic command via CAN bus and waits for a response.
+
+        Args:
+            op_code (int): Operation code of the command.
+            data (list of bytes, optional): Additional data for the command. Defaults to an empty list.
+
+        Returns:
+            dict: A dictionary with &#39;status&#39; key if successful, None otherwise.
+        &#34;&#34;&#34;      
+
+        # Check if data is an integer and convert it to a list if it is
+        if isinstance(data, int):
+            data = [data]
+        elif isinstance(data, bool):
+            # Assuming _bool_to_int is a method that converts a boolean to an integer
+            data = self._bool_to_int(data)
+                    
+        msg = self.create_can_msg([op_code] + data)
+        # Flag to indicate whether the response has been received
+        status = None
+
+        def receive_message(message):
+            nonlocal status
+            if not status:
+                try:
+                    self.check_msg_crc(message)
+                    if message.arbitration_id == self.can_id:
+                        if not (message.data[0] == op_code and len(message.data) == response_length):
+                            logging.error(f&#34;Unexpected response length or opcode.&#34;)                        
+                        status = message.data                                                                
+                except InvalidCRCError:
+                    logging.error(f&#34;CRC check failed for the message: {e}&#34;)            
+
+        try:        
+            self.notifier.add_listener(receive_message)
+            self.bus.send(msg)
+        except can.CanError as e:
+            raise CanMessageError(f&#34;Error sending message: {e}&#34;)            
+
+        # Wait for response (with a timeout)
+        start_time = time.perf_counter()
+        while (time.perf_counter() - start_time &lt; self.timeout) and status == None:
+            time.sleep(0.1)  # Small sleep to prevent busy waiting
+        self.notifier.remove_listener(receive_message)
+
+        return status
+                      
+    def set_generic_status(self, op_code, data = []):
+        &#34;&#34;&#34;Sends a generic status command and processes the response.
+
+        Args:
+            op_code (int): Operation code of the command.
+            data (list of bytes, optional): Additional data for the command. Defaults to an empty list.
+
+        Returns:
+            dict: Modified result dictionary with &#39;status&#39; key, None on error.
+        &#34;&#34;&#34;        
+        tmp = self.set_generic(op_code, MksServo.GENERIC_RESPONSE_LENGTH, data)
+        if not tmp == None:
+            status_int = int.from_bytes(tmp[1:2], byteorder=&#39;big&#39;)  
+
+            try:            
+                return SuccessStatus(status_int)
+            except ValueError:
+                raise InvalidResponseError(f&#34;No enum member with value {status_int}&#34;)
+                
+        return None
+    
+    def specialized_state(self, op_code, status_enum, status_enum_exception):
+        tmp = self.set_generic(op_code, self.GENERIC_RESPONSE_LENGTH, [op_code])  
+        status_int = int.from_bytes(tmp[1:2], byteorder=&#39;big&#39;)  
+        try:
+            return status_enum(status_int)
+        except ValueError:
+            raise status_enum_exception(f&#34;No enum member with value {status_int}&#34;)                     
+        </code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="mks-servo-can.mks_servo.CanMessageError"><code class="flex name class">
+<span>class <span class="ident">CanMessageError</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Raised for errors related to CAN messaging.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CanMessageError(Exception):
+    &#34;&#34;&#34;Raised for errors related to CAN messaging.&#34;&#34;&#34;
+    pass</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="mks-servo-can.mks_servo.InvalidCRCError"><code class="flex name class">
+<span>class <span class="ident">InvalidCRCError</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Raised when CRC check fails.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class InvalidCRCError(Exception):
+    &#34;&#34;&#34;Raised when CRC check fails.&#34;&#34;&#34;
+    pass</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="mks-servo-can.mks_servo.InvalidResponseError"><code class="flex name class">
+<span>class <span class="ident">InvalidResponseError</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Raised for invalid response.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class InvalidResponseError(Exception):
+    &#34;&#34;&#34;Raised for invalid response.&#34;&#34;&#34;
+    pass</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo"><code class="flex name class">
+<span>class <span class="ident">MksServo</span></span>
+<span>(</span><span>bus, notifier, id)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Inits MksServo with the CAN bus and servo ID.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>bus</code></strong> :&ensp;<code>can.interface.Bus</code></dt>
+<dd>The CAN bus instance to be used.</dd>
+<dt><strong><code>can_id</code></strong> :&ensp;<code>int</code></dt>
+<dd>The CAN ID for this servo.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MksServo:
+    from can_commands import (
+        read_encoder_value_carry,
+        read_encoder_value_addition,
+        read_motor_speed,
+        read_num_pulses_received,
+        read_io_port_status,
+        read_motor_shaft_angle_error,
+        read_en_pins_status,
+        read_go_back_to_zero_status_when_power_on,
+        release_motor_shaft_locked_protection_state,
+        read_motor_shaft_protection_state
+    )
+
+    from can_motor import (
+        MAX_SPEED,
+        MAX_ACCELERATION,
+        MAX_PULSES,
+        invalid_direction_error,
+        invalid_speed_error,
+        invalid_aceleration_error,
+        invalid_pulses_error,
+        motor_status_error,
+        _validate_direction,
+        _validate_speed,
+        _validate_acceleration,
+        _validate_pulses,
+        query_motor_status,
+        enable_motor,
+        emergency_stop_motor,
+        run_motor_in_speed_mode,
+        save_clean_in_speed_mode,
+        is_motor_running,
+        wait_for_motor_idle,        
+        run_motor_relative_motion_by_pulses,
+        run_motor_absolute_motion_by_pulses,
+        run_motor_relative_motion_by_axis,
+        run_motor_absolute_motion_by_axis
+    )
+    from can_set import (
+        _validate_current,
+        nb_calibrate_encoder,
+        b_calibrate_encoder,
+        wait_for_calibration,
+        set_work_mode,
+        set_working_current,
+        set_holding_current,
+        set_subdivisions,
+        set_en_pin_config,
+        set_motor_rotation_direction,
+        set_auto_turn_off_screen,
+        set_motor_shaft_locked_rotor_protection,
+        set_subdivision_interpolation,
+        set_can_bitrate,
+        set_can_id,
+        set_slave_respond_active,
+        set_key_lock,
+        set_group_id,
+        set_home,
+        go_home,
+        set_current_axis_to_zero,
+        set_limit_port_remap,
+        set_mode0,
+        restore_default_parameters
+    )
+
+    from mks_enums import (
+        Direction,
+        Enable,
+        SuccessStatus,
+        StatusCommand8,
+        StatusCommand9,
+        CalibrationResult,
+        WorkMode,
+        HoldingStrength,
+        EnPinEnable,
+        CanBitrate,
+        EndStopLevel,
+        GoHomeResult,
+        Mode0,
+        SaveCleanState,
+        RunMotorResult,
+        MotorStatus
+    )
+
+    &#34;&#34;&#34;Controls MKS Servo via CAN messages.
+
+    This class provides functionality to send commands to and receive responses from 
+    an MKS Servo using CAN bus communication.
+
+    Attributes:
+        GENERIC_RESPONSE_LENGTH (int): Expected length of the generic response message.
+        DEFAULT_TIMEOUT (int): Default timeout for waiting for a response in seconds.
+        can_id (int): The CAN ID for this servo.
+        bus (can.interface.Bus): The CAN bus instance to be used.
+        timeout (int): Timeout for waiting for a response in seconds.
+    &#34;&#34;&#34;
+    GENERIC_RESPONSE_LENGTH = 3
+    DEFAULT_TIMEOUT = 1
+    MAX_CALIBRATION_TIME = 20
+
+    _calibration_status = CalibrationResult.Unkown
+    _motor_run_status = RunMotorResult.RunComplete
+
+    def __init__ (self, bus, notifier, id):
+        &#34;&#34;&#34;Inits MksServo with the CAN bus and servo ID.
+
+        Args:
+            bus (can.interface.Bus): The CAN bus instance to be used.
+            can_id (int): The CAN ID for this servo.
+        &#34;&#34;&#34;     
+
+        def monitor_incomming_messages(message):
+            try:
+                if message.arbitration_id == self.can_id:
+                    self.check_msg_crc(message)
+
+                    if (message.data[0] == self.MOTOR_CALIBRATION_COMMAND and len(message.data) == self.GENERIC_RESPONSE_LENGTH):
+                        status_int = int.from_bytes(message.data[1:2], byteorder=&#39;big&#39;)  
+                        try:
+                            self._calibration_status = self.CalibrationResult(status_int)                            
+                        except ValueError:
+                            logging.warning(f&#34;No enum member with value {status_int}&#34;)                                                       
+                    elif (message.data[0] == self.RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND and len(message.data) == self.GENERIC_RESPONSE_LENGTH):
+                        status_int = int.from_bytes(message.data[1:2], byteorder=&#39;big&#39;)  
+                        try:
+                            self._motor_run_status = self.RunMotorResult(status_int)                            
+                        except ValueError:
+                            logging.warning(f&#34;No enum member with value {status_int}&#34;)                                                       
+                    elif message.data[0] == self.QUERY_MOTOR_STATUS_COMMAND:
+                        a = 1
+                    elif message.data[0] == self.QUERY_READ_ENCODED_VALUE_ADDITION_COMMAND:
+                        a = 1                       
+                    else:                    
+                        print(&#34;New message&#34;)
+                        print(message, flush=True)                                       
+            except InvalidCRCError:
+                logging.error(f&#34;CRC check failed for the message&#34;)                    
+            return True
+                   
+        self.can_id = id
+        self.bus = bus
+        self.notifier = notifier
+        self.timeout = MksServo.DEFAULT_TIMEOUT
+        self.notifier.add_listener(monitor_incomming_messages)
+
+    def _bool_to_int(self, value):
+        &#34;&#34;&#34;
+        Checks if the input is a boolean. If yes, returns 1 for True and 0 for False.
+        If the input is not a boolean, the value is returned.
+
+        Args:
+        - value: The value to be checked and converted.
+
+        Returns:
+        - int: 1 if value is True, 0 if value is False, value otherwise
+        - str: A message if the value is not a boolean.
+        &#34;&#34;&#34;
+        if isinstance(value, bool):
+            return [1] if value else [0]
+        else:
+            return value
+
+    
+    def create_can_msg(self, msg):
+        &#34;&#34;&#34;Creates a CAN message with a CRC byte appended at the end.
+
+        Args:
+            msg (bytearray or list of bytes): The message data to which the CRC byte will be appended.
+
+        Returns:
+            can.Message: A CAN message object with the specified ID and data including the CRC byte.
+        &#34;&#34;&#34;
+
+        # Calculate CRC and append to message
+        crc = (self.can_id + sum(msg)) &amp; 0xFF
+        write_data = bytearray(msg) + bytes([crc])
+        
+        can_message = can.Message(arbitration_id=self.can_id, data=write_data, is_extended_id=False)            
+        logging.debug(f&#34;CAN Message Created: {can_message}&#34;)
+
+        return can_message
+
+    def check_msg_crc(self, msg):
+        &#34;&#34;&#34;Checks the CRC byte of a given CAN message for validity.
+
+        Args:
+            msg (can.Message): A CAN message object with an arbitration ID and data.
+
+        Returns:
+            bool: True if the last byte of the message data matches the calculated CRC, False otherwise.
+        &#34;&#34;&#34;
+
+        logging.debug(f&#34;Checking CRC for message: {msg}&#34;)
+
+        # Calculate expected CRC and compare with the last byte of the message data
+        crc = (msg.arbitration_id + sum(msg.data[:-1])) &amp; 0xFF
+        if msg.data[-1] != crc:
+            raise InvalidCRCError(&#34;CRC check failed for the message.&#34;)    
+            
+        return True
+    
+    def set_generic(self, op_code, response_length, data = []):
+        &#34;&#34;&#34;Sends a generic command via CAN bus and waits for a response.
+
+        Args:
+            op_code (int): Operation code of the command.
+            data (list of bytes, optional): Additional data for the command. Defaults to an empty list.
+
+        Returns:
+            dict: A dictionary with &#39;status&#39; key if successful, None otherwise.
+        &#34;&#34;&#34;      
+
+        # Check if data is an integer and convert it to a list if it is
+        if isinstance(data, int):
+            data = [data]
+        elif isinstance(data, bool):
+            # Assuming _bool_to_int is a method that converts a boolean to an integer
+            data = self._bool_to_int(data)
+                    
+        msg = self.create_can_msg([op_code] + data)
+        # Flag to indicate whether the response has been received
+        status = None
+
+        def receive_message(message):
+            nonlocal status
+            if not status:
+                try:
+                    self.check_msg_crc(message)
+                    if message.arbitration_id == self.can_id:
+                        if not (message.data[0] == op_code and len(message.data) == response_length):
+                            logging.error(f&#34;Unexpected response length or opcode.&#34;)                        
+                        status = message.data                                                                
+                except InvalidCRCError:
+                    logging.error(f&#34;CRC check failed for the message: {e}&#34;)            
+
+        try:        
+            self.notifier.add_listener(receive_message)
+            self.bus.send(msg)
+        except can.CanError as e:
+            raise CanMessageError(f&#34;Error sending message: {e}&#34;)            
+
+        # Wait for response (with a timeout)
+        start_time = time.perf_counter()
+        while (time.perf_counter() - start_time &lt; self.timeout) and status == None:
+            time.sleep(0.1)  # Small sleep to prevent busy waiting
+        self.notifier.remove_listener(receive_message)
+
+        return status
+                      
+    def set_generic_status(self, op_code, data = []):
+        &#34;&#34;&#34;Sends a generic status command and processes the response.
+
+        Args:
+            op_code (int): Operation code of the command.
+            data (list of bytes, optional): Additional data for the command. Defaults to an empty list.
+
+        Returns:
+            dict: Modified result dictionary with &#39;status&#39; key, None on error.
+        &#34;&#34;&#34;        
+        tmp = self.set_generic(op_code, MksServo.GENERIC_RESPONSE_LENGTH, data)
+        if not tmp == None:
+            status_int = int.from_bytes(tmp[1:2], byteorder=&#39;big&#39;)  
+
+            try:            
+                return SuccessStatus(status_int)
+            except ValueError:
+                raise InvalidResponseError(f&#34;No enum member with value {status_int}&#34;)
+                
+        return None
+    
+    def specialized_state(self, op_code, status_enum, status_enum_exception):
+        tmp = self.set_generic(op_code, self.GENERIC_RESPONSE_LENGTH, [op_code])  
+        status_int = int.from_bytes(tmp[1:2], byteorder=&#39;big&#39;)  
+        try:
+            return status_enum(status_int)
+        except ValueError:
+            raise status_enum_exception(f&#34;No enum member with value {status_int}&#34;)                     </code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="mks-servo-can.mks_servo.MksServo.CalibrationResult"><code class="name">var <span class="ident">CalibrationResult</span></code></dt>
+<dd>
+<div class="desc"><p>Create a collection of name/value pairs.</p>
+<p>Example enumeration:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; class Color(Enum):
+...     RED = 1
+...     BLUE = 2
+...     GREEN = 3
+</code></pre>
+<p>Access them by:</p>
+<ul>
+<li>attribute access::</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color.RED
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>value lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color(1)
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>name lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color['RED']
+&lt;Color.RED: 1&gt;
+</code></pre>
+<p>Enumerations can be iterated over, and know how many members they have:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; len(Color)
+3
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; list(Color)
+[&lt;Color.RED: 1&gt;, &lt;Color.BLUE: 2&gt;, &lt;Color.GREEN: 3&gt;]
+</code></pre>
+<p>Methods can be added to enumerations, and members can have their own
+attributes &ndash; see the documentation for details.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.CanBitrate"><code class="name">var <span class="ident">CanBitrate</span></code></dt>
+<dd>
+<div class="desc"><p>Create a collection of name/value pairs.</p>
+<p>Example enumeration:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; class Color(Enum):
+...     RED = 1
+...     BLUE = 2
+...     GREEN = 3
+</code></pre>
+<p>Access them by:</p>
+<ul>
+<li>attribute access::</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color.RED
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>value lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color(1)
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>name lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color['RED']
+&lt;Color.RED: 1&gt;
+</code></pre>
+<p>Enumerations can be iterated over, and know how many members they have:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; len(Color)
+3
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; list(Color)
+[&lt;Color.RED: 1&gt;, &lt;Color.BLUE: 2&gt;, &lt;Color.GREEN: 3&gt;]
+</code></pre>
+<p>Methods can be added to enumerations, and members can have their own
+attributes &ndash; see the documentation for details.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.DEFAULT_TIMEOUT"><code class="name">var <span class="ident">DEFAULT_TIMEOUT</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.Direction"><code class="name">var <span class="ident">Direction</span></code></dt>
+<dd>
+<div class="desc"><p>Create a collection of name/value pairs.</p>
+<p>Example enumeration:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; class Color(Enum):
+...     RED = 1
+...     BLUE = 2
+...     GREEN = 3
+</code></pre>
+<p>Access them by:</p>
+<ul>
+<li>attribute access::</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color.RED
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>value lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color(1)
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>name lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color['RED']
+&lt;Color.RED: 1&gt;
+</code></pre>
+<p>Enumerations can be iterated over, and know how many members they have:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; len(Color)
+3
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; list(Color)
+[&lt;Color.RED: 1&gt;, &lt;Color.BLUE: 2&gt;, &lt;Color.GREEN: 3&gt;]
+</code></pre>
+<p>Methods can be added to enumerations, and members can have their own
+attributes &ndash; see the documentation for details.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.EnPinEnable"><code class="name">var <span class="ident">EnPinEnable</span></code></dt>
+<dd>
+<div class="desc"><p>Create a collection of name/value pairs.</p>
+<p>Example enumeration:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; class Color(Enum):
+...     RED = 1
+...     BLUE = 2
+...     GREEN = 3
+</code></pre>
+<p>Access them by:</p>
+<ul>
+<li>attribute access::</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color.RED
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>value lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color(1)
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>name lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color['RED']
+&lt;Color.RED: 1&gt;
+</code></pre>
+<p>Enumerations can be iterated over, and know how many members they have:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; len(Color)
+3
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; list(Color)
+[&lt;Color.RED: 1&gt;, &lt;Color.BLUE: 2&gt;, &lt;Color.GREEN: 3&gt;]
+</code></pre>
+<p>Methods can be added to enumerations, and members can have their own
+attributes &ndash; see the documentation for details.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.Enable"><code class="name">var <span class="ident">Enable</span></code></dt>
+<dd>
+<div class="desc"><p>Create a collection of name/value pairs.</p>
+<p>Example enumeration:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; class Color(Enum):
+...     RED = 1
+...     BLUE = 2
+...     GREEN = 3
+</code></pre>
+<p>Access them by:</p>
+<ul>
+<li>attribute access::</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color.RED
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>value lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color(1)
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>name lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color['RED']
+&lt;Color.RED: 1&gt;
+</code></pre>
+<p>Enumerations can be iterated over, and know how many members they have:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; len(Color)
+3
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; list(Color)
+[&lt;Color.RED: 1&gt;, &lt;Color.BLUE: 2&gt;, &lt;Color.GREEN: 3&gt;]
+</code></pre>
+<p>Methods can be added to enumerations, and members can have their own
+attributes &ndash; see the documentation for details.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.EndStopLevel"><code class="name">var <span class="ident">EndStopLevel</span></code></dt>
+<dd>
+<div class="desc"><p>Create a collection of name/value pairs.</p>
+<p>Example enumeration:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; class Color(Enum):
+...     RED = 1
+...     BLUE = 2
+...     GREEN = 3
+</code></pre>
+<p>Access them by:</p>
+<ul>
+<li>attribute access::</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color.RED
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>value lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color(1)
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>name lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color['RED']
+&lt;Color.RED: 1&gt;
+</code></pre>
+<p>Enumerations can be iterated over, and know how many members they have:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; len(Color)
+3
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; list(Color)
+[&lt;Color.RED: 1&gt;, &lt;Color.BLUE: 2&gt;, &lt;Color.GREEN: 3&gt;]
+</code></pre>
+<p>Methods can be added to enumerations, and members can have their own
+attributes &ndash; see the documentation for details.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.GENERIC_RESPONSE_LENGTH"><code class="name">var <span class="ident">GENERIC_RESPONSE_LENGTH</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.GoHomeResult"><code class="name">var <span class="ident">GoHomeResult</span></code></dt>
+<dd>
+<div class="desc"><p>Create a collection of name/value pairs.</p>
+<p>Example enumeration:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; class Color(Enum):
+...     RED = 1
+...     BLUE = 2
+...     GREEN = 3
+</code></pre>
+<p>Access them by:</p>
+<ul>
+<li>attribute access::</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color.RED
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>value lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color(1)
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>name lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color['RED']
+&lt;Color.RED: 1&gt;
+</code></pre>
+<p>Enumerations can be iterated over, and know how many members they have:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; len(Color)
+3
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; list(Color)
+[&lt;Color.RED: 1&gt;, &lt;Color.BLUE: 2&gt;, &lt;Color.GREEN: 3&gt;]
+</code></pre>
+<p>Methods can be added to enumerations, and members can have their own
+attributes &ndash; see the documentation for details.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.HoldingStrength"><code class="name">var <span class="ident">HoldingStrength</span></code></dt>
+<dd>
+<div class="desc"><p>Create a collection of name/value pairs.</p>
+<p>Example enumeration:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; class Color(Enum):
+...     RED = 1
+...     BLUE = 2
+...     GREEN = 3
+</code></pre>
+<p>Access them by:</p>
+<ul>
+<li>attribute access::</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color.RED
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>value lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color(1)
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>name lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color['RED']
+&lt;Color.RED: 1&gt;
+</code></pre>
+<p>Enumerations can be iterated over, and know how many members they have:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; len(Color)
+3
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; list(Color)
+[&lt;Color.RED: 1&gt;, &lt;Color.BLUE: 2&gt;, &lt;Color.GREEN: 3&gt;]
+</code></pre>
+<p>Methods can be added to enumerations, and members can have their own
+attributes &ndash; see the documentation for details.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.MAX_ACCELERATION"><code class="name">var <span class="ident">MAX_ACCELERATION</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.MAX_CALIBRATION_TIME"><code class="name">var <span class="ident">MAX_CALIBRATION_TIME</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.MAX_PULSES"><code class="name">var <span class="ident">MAX_PULSES</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.MAX_SPEED"><code class="name">var <span class="ident">MAX_SPEED</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.Mode0"><code class="name">var <span class="ident">Mode0</span></code></dt>
+<dd>
+<div class="desc"><p>Create a collection of name/value pairs.</p>
+<p>Example enumeration:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; class Color(Enum):
+...     RED = 1
+...     BLUE = 2
+...     GREEN = 3
+</code></pre>
+<p>Access them by:</p>
+<ul>
+<li>attribute access::</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color.RED
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>value lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color(1)
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>name lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color['RED']
+&lt;Color.RED: 1&gt;
+</code></pre>
+<p>Enumerations can be iterated over, and know how many members they have:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; len(Color)
+3
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; list(Color)
+[&lt;Color.RED: 1&gt;, &lt;Color.BLUE: 2&gt;, &lt;Color.GREEN: 3&gt;]
+</code></pre>
+<p>Methods can be added to enumerations, and members can have their own
+attributes &ndash; see the documentation for details.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.MotorStatus"><code class="name">var <span class="ident">MotorStatus</span></code></dt>
+<dd>
+<div class="desc"><p>Create a collection of name/value pairs.</p>
+<p>Example enumeration:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; class Color(Enum):
+...     RED = 1
+...     BLUE = 2
+...     GREEN = 3
+</code></pre>
+<p>Access them by:</p>
+<ul>
+<li>attribute access::</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color.RED
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>value lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color(1)
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>name lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color['RED']
+&lt;Color.RED: 1&gt;
+</code></pre>
+<p>Enumerations can be iterated over, and know how many members they have:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; len(Color)
+3
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; list(Color)
+[&lt;Color.RED: 1&gt;, &lt;Color.BLUE: 2&gt;, &lt;Color.GREEN: 3&gt;]
+</code></pre>
+<p>Methods can be added to enumerations, and members can have their own
+attributes &ndash; see the documentation for details.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.RunMotorResult"><code class="name">var <span class="ident">RunMotorResult</span></code></dt>
+<dd>
+<div class="desc"><p>Create a collection of name/value pairs.</p>
+<p>Example enumeration:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; class Color(Enum):
+...     RED = 1
+...     BLUE = 2
+...     GREEN = 3
+</code></pre>
+<p>Access them by:</p>
+<ul>
+<li>attribute access::</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color.RED
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>value lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color(1)
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>name lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color['RED']
+&lt;Color.RED: 1&gt;
+</code></pre>
+<p>Enumerations can be iterated over, and know how many members they have:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; len(Color)
+3
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; list(Color)
+[&lt;Color.RED: 1&gt;, &lt;Color.BLUE: 2&gt;, &lt;Color.GREEN: 3&gt;]
+</code></pre>
+<p>Methods can be added to enumerations, and members can have their own
+attributes &ndash; see the documentation for details.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.SaveCleanState"><code class="name">var <span class="ident">SaveCleanState</span></code></dt>
+<dd>
+<div class="desc"><p>Create a collection of name/value pairs.</p>
+<p>Example enumeration:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; class Color(Enum):
+...     RED = 1
+...     BLUE = 2
+...     GREEN = 3
+</code></pre>
+<p>Access them by:</p>
+<ul>
+<li>attribute access::</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color.RED
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>value lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color(1)
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>name lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color['RED']
+&lt;Color.RED: 1&gt;
+</code></pre>
+<p>Enumerations can be iterated over, and know how many members they have:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; len(Color)
+3
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; list(Color)
+[&lt;Color.RED: 1&gt;, &lt;Color.BLUE: 2&gt;, &lt;Color.GREEN: 3&gt;]
+</code></pre>
+<p>Methods can be added to enumerations, and members can have their own
+attributes &ndash; see the documentation for details.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.StatusCommand8"><code class="name">var <span class="ident">StatusCommand8</span></code></dt>
+<dd>
+<div class="desc"><p>Create a collection of name/value pairs.</p>
+<p>Example enumeration:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; class Color(Enum):
+...     RED = 1
+...     BLUE = 2
+...     GREEN = 3
+</code></pre>
+<p>Access them by:</p>
+<ul>
+<li>attribute access::</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color.RED
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>value lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color(1)
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>name lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color['RED']
+&lt;Color.RED: 1&gt;
+</code></pre>
+<p>Enumerations can be iterated over, and know how many members they have:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; len(Color)
+3
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; list(Color)
+[&lt;Color.RED: 1&gt;, &lt;Color.BLUE: 2&gt;, &lt;Color.GREEN: 3&gt;]
+</code></pre>
+<p>Methods can be added to enumerations, and members can have their own
+attributes &ndash; see the documentation for details.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.StatusCommand9"><code class="name">var <span class="ident">StatusCommand9</span></code></dt>
+<dd>
+<div class="desc"><p>Create a collection of name/value pairs.</p>
+<p>Example enumeration:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; class Color(Enum):
+...     RED = 1
+...     BLUE = 2
+...     GREEN = 3
+</code></pre>
+<p>Access them by:</p>
+<ul>
+<li>attribute access::</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color.RED
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>value lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color(1)
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>name lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color['RED']
+&lt;Color.RED: 1&gt;
+</code></pre>
+<p>Enumerations can be iterated over, and know how many members they have:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; len(Color)
+3
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; list(Color)
+[&lt;Color.RED: 1&gt;, &lt;Color.BLUE: 2&gt;, &lt;Color.GREEN: 3&gt;]
+</code></pre>
+<p>Methods can be added to enumerations, and members can have their own
+attributes &ndash; see the documentation for details.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.SuccessStatus"><code class="name">var <span class="ident">SuccessStatus</span></code></dt>
+<dd>
+<div class="desc"><p>Create a collection of name/value pairs.</p>
+<p>Example enumeration:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; class Color(Enum):
+...     RED = 1
+...     BLUE = 2
+...     GREEN = 3
+</code></pre>
+<p>Access them by:</p>
+<ul>
+<li>attribute access::</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color.RED
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>value lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color(1)
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>name lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color['RED']
+&lt;Color.RED: 1&gt;
+</code></pre>
+<p>Enumerations can be iterated over, and know how many members they have:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; len(Color)
+3
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; list(Color)
+[&lt;Color.RED: 1&gt;, &lt;Color.BLUE: 2&gt;, &lt;Color.GREEN: 3&gt;]
+</code></pre>
+<p>Methods can be added to enumerations, and members can have their own
+attributes &ndash; see the documentation for details.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.WorkMode"><code class="name">var <span class="ident">WorkMode</span></code></dt>
+<dd>
+<div class="desc"><p>Create a collection of name/value pairs.</p>
+<p>Example enumeration:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; class Color(Enum):
+...     RED = 1
+...     BLUE = 2
+...     GREEN = 3
+</code></pre>
+<p>Access them by:</p>
+<ul>
+<li>attribute access::</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color.RED
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>value lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color(1)
+&lt;Color.RED: 1&gt;
+</code></pre>
+<ul>
+<li>name lookup:</li>
+</ul>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Color['RED']
+&lt;Color.RED: 1&gt;
+</code></pre>
+<p>Enumerations can be iterated over, and know how many members they have:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; len(Color)
+3
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; list(Color)
+[&lt;Color.RED: 1&gt;, &lt;Color.BLUE: 2&gt;, &lt;Color.GREEN: 3&gt;]
+</code></pre>
+<p>Methods can be added to enumerations, and members can have their own
+attributes &ndash; see the documentation for details.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.invalid_aceleration_error"><code class="name">var <span class="ident">invalid_aceleration_error</span></code></dt>
+<dd>
+<div class="desc"><p>Exception raised for invalid motor acceleration.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.invalid_direction_error"><code class="name">var <span class="ident">invalid_direction_error</span></code></dt>
+<dd>
+<div class="desc"><p>Exception raised for invalid motor direction.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.invalid_pulses_error"><code class="name">var <span class="ident">invalid_pulses_error</span></code></dt>
+<dd>
+<div class="desc"><p>Exception raised for invalid pulse count.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.invalid_speed_error"><code class="name">var <span class="ident">invalid_speed_error</span></code></dt>
+<dd>
+<div class="desc"><p>Exception raised for invalid motor speed.</p></div>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.motor_status_error"><code class="name">var <span class="ident">motor_status_error</span></code></dt>
+<dd>
+<div class="desc"><p>Exception raised for invalid motor status.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="mks-servo-can.mks_servo.MksServo.b_calibrate_encoder"><code class="name flex">
+<span>def <span class="ident">b_calibrate_encoder</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Does the calibration procedure of the encoder. It blocks until the procedure completes.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>CalibrationResult</code></dt>
+<dd>The success result of the command. It should be "CalibratedSuccess" or "CalibratingFail".</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def b_calibrate_encoder(self):
+    &#34;&#34;&#34;
+    Does the calibration procedure of the encoder. It blocks until the procedure completes.
+
+    Returns:
+        CalibrationResult: The success result of the command. It should be &#34;CalibratedSuccess&#34; or &#34;CalibratingFail&#34;.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.    
+    &#34;&#34;&#34;      
+    nb_calibrate_encoder(self) 
+    wait_for_calibration(self)
+    return self._calibration_status</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.check_msg_crc"><code class="name flex">
+<span>def <span class="ident">check_msg_crc</span></span>(<span>self, msg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks the CRC byte of a given CAN message for validity.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>msg</code></strong> :&ensp;<code>can.Message</code></dt>
+<dd>A CAN message object with an arbitration ID and data.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>True if the last byte of the message data matches the calculated CRC, False otherwise.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def check_msg_crc(self, msg):
+    &#34;&#34;&#34;Checks the CRC byte of a given CAN message for validity.
+
+    Args:
+        msg (can.Message): A CAN message object with an arbitration ID and data.
+
+    Returns:
+        bool: True if the last byte of the message data matches the calculated CRC, False otherwise.
+    &#34;&#34;&#34;
+
+    logging.debug(f&#34;Checking CRC for message: {msg}&#34;)
+
+    # Calculate expected CRC and compare with the last byte of the message data
+    crc = (msg.arbitration_id + sum(msg.data[:-1])) &amp; 0xFF
+    if msg.data[-1] != crc:
+        raise InvalidCRCError(&#34;CRC check failed for the message.&#34;)    
+        
+    return True</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.create_can_msg"><code class="name flex">
+<span>def <span class="ident">create_can_msg</span></span>(<span>self, msg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Creates a CAN message with a CRC byte appended at the end.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>msg</code></strong> :&ensp;<code>bytearray</code> or <code>list</code> of <code>bytes</code></dt>
+<dd>The message data to which the CRC byte will be appended.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>can.Message</code></dt>
+<dd>A CAN message object with the specified ID and data including the CRC byte.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_can_msg(self, msg):
+    &#34;&#34;&#34;Creates a CAN message with a CRC byte appended at the end.
+
+    Args:
+        msg (bytearray or list of bytes): The message data to which the CRC byte will be appended.
+
+    Returns:
+        can.Message: A CAN message object with the specified ID and data including the CRC byte.
+    &#34;&#34;&#34;
+
+    # Calculate CRC and append to message
+    crc = (self.can_id + sum(msg)) &amp; 0xFF
+    write_data = bytearray(msg) + bytes([crc])
+    
+    can_message = can.Message(arbitration_id=self.can_id, data=write_data, is_extended_id=False)            
+    logging.debug(f&#34;CAN Message Created: {can_message}&#34;)
+
+    return can_message</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.emergency_stop_motor"><code class="name flex">
+<span>def <span class="ident">emergency_stop_motor</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Runs the emergency motor stop</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def emergency_stop_motor(self):
+    &#34;&#34;&#34;
+    Runs the emergency motor stop
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.    
+    &#34;&#34;&#34;      
+    return self.set_generic_status(MksCommands.EMERGENCY_STOP_COMMAND)   </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.enable_motor"><code class="name flex">
+<span>def <span class="ident">enable_motor</span></span>(<span>self, enable: mks_enums.Enable)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def enable_motor(self, enable: Enable):
+    return self.set_generic_status(MksCommands.ENABLE_MOTOR_COMMAND, enable)   </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.go_home"><code class="name flex">
+<span>def <span class="ident">go_home</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Goes home</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.
+</dd>
+</dl>
+<p>Note: Same as the "CanID" option on screen.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def go_home(self):
+    &#34;&#34;&#34;
+    Goes home
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.        
+
+    Note: Same as the &#34;CanID&#34; option on screen.
+    &#34;&#34;&#34;       
+    tmp = self.set_generic(MksCommands.GO_HOME_COMMAND, self.GENERIC_RESPONSE_LENGTH)
+    status_int = int.from_bytes(tmp[1:2], byteorder=&#39;big&#39;)  
+    rslt = {}
+    try:
+        rslt[&#39;status&#39;] = GoHomeResult(status_int)
+    except ValueError:
+        raise gohome_status_error(f&#34;No enum member with value {status_int}&#34;)                     
+    return rslt   </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.is_motor_running"><code class="name flex">
+<span>def <span class="ident">is_motor_running</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the current running state of the motor</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>boolean</code></dt>
+<dd>The running state of the motor.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_motor_running(self):
+    &#34;&#34;&#34;
+    Returns the current running state of the motor
+    Returns:
+        boolean: The running state of the motor. 
+    &#34;&#34;&#34;       
+    return self._motor_run_status == RunMotorResult.RunStarting</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.nb_calibrate_encoder"><code class="name flex">
+<span>def <span class="ident">nb_calibrate_encoder</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Initiates the calibration procedure of the encoder.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>CalibrationResult</code></dt>
+<dd>The success result of the command. It should be "Calibrating".</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def nb_calibrate_encoder(self):
+    &#34;&#34;&#34;
+    Initiates the calibration procedure of the encoder.
+
+    Returns:
+        CalibrationResult: The success result of the command. It should be &#34;Calibrating&#34;.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.    
+    &#34;&#34;&#34;       
+    tmp = self.set_generic(MksCommands.MOTOR_CALIBRATION_COMMAND, self.GENERIC_RESPONSE_LENGTH, 0x00)
+    status_int = int.from_bytes(tmp[1:2], byteorder=&#39;big&#39;)      
+    try:
+        rslt = CalibrationResult(status_int)
+        self._calibration_status = rslt
+        return rslt
+    except ValueError:
+        raise calibration_error(f&#34;No enum member with value {status_int}&#34;)                     </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.query_motor_status"><code class="name flex">
+<span>def <span class="ident">query_motor_status</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Runs the emergency motor stop</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def query_motor_status(self): 
+    &#34;&#34;&#34;
+    Runs the emergency motor stop
+    
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.    
+    &#34;&#34;&#34;  
+    return self.specialized_state(MksCommands.QUERY_MOTOR_STATUS_COMMAND, 
+        MotorStatus, motor_status_error)                   </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.read_en_pins_status"><code class="name flex">
+<span>def <span class="ident">read_en_pins_status</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads the En pins status</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the enable pin status.</dd>
+<dt><code>None</code></dt>
+<dd>if there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_en_pins_status(self):
+    &#34;&#34;&#34;
+    Reads the En pins status
+
+    Returns:
+        int: If successful, returns the enable pin status.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    &#34;&#34;&#34;     
+    return self.specialized_state(self.READ_EN_PINS_STATUS, 
+        EnableStatus, enable_status_error)                   </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.read_encoder_value_addition"><code class="name flex">
+<span>def <span class="ident">read_encoder_value_addition</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads the encoder value in addition mode</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the current value of the encoder (range from 0 to +-0x7FFFFFFFFFFF).</dd>
+<dt><code>None</code></dt>
+<dd>if there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<p>if the current value is 0x3FF0, after one turn CCW, the carry is 1 and value is 0x7FF0.
+if the current value is 0x3FF0, after one turn CW, the carry is -1 and value is -0x10.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_encoder_value_addition(self): 
+    &#34;&#34;&#34;
+    Reads the encoder value in addition mode
+
+    Returns:
+        int: If successful, returns the current value of the encoder (range from 0 to +-0x7FFFFFFFFFFF).
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+
+    Examples:
+        if the current value is 0x3FF0, after one turn CCW, the carry is 1 and value is 0x7FF0.
+        if the current value is 0x3FF0, after one turn CW, the carry is -1 and value is -0x10.
+    &#34;&#34;&#34;       
+    op_code = MksCommands.READ_ENCODED_VALUE_ADDITION
+    response_length = 8
+
+    data = self.set_generic(op_code, response_length, [op_code])
+
+    if data:
+        return int.from_bytes(data[1:7], byteorder=&#39;big&#39;, signed=True)                                
+    return None  </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.read_encoder_value_carry"><code class="name flex">
+<span>def <span class="ident">read_encoder_value_carry</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads the encoder value</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code> or <code>None</code></dt>
+<dd>If successful, returns a dictionary with 'carry' and 'value' from the encoder. </dd>
+</dl>
+<p>Returns None if there's an error in sending the message, a self.timeout occurs, or the response is
+invalid.</p>
+<p>Keyword Returns:
+<carry> int: The carry value of the encoder.
+When value is greather than 0x3FFF, carry += 1.
+When value is less than 0, carry -= 1</p>
+<pre><code>&lt;value&gt; int: The current value of the encoder (range from 0 to 0x3FFF).
+</code></pre>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<p>if the current carry is 0 and value is 0x3FF0, after one turn CCW, the carry is 1 and value is 0x3FF0.
+if the current carry is 0 and value is 0x3FF0, after one turn CW, the carry is -1 and value is 0x3FF0.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_encoder_value_carry(self):
+    &#34;&#34;&#34;
+    Reads the encoder value
+
+    Returns:
+        dict or None: If successful, returns a dictionary with &#39;carry&#39; and &#39;value&#39; from the encoder. 
+    Returns None if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+    invalid.
+
+    Keyword Returns:
+        &lt;carry&gt; int: The carry value of the encoder. 
+            When value is greather than 0x3FFF, carry += 1. 
+            When value is less than 0, carry -= 1
+          
+        &lt;value&gt; int: The current value of the encoder (range from 0 to 0x3FFF).
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+
+    Examples:
+        if the current carry is 0 and value is 0x3FF0, after one turn CCW, the carry is 1 and value is 0x3FF0.
+        if the current carry is 0 and value is 0x3FF0, after one turn CW, the carry is -1 and value is 0x3FF0.
+    &#34;&#34;&#34;
+    op_code = MksCommands.READ_ENCODER_VALUE_CARRY
+    response_length = 8
+
+    data = self.set_generic(op_code, response_length, [op_code])
+
+    if data:
+        carry = int.from_bytes(data[1:5], byteorder=&#39;big&#39;, signed=True)
+        value = int.from_bytes(data[5:7], byteorder=&#39;big&#39;, signed=True)
+        return {&#39;carry&#39;: carry, &#39;value&#39;: value}
+    
+    return None          </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.read_go_back_to_zero_status_when_power_on"><code class="name flex">
+<span>def <span class="ident">read_go_back_to_zero_status_when_power_on</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads the go back to zero status when power on</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the go back to zero status.</dd>
+<dt><code>None</code></dt>
+<dd>if there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_go_back_to_zero_status_when_power_on(self):
+    &#34;&#34;&#34;
+    Reads the go back to zero status when power on
+
+    Returns:
+        int: If successful, returns the go back to zero status.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    &#34;&#34;&#34;    
+    return self.specialized_state(self.READ_GO_BACK_TO_ZERO_STATUS_WHEN_POWER_ON, 
+        GoBackToZeroStatus, go_back_to_zero_status_error) </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.read_io_port_status"><code class="name flex">
+<span>def <span class="ident">read_io_port_status</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads the IO Ports status</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the port status as Bit[0] is IN_1, Bit[1] is IN_2, Bit[2] is OUT_1, Bit[3] is OUT_2</dd>
+<dt><code>None</code></dt>
+<dd>if there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_io_port_status(self):
+    &#34;&#34;&#34;
+    Reads the IO Ports status
+
+    Returns:
+        int: If successful, returns the port status as Bit[0] is IN_1, Bit[1] is IN_2, Bit[2] is OUT_1, Bit[3] is OUT_2
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    &#34;&#34;&#34;        
+    op_code = MksCommands.READ_NUM_PULSES_RECEIVED
+    response_length = 3
+    data = self.set_generic(op_code, response_length, [op_code])
+
+    # TODO: Parse the response and return the data in a dictionary for each of the pins
+    if data:
+        return int.from_bytes(data[1:2], byteorder=&#39;big&#39;)                                
+    return None  </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.read_motor_shaft_angle_error"><code class="name flex">
+<span>def <span class="ident">read_motor_shaft_angle_error</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads the error on the motor shaft angle.</p>
+<p>The error is the difference between the angle you want to control minus the real-time angle of the motor.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the error of the motor shaft angle.</dd>
+<dt><code>None</code></dt>
+<dd>if there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl>
+<h2 id="note">Note</h2>
+<p>0 to 51200 corresponds to 0 to 360º.</p>
+<h2 id="example">Example</h2>
+<p>When the angle error is 1º, the return error is 51200/360 = 142.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_motor_shaft_angle_error(self):
+    &#34;&#34;&#34;
+    Reads the error on the motor shaft angle.
+
+    The error is the difference between the angle you want to control minus the real-time angle of the motor.
+
+    Returns:
+        int: If successful, returns the error of the motor shaft angle.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+
+    Note:
+        0 to 51200 corresponds to 0 to 360º.
+
+    Example:
+        When the angle error is 1º, the return error is 51200/360 = 142.
+    &#34;&#34;&#34;     
+    op_code = MksCommands.READ_MOTOR_SHAFT_ANGLE_ERROR
+    response_length = 6
+    data = self.set_generic(op_code, response_length, [op_code])
+
+    # TODO: Raise an exception here  if there is a problem parsing the response
+    if data:
+        return int.from_bytes(data[1:5], byteorder=&#39;big&#39;, signed=True)                                
+    return None  </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.read_motor_shaft_protection_state"><code class="name flex">
+<span>def <span class="ident">read_motor_shaft_protection_state</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Read the motor shaft protection state.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the motor shaft protection state.</dd>
+<dt><code>None</code></dt>
+<dd>if there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_motor_shaft_protection_state(self):
+    &#34;&#34;&#34;
+    Read the motor shaft protection state.
+
+    Returns:
+        int: If successful, returns the motor shaft protection state.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    &#34;&#34;&#34;                 
+    return self.specialized_state(self.READ_MOTOR_SHAFT_PROTECTION_STATE, 
+        MotorShaftProtectionStatus, motor_shaft_protection_status_error)</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.read_motor_speed"><code class="name flex">
+<span>def <span class="ident">read_motor_speed</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Read the real-time speed of the motor (RPM).</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the current speed of the motor in RPM.</dd>
+<dt><code>None</code></dt>
+<dd>if there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl>
+<h2 id="note">Note</h2>
+<p>If it runs CCW, the speed is positive.
+If it runs CW, the speed is negative.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_motor_speed(self):
+    &#34;&#34;&#34;
+    Read the real-time speed of the motor (RPM).
+
+    Returns:
+        int: If successful, returns the current speed of the motor in RPM.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+
+    Note:
+        If it runs CCW, the speed is positive.
+        If it runs CW, the speed is negative.
+    &#34;&#34;&#34;          
+    op_code = MksCommands.READ_MOTOR_SPEED
+    response_length = 4
+
+    data = self.set_generic(op_code, response_length, [op_code])
+
+    # TODO: Raise an exception here  if there is a problem parsing the response
+    if data:
+        return int.from_bytes(data[1:3], byteorder=&#39;big&#39;, signed=True)                                
+    return None  </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.read_num_pulses_received"><code class="name flex">
+<span>def <span class="ident">read_num_pulses_received</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads the number of pulses received</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the number of pulses received.</dd>
+<dt><code>None</code></dt>
+<dd>if there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_num_pulses_received(self): 
+    &#34;&#34;&#34;
+    Reads the number of pulses received
+
+    Returns:
+        int: If successful, returns the number of pulses received.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    &#34;&#34;&#34;          
+    op_code = MksCommands.READ_NUM_PULSES_RECEIVED
+    response_length = 6
+
+    data = self.set_generic(op_code, response_length, [op_code])
+
+    # TODO: Raise an exception here  if there is a problem parsing the response
+    if data:
+        return int.from_bytes(data[1:5], byteorder=&#39;big&#39;, signed=True)                                
+    return None  </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.release_motor_shaft_locked_protection_state"><code class="name flex">
+<span>def <span class="ident">release_motor_shaft_locked_protection_state</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Release the motor shaft locked-rotor protection state.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the release motor shaft locked protection state.</dd>
+<dt><code>None</code></dt>
+<dd>if there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def release_motor_shaft_locked_protection_state(self):
+    &#34;&#34;&#34;
+    Release the motor shaft locked-rotor protection state.
+
+    Returns:
+        int: If successful, returns the release motor shaft locked protection state.
+        None: if there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    &#34;&#34;&#34;        
+    return self.specialized_state(self.RELEASE_MOTOR_SHAFT_LOCKED_PROTECTION_STATE, 
+        SuccessStatus, success_status_error) </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.restore_default_parameters"><code class="name flex">
+<span>def <span class="ident">restore_default_parameters</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Restores the default parameters. After restored the parameters, motor driver will reboot, and
+needs to calibrate the motor.</p>
+<p>Args:
+<br>
+can_id (int): The can id</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.
+</dd>
+</dl>
+<p>Note: This is the same as pressing the "Next" key, then power on the motor.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def restore_default_parameters(self):
+    &#34;&#34;&#34;
+    Restores the default parameters. After restored the parameters, motor driver will reboot, and
+    needs to calibrate the motor.
+
+    Args:        
+        can_id (int): The can id
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.        
+
+    Note: This is the same as pressing the &#34;Next&#34; key, then power on the motor.
+    &#34;&#34;&#34;       
+    return self.set_generic_status(MksCommands.RESTORE_DEFAULT_PARAMETERS_COMMAND)   </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.run_motor_absolute_motion_by_axis"><code class="name flex">
+<span>def <span class="ident">run_motor_absolute_motion_by_axis</span></span>(<span>self, speed, acceleration, absolute_axis)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The motor runs to the specified axis with the set acceleration and speed. The axis is the encoder value in
+addition mode. It can be read using read_encoder_value_addition method.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>speed</code></strong> :&ensp;<code>int</code></dt>
+<dd>The speed in the range of 0 to 3000 RPMs.</dd>
+<dt><strong><code>acceleration</code></strong> :&ensp;<code>int</code></dt>
+<dd>The acceleration in the range of 0 to 255.</dd>
+<dt><strong><code>absolute_axis</code></strong> :&ensp;<code>int</code></dt>
+<dd>The relative axis, the value range is -8388607 to +8388607.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the status of the motor, at the end of the command execution. </dd>
+<dt><code>None</code></dt>
+<dd>If there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl>
+<p>Note: In this mode, the axis error is about +-15. It is suggested running with 64 subdivisions.
+<br>
+Note: If the motor is rotating more than 1000 RPM, it is not a good idea to stop the motor inmediately.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run_motor_absolute_motion_by_axis(self, speed, acceleration, absolute_axis):
+    &#34;&#34;&#34;
+    The motor runs to the specified axis with the set acceleration and speed. The axis is the encoder value in 
+    addition mode. It can be read using read_encoder_value_addition method.
+
+    Args:
+        speed (int): The speed in the range of 0 to 3000 RPMs.
+        acceleration (int): The acceleration in the range of 0 to 255.
+        absolute_axis (int): The relative axis, the value range is -8388607 to +8388607.
+        
+    Returns:
+        int: If successful, returns the status of the motor, at the end of the command execution. 
+        None: If there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+    invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+
+    Note: In this mode, the axis error is about +-15. It is suggested running with 64 subdivisions.    
+    Note: If the motor is rotating more than 1000 RPM, it is not a good idea to stop the motor inmediately.
+    &#34;&#34;&#34;
+    if self.is_motor_running():
+        raise motor_already_running_error(&#34;&#34;)    
+    self._validate_speed(speed)
+    self._validate_acceleration(acceleration)
+  
+    # TODO: Should we add a check to avoid stopping the motor inmediately when running at more than 1000 RPMs?
+    cmd = [
+        ((speed &gt;&gt; 8) &amp; 0b1111),
+        speed &amp; 0xFF,
+        acceleration,        
+        (absolute_axis &gt;&gt; 16) &amp; 0xFF,
+        (absolute_axis &gt;&gt; 8) &amp; 0xFF,
+        (absolute_axis &gt;&gt; 0) &amp; 0xFF,
+    ]
+    tmp = self.set_generic(MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)  
+    status_int = int.from_bytes(tmp[1:2], byteorder=&#39;big&#39;)      
+    try:
+        return RunMotorResult(status_int)
+    except ValueError:
+        raise motor_status_error(f&#34;No enum member with value {status_int}&#34;)                                             </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.run_motor_absolute_motion_by_pulses"><code class="name flex">
+<span>def <span class="ident">run_motor_absolute_motion_by_pulses</span></span>(<span>self, speed, acceleration, absolute_pulses)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The motor runs to the specified position with the set acceleration and speed.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>speed</code></strong> :&ensp;<code>int</code></dt>
+<dd>The speed in the range of 0 to 3000 RPMs.</dd>
+<dt><strong><code>acceleration</code></strong> :&ensp;<code>int</code></dt>
+<dd>The acceleration in the range of 0 to 255.</dd>
+<dt><strong><code>absolute_pulses</code></strong> :&ensp;<code>int</code></dt>
+<dd>The absolute pulses, the value range is -8388607 to +8388607.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the status of the motor, at the end of the command execution. </dd>
+<dt><code>None</code></dt>
+<dd>If there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl>
+<p>Note: If the motor is rotating more than 1000 RPM, it is not a good idea to stop the motor inmediately.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run_motor_absolute_motion_by_pulses(self, speed, acceleration, absolute_pulses):
+    &#34;&#34;&#34;
+    The motor runs to the specified position with the set acceleration and speed.
+
+    Args:
+        speed (int): The speed in the range of 0 to 3000 RPMs.
+        acceleration (int): The acceleration in the range of 0 to 255.
+        absolute_pulses (int): The absolute pulses, the value range is -8388607 to +8388607.
+
+    Returns:
+        int: If successful, returns the status of the motor, at the end of the command execution. 
+        None: If there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+    invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    
+    Note: If the motor is rotating more than 1000 RPM, it is not a good idea to stop the motor inmediately.
+    &#34;&#34;&#34;        
+    if self.is_motor_running:
+        raise motor_already_running_error(&#34;&#34;)    
+    self._validate_speed(speed)
+    self._validate_pulses(absolute_pulses)
+  
+    cmd = [
+        (speed &gt;&gt; 8),
+        speed &amp; 0xFF,
+        acceleration,
+        (absolute_pulses &gt;&gt; 16) &amp; 0xFF,
+        (absolute_pulses &gt;&gt; 8) &amp; 0xFF,
+        (absolute_pulses &gt;&gt; 0) &amp; 0xFF,
+    ]
+    tmp = self.set_generic(MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_PULSES_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)  
+    status_int = int.from_bytes(tmp[1:2], byteorder=&#39;big&#39;)  
+    rslt = {}
+    try:
+        rslt[&#39;status&#39;] = RunMotorResult(status_int)
+    except ValueError:
+        raise motor_status_error(f&#34;No enum member with value {status_int}&#34;)                     
+    return rslt      </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.run_motor_in_speed_mode"><code class="name flex">
+<span>def <span class="ident">run_motor_in_speed_mode</span></span>(<span>self, direction: mks_enums.Direction, speed, acceleration)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the speed mode, where the motor can be run with a fixed acceleration and speed.</p>
+<p>Args:
+<br>
+direction (Direction): The direction of the motor, CCW or CW.
+speed (int): The speed in the range of 0 to 3000 RPMs.
+acceleration (int): The acceleration in the range of 0 to 255.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run_motor_in_speed_mode(self, direction: Direction, speed, acceleration):
+    &#34;&#34;&#34;
+    Sets the speed mode, where the motor can be run with a fixed acceleration and speed.
+
+    Args:        
+        direction (Direction): The direction of the motor, CCW or CW.
+        speed (int): The speed in the range of 0 to 3000 RPMs.
+        acceleration (int): The acceleration in the range of 0 to 255.
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.    
+    &#34;&#34;&#34;             
+    self._validate_direction(direction)
+    self._validate_speed(speed)
+    self._validate_acceleration(acceleration)
+
+    direction_value = 0x80 if direction == Direction.CW else 0
+
+    cmd = [
+        direction_value + ((speed &gt;&gt; 8) &amp; 0b1111),
+        speed &amp; 0xFF,
+        acceleration
+    ]
+    return self.set_generic_status(MksCommands.RUN_MOTOR_SPEED_MODE_COMMAND, cmd)       </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.run_motor_relative_motion_by_axis"><code class="name flex">
+<span>def <span class="ident">run_motor_relative_motion_by_axis</span></span>(<span>self, speed, acceleration, relative_axis)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The motor runs relative to the axis with the set acceleration and speed. The axis is the encoder value in
+addition mode. It can be read using read_encoder_value_addition method.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>speed</code></strong> :&ensp;<code>int</code></dt>
+<dd>The speed in the range of 0 to 3000 RPMs.</dd>
+<dt><strong><code>acceleration</code></strong> :&ensp;<code>int</code></dt>
+<dd>The acceleration in the range of 0 to 255.</dd>
+<dt><strong><code>relative_axis</code></strong> :&ensp;<code>int</code></dt>
+<dd>The relative axis, the value range is -8388607 to +8388607.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the status of the motor, at the end of the command execution. </dd>
+<dt><code>None</code></dt>
+<dd>If there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl>
+<p>Note: In this mode, the axis error is about +-15. It is suggested running with 64 subdivisions.
+<br>
+Note: If the motor is rotating more than 1000 RPM, it is not a good idea to stop the motor inmediately.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run_motor_relative_motion_by_axis(self, speed, acceleration, relative_axis):
+    &#34;&#34;&#34;
+    The motor runs relative to the axis with the set acceleration and speed. The axis is the encoder value in 
+    addition mode. It can be read using read_encoder_value_addition method.
+
+    Args:
+        speed (int): The speed in the range of 0 to 3000 RPMs.
+        acceleration (int): The acceleration in the range of 0 to 255.
+        relative_axis (int): The relative axis, the value range is -8388607 to +8388607.
+
+    Returns:
+        int: If successful, returns the status of the motor, at the end of the command execution. 
+        None: If there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+    invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+
+    Note: In this mode, the axis error is about +-15. It is suggested running with 64 subdivisions.    
+    Note: If the motor is rotating more than 1000 RPM, it is not a good idea to stop the motor inmediately.
+    &#34;&#34;&#34;    
+    if self.is_motor_running:
+        raise motor_already_running_error(&#34;&#34;)    
+    self._validate_speed(speed)
+    self._validate_acceleration(acceleration)
+
+    # TODO: Should we add a check to avoid stopping the motor inmediately when running at more than 1000 RPMs?
+    cmd = [
+        ((speed &gt;&gt; 8) &amp; 0b1111),
+        speed &amp; 0xFF,
+        acceleration,        
+        (relative_axis &gt;&gt; 16) &amp; 0xFF,
+        (relative_axis &gt;&gt; 8) &amp; 0xFF,
+        (relative_axis &gt;&gt; 0) &amp; 0xFF,
+    ]
+    tmp = self.set_generic(MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_AXIS_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)  
+    status_int = int.from_bytes(tmp[1:2], byteorder=&#39;big&#39;)  
+    rslt = {}    
+    try:
+        rslt[&#39;status&#39;] = RunMotorResult(status_int)
+    except ValueError:
+        raise motor_status_error(f&#34;No enum member with value {status_int}&#34;)                                       
+    return rslt    </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.run_motor_relative_motion_by_pulses"><code class="name flex">
+<span>def <span class="ident">run_motor_relative_motion_by_pulses</span></span>(<span>self, direction: mks_enums.Direction, speed, acceleration, pulses)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The motor runs to the relative position with the set acceleration and speed.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>direction</code></strong> :&ensp;<code>Direction</code></dt>
+<dd>The direction of the motor, CCW or CW.</dd>
+<dt><strong><code>speed</code></strong> :&ensp;<code>int</code></dt>
+<dd>The speed in the range of 0 to 3000 RPMs.</dd>
+<dt><strong><code>acceleration</code></strong> :&ensp;<code>int</code></dt>
+<dd>The acceleration in the range of 0 to 255.</dd>
+<dt><strong><code>pulses</code></strong> :&ensp;<code>int</code></dt>
+<dd>The motor run steps, the value range is 0 to 0xFFFFFF.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>If successful, returns the status of the motor, at the end of the command execution. </dd>
+<dt><code>None</code></dt>
+<dd>If there's an error in sending the message, a self.timeout occurs, or the response is </dd>
+</dl>
+<p>invalid.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl>
+<p>Note: If the motor is rotating more than 1000 RPM, it is not a good idea to stop the motor inmediately.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run_motor_relative_motion_by_pulses(self, direction: Direction, speed, acceleration, pulses):
+    &#34;&#34;&#34;
+    The motor runs to the relative position with the set acceleration and speed.
+
+    Args:
+        direction (Direction): The direction of the motor, CCW or CW.
+        speed (int): The speed in the range of 0 to 3000 RPMs.
+        acceleration (int): The acceleration in the range of 0 to 255.
+        pulses (int): The motor run steps, the value range is 0 to 0xFFFFFF.
+
+    Returns:
+        int: If successful, returns the status of the motor, at the end of the command execution. 
+        None: If there&#39;s an error in sending the message, a self.timeout occurs, or the response is 
+    invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+    
+    Note: If the motor is rotating more than 1000 RPM, it is not a good idea to stop the motor inmediately.
+    &#34;&#34;&#34;        
+    if self.is_motor_running:
+        raise motor_already_running_error(&#34;&#34;)    
+    self._validate_direction(direction)
+    self._validate_speed(speed)
+    self._validate_pulses(pulses)
+  
+    direction_value = 0x80 if direction == Direction.CW else 0
+
+    cmd = [
+        direction_value + ((speed &gt;&gt; 8) &amp; 0b1111),
+        speed &amp; 0xFF,
+        acceleration,
+        (pulses &gt;&gt; 16) &amp; 0xFF,
+        (pulses &gt;&gt; 8) &amp; 0xFF,
+        (pulses &gt;&gt; 0) &amp; 0xFF,
+    ]
+    tmp = self.set_generic(MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_PULSES_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)  
+    status_int = int.from_bytes(tmp[1:2], byteorder=&#39;big&#39;)  
+    rslt = {}
+    try:
+        rslt[&#39;status&#39;] = RunMotorResult(status_int)
+    except ValueError:
+        raise motor_status_error(f&#34;No enum member with value {status_int}&#34;)                     
+    return rslt   </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.save_clean_in_speed_mode"><code class="name flex">
+<span>def <span class="ident">save_clean_in_speed_mode</span></span>(<span>self, state: mks_enums.SaveCleanState)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the save/clean parameter state in speed mode</p>
+<p>Args:
+<br>
+state (SaveCleanState): The save/clean paramete state</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_clean_in_speed_mode(self, state: SaveCleanState):
+    &#34;&#34;&#34;
+    Sets the save/clean parameter state in speed mode
+
+    Args:        
+        state (SaveCleanState): The save/clean paramete state
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.    
+    &#34;&#34;&#34;         
+    return self.set_generic_status(MksCommands.SAVE_CLEAN_IN_SPEED_MODE_COMMAND)   </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_auto_turn_off_screen"><code class="name flex">
+<span>def <span class="ident">set_auto_turn_off_screen</span></span>(<span>self, enable: mks_enums.Enable)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the auto turn off function of the screen</p>
+<p>Args:
+<br>
+enable (Enable): The enable value.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.
+</dd>
+</dl>
+<p>Note: If set to Enable, the screen will automatically turn off after about 15 seconds, and
+any button can wake up the screen again.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_auto_turn_off_screen(self, enable: Enable):
+    &#34;&#34;&#34;
+    Sets the auto turn off function of the screen
+
+    Args:        
+        enable (Enable): The enable value.
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.        
+
+    Note: If set to Enable, the screen will automatically turn off after about 15 seconds, and
+        any button can wake up the screen again.
+    &#34;&#34;&#34;       
+    return self.set_generic_status(MksCommands.SET_AUTO_TURN_OFF_SCREEN_COMMAND, enable.value)</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_can_bitrate"><code class="name flex">
+<span>def <span class="ident">set_can_bitrate</span></span>(<span>self, bitrate: mks_enums.CanBitrate)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the can bitrate</p>
+<p>Args:
+<br>
+bitrate (CanBitrate): The can bitrate</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.
+</dd>
+</dl>
+<p>Note: Same as the "CanRate" option on screen.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_can_bitrate(self, bitrate: CanBitrate):
+    &#34;&#34;&#34;
+    Sets the can bitrate
+
+    Args:        
+        bitrate (CanBitrate): The can bitrate
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.        
+
+    Note: Same as the &#34;CanRate&#34; option on screen.
+    &#34;&#34;&#34;        
+    return self.set_generic_status(MksCommands.SET_CAN_BITRATE_COMMAND, bitrate.value)</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_can_id"><code class="name flex">
+<span>def <span class="ident">set_can_id</span></span>(<span>self, can_id)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set the can id</p>
+<p>Args:
+<br>
+can_id (int): The can id</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.
+</dd>
+</dl>
+<p>Note: Same as the "CanID" option on screen.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_can_id(self, can_id):
+    &#34;&#34;&#34;
+    Set the can id
+
+    Args:        
+        can_id (int): The can id
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.        
+
+    Note: Same as the &#34;CanID&#34; option on screen.
+    &#34;&#34;&#34;        
+    return self.set_generic_status(MksCommands.SET_CAN_ID, [(can_id &gt;&gt; 8) &amp; 0xF, can_id &amp; 0xFF])</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_current_axis_to_zero"><code class="name flex">
+<span>def <span class="ident">set_current_axis_to_zero</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets current axis to zero. It is like "go_home" without running the motor.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_current_axis_to_zero(self):
+    &#34;&#34;&#34;
+    Sets current axis to zero. It is like &#34;go_home&#34; without running the motor.
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.        
+    &#34;&#34;&#34;       
+    return self.set_generic_status(MksCommands.SET_CURRENT_AXIS_TO_ZERO_COMMAND)   </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_en_pin_config"><code class="name flex">
+<span>def <span class="ident">set_en_pin_config</span></span>(<span>self, enable: mks_enums.EnPinEnable)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the active of the enable pins</p>
+<p>Args:
+<br>
+enable (EnPinEnable): The active mode.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_en_pin_config(self, enable: EnPinEnable):
+    &#34;&#34;&#34;
+    Sets the active of the enable pins
+
+    Args:        
+        enable (EnPinEnable): The active mode.
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.        
+    &#34;&#34;&#34;        
+    return self.set_generic_status(MksCommands.SET_EN_PIN_CONFIG_COMMAND, enable.value)     </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_generic"><code class="name flex">
+<span>def <span class="ident">set_generic</span></span>(<span>self, op_code, response_length, data=[])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sends a generic command via CAN bus and waits for a response.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>op_code</code></strong> :&ensp;<code>int</code></dt>
+<dd>Operation code of the command.</dd>
+<dt><strong><code>data</code></strong> :&ensp;<code>list</code> of <code>bytes</code>, optional</dt>
+<dd>Additional data for the command. Defaults to an empty list.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>A dictionary with 'status' key if successful, None otherwise.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_generic(self, op_code, response_length, data = []):
+    &#34;&#34;&#34;Sends a generic command via CAN bus and waits for a response.
+
+    Args:
+        op_code (int): Operation code of the command.
+        data (list of bytes, optional): Additional data for the command. Defaults to an empty list.
+
+    Returns:
+        dict: A dictionary with &#39;status&#39; key if successful, None otherwise.
+    &#34;&#34;&#34;      
+
+    # Check if data is an integer and convert it to a list if it is
+    if isinstance(data, int):
+        data = [data]
+    elif isinstance(data, bool):
+        # Assuming _bool_to_int is a method that converts a boolean to an integer
+        data = self._bool_to_int(data)
+                
+    msg = self.create_can_msg([op_code] + data)
+    # Flag to indicate whether the response has been received
+    status = None
+
+    def receive_message(message):
+        nonlocal status
+        if not status:
+            try:
+                self.check_msg_crc(message)
+                if message.arbitration_id == self.can_id:
+                    if not (message.data[0] == op_code and len(message.data) == response_length):
+                        logging.error(f&#34;Unexpected response length or opcode.&#34;)                        
+                    status = message.data                                                                
+            except InvalidCRCError:
+                logging.error(f&#34;CRC check failed for the message: {e}&#34;)            
+
+    try:        
+        self.notifier.add_listener(receive_message)
+        self.bus.send(msg)
+    except can.CanError as e:
+        raise CanMessageError(f&#34;Error sending message: {e}&#34;)            
+
+    # Wait for response (with a timeout)
+    start_time = time.perf_counter()
+    while (time.perf_counter() - start_time &lt; self.timeout) and status == None:
+        time.sleep(0.1)  # Small sleep to prevent busy waiting
+    self.notifier.remove_listener(receive_message)
+
+    return status</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_generic_status"><code class="name flex">
+<span>def <span class="ident">set_generic_status</span></span>(<span>self, op_code, data=[])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sends a generic status command and processes the response.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>op_code</code></strong> :&ensp;<code>int</code></dt>
+<dd>Operation code of the command.</dd>
+<dt><strong><code>data</code></strong> :&ensp;<code>list</code> of <code>bytes</code>, optional</dt>
+<dd>Additional data for the command. Defaults to an empty list.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>Modified result dictionary with 'status' key, None on error.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_generic_status(self, op_code, data = []):
+    &#34;&#34;&#34;Sends a generic status command and processes the response.
+
+    Args:
+        op_code (int): Operation code of the command.
+        data (list of bytes, optional): Additional data for the command. Defaults to an empty list.
+
+    Returns:
+        dict: Modified result dictionary with &#39;status&#39; key, None on error.
+    &#34;&#34;&#34;        
+    tmp = self.set_generic(op_code, MksServo.GENERIC_RESPONSE_LENGTH, data)
+    if not tmp == None:
+        status_int = int.from_bytes(tmp[1:2], byteorder=&#39;big&#39;)  
+
+        try:            
+            return SuccessStatus(status_int)
+        except ValueError:
+            raise InvalidResponseError(f&#34;No enum member with value {status_int}&#34;)
+            
+    return None</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_group_id"><code class="name flex">
+<span>def <span class="ident">set_group_id</span></span>(<span>self, group_id)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the group id</p>
+<p>Args:
+<br>
+group_id (int): The group id</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_group_id(self, group_id):
+    &#34;&#34;&#34;
+    Sets the group id
+
+    Args:        
+        group_id (int): The group id
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.        
+    
+    &#34;&#34;&#34;     
+    return self.set_generic_status(MksCommands.SET_GROUP_ID_COMMAND, [(group_id &gt;&gt; 8) &amp; 0xF, group_id &amp; 0xFF])</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_holding_current"><code class="name flex">
+<span>def <span class="ident">set_holding_current</span></span>(<span>self, strength: mks_enums.HoldingStrength)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the holding current.</p>
+<p>Args:
+<br>
+strength (HoldingStrength): Sets the holding current percentage.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.
+</dd>
+</dl>
+<p>Note: Only for OPEN and CLOSE mode, vFOC mode is invalid.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_holding_current(self, strength: HoldingStrength):
+    &#34;&#34;&#34;
+    Sets the holding current.
+
+    Args:        
+        strength (HoldingStrength): Sets the holding current percentage.
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.    
+
+    Note: Only for OPEN and CLOSE mode, vFOC mode is invalid.
+    &#34;&#34;&#34;          
+    return self.set_generic_status(MksCommands.SET_HOLDING_CURRENT_COMMAND, strength.value)    </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_home"><code class="name flex">
+<span>def <span class="ident">set_home</span></span>(<span>self, homeTrig: mks_enums.EndStopLevel, homeDir: mks_enums.Direction, homeSpeed, endLimit: mks_enums.Enable)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the parameter of Home</p>
+<p>Args:
+<br>
+homeTrig (EndStopLevel): The effective level of the end stop
+homeDir (Direction): The direction of go home
+homeSpeed (int): The speed of go home
+endLimit (Enable): The end limit enable status.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.
+</dd>
+</dl>
+<p>Note: Same as the "HmTrig", "HmDir" and "HmSpeed" options on screen.</p>
+<p>Note: When first time to using the endLimit function or changing the limit paramters, it is necessary to go home.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_home(self, homeTrig : EndStopLevel, homeDir: Direction, homeSpeed, endLimit: Enable):
+    &#34;&#34;&#34;
+    Sets the parameter of Home
+
+    Args:        
+        homeTrig (EndStopLevel): The effective level of the end stop
+        homeDir (Direction): The direction of go home
+        homeSpeed (int): The speed of go home
+        endLimit (Enable): The end limit enable status.
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.        
+
+    Note: Same as the &#34;HmTrig&#34;, &#34;HmDir&#34; and &#34;HmSpeed&#34; options on screen.
+
+    Note: When first time to using the endLimit function or changing the limit paramters, it is necessary to go home.
+    &#34;&#34;&#34;       
+    return self.set_generic_status(MksCommands.SET_HOME_COMMAND, [homeTrig, homeDir, (homeSpeed &gt;&gt; 8) &amp; 0xF, homeSpeed &amp; 0xFF, endLimit])</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_key_lock"><code class="name flex">
+<span>def <span class="ident">set_key_lock</span></span>(<span>self, enable: mks_enums.Enable)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set the key lock</p>
+<p>Args:
+<br>
+enable (Enable): The status of the key lock</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_key_lock(self, enable: Enable):
+    &#34;&#34;&#34;
+    Set the key lock
+
+    Args:        
+        enable (Enable): The status of the key lock
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.            
+    &#34;&#34;&#34;       
+    return self.set_generic_status(MksCommands.SET_KEY_LOCK_ENABLE_COMMAND, enable.value)</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_limit_port_remap"><code class="name flex">
+<span>def <span class="ident">set_limit_port_remap</span></span>(<span>self, enable: mks_enums.Enable)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the limit port remap. The 28/35/42D motors only have a left limit port.
+In serial control mode, limit port remapping can be enabled to add a right limit port.
+For the 57D motor, limit port remapping can also be enabled if required to facilitate wiring.
+Left limit -&gt; En port
+Right limit -&gt; Dir port.
+The com port must be connected to the corresponding high level.</p>
+<p>Args:
+<br>
+enable (Enable): The enable status.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_limit_port_remap(self, enable: Enable):
+    &#34;&#34;&#34;
+    Sets the limit port remap. The 28/35/42D motors only have a left limit port.
+    In serial control mode, limit port remapping can be enabled to add a right limit port.
+    For the 57D motor, limit port remapping can also be enabled if required to facilitate wiring.
+    Left limit -&gt; En port
+    Right limit -&gt; Dir port.
+    The com port must be connected to the corresponding high level.
+
+    Args:        
+        enable (Enable): The enable status.
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.            
+    &#34;&#34;&#34;       
+    return self.set_generic_status(MksCommands.SET_LIMIT_PORT_REMAP_COMMAND, enable.value)   </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_mode0"><code class="name flex">
+<span>def <span class="ident">set_mode0</span></span>(<span>self, mode: mks_enums.Mode0, enable: mks_enums.Enable, speed, direction: mks_enums.Direction)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets mode 0 where the motor can automatically return to the 0 point position when power on.
+The maximum angle is 359 degrees.</p>
+<p>Args:
+<br>
+mode (Mode0): The mode
+enable (Enable): The enable status
+speed (int): Speed. 0: slowest, 4: fastest
+direction (Direction): The direction</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_mode0(self, mode : Mode0, enable : Enable, speed, direction: Direction):
+    &#34;&#34;&#34;
+    Sets mode 0 where the motor can automatically return to the 0 point position when power on.
+    The maximum angle is 359 degrees.
+
+    Args:        
+        mode (Mode0): The mode
+        enable (Enable): The enable status
+        speed (int): Speed. 0: slowest, 4: fastest
+        direction (Direction): The direction
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.            
+    &#34;&#34;&#34;       
+    cmd = [mode, enable.value, speed, direction.value]
+    return self.set_generic_status(MksCommands.SET_MODE0_COMMAND, [mode, enable, speed, direction])   </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_motor_rotation_direction"><code class="name flex">
+<span>def <span class="ident">set_motor_rotation_direction</span></span>(<span>self, direction: mks_enums.Direction)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the direction of motor rotation</p>
+<p>Args:
+<br>
+direction (Direction): The direction</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.
+</dd>
+</dl>
+<p>Note: Only for pulse interface, the direction of serial interface is set by command.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_motor_rotation_direction(self, direction: Direction):
+    &#34;&#34;&#34;
+    Sets the direction of motor rotation
+
+    Args:        
+        direction (Direction): The direction
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.        
+
+    Note: Only for pulse interface, the direction of serial interface is set by command.
+    &#34;&#34;&#34;          
+    return self.set_generic_status(MksCommands.SET_MOTOR_ROTATION_DIRECTION, direction.value)</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_motor_shaft_locked_rotor_protection"><code class="name flex">
+<span>def <span class="ident">set_motor_shaft_locked_rotor_protection</span></span>(<span>self, enable: mks_enums.Enable)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the motor shaft protection</p>
+<p>Args:
+<br>
+enable (Enable): The enable value.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.
+</dd>
+</dl>
+<p>Note: Same as the "Protect" option on screen.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_motor_shaft_locked_rotor_protection(self, enable: Enable):
+    &#34;&#34;&#34;
+    Sets the motor shaft protection
+
+    Args:        
+        enable (Enable): The enable value.
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.        
+
+    Note: Same as the &#34;Protect&#34; option on screen.
+    &#34;&#34;&#34;     
+    return self.set_generic_status(MksCommands.SET_MOTOR_SHAFT_LOCKED_ROTOR_PROTECTION_COMMAND, enable.value)</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_slave_respond_active"><code class="name flex">
+<span>def <span class="ident">set_slave_respond_active</span></span>(<span>self, respon, active)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the slave respond and active</p>
+<p>Args:
+<br>
+respon (Enable):
+active (Enable): </p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.
+</dd>
+</dl>
+<p>Note: Not implemented</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_slave_respond_active(self, respon, active):
+    &#34;&#34;&#34;
+    Sets the slave respond and active
+
+    Args:        
+        respon (Enable): 
+        active (Enable): 
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.        
+
+    Note: Not implemented
+    &#34;&#34;&#34;         
+    print (&#34;Not implemented&#34;)</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_subdivision_interpolation"><code class="name flex">
+<span>def <span class="ident">set_subdivision_interpolation</span></span>(<span>self, enable: mks_enums.Enable)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the subdivision interpolation function.</p>
+<p>Args:
+<br>
+enable (Enable): The enable value for the interpolation..</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.
+</dd>
+</dl>
+<p>Note: Same as the "Mplyer" option on screen.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_subdivision_interpolation(self, enable: Enable):
+    &#34;&#34;&#34;
+    Sets the subdivision interpolation function.
+
+    Args:        
+        enable (Enable): The enable value for the interpolation..
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.        
+
+    Note: Same as the &#34;Mplyer&#34; option on screen.
+    &#34;&#34;&#34;       
+    return self.set_generic_status(MksCommands.SET_SUBDIVISION_INTERPOLATION_COMMAND, enable.value)</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_subdivisions"><code class="name flex">
+<span>def <span class="ident">set_subdivisions</span></span>(<span>self, mstep)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the subdivisions</p>
+<p>Args:
+<br>
+mstep (int): The subdivisions</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_subdivisions(self, mstep):
+    &#34;&#34;&#34;
+    Sets the subdivisions
+
+    Args:        
+        mstep (int): The subdivisions
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.        
+    &#34;&#34;&#34;      
+    return self.set_generic_status(MksCommands.SET_SUBDIVISIONS_COMMAND, mstep)    </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_work_mode"><code class="name flex">
+<span>def <span class="ident">set_work_mode</span></span>(<span>self, mode: mks_enums.WorkMode)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set the working mode of the servo.</p>
+<p>Args:
+<br>
+mode (WorkMode): The mode of the servo</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.
+</dd>
+</dl>
+<p>Note: Setting CrOpen, CrClose or CrvFoc will lose communication over CAN.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_work_mode(self, mode: WorkMode):
+    &#34;&#34;&#34;
+    Set the working mode of the servo.
+
+    Args:        
+        mode (WorkMode): The mode of the servo
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.    
+
+    Note: Setting CrOpen, CrClose or CrvFoc will lose communication over CAN.
+    &#34;&#34;&#34;       
+    return self.set_generic_status(MksCommands.SET_WORK_MODE_COMMAND, mode.value)</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.set_working_current"><code class="name flex">
+<span>def <span class="ident">set_working_current</span></span>(<span>self, current)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the working current.</p>
+<p>Args:
+<br>
+current (int): The working current in miliamps.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>SuccessStatus</code></dt>
+<dd>The success result of the command.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.
+</dd>
+</dl>
+<p>Note: The maximum current for Servo42D, 28D and 35D is 3000 mA. The maximum current for servod57d is 5200 ma.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_working_current(self, current):
+    &#34;&#34;&#34;
+    Sets the working current.
+
+    Args:        
+        current (int): The working current in miliamps.
+
+    Returns:
+        SuccessStatus: The success result of the command.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.    
+
+    Note: The maximum current for Servo42D, 28D and 35D is 3000 mA. The maximum current for servod57d is 5200 ma.
+    &#34;&#34;&#34;      
+    self._validate_current(current)
+    return self.set_generic_status(MksCommands.SET_WORKING_CURRENT_COMMAND, [(current &gt;&gt; 8) &amp; 0xFF, current &amp; 0xFF])    </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.specialized_state"><code class="name flex">
+<span>def <span class="ident">specialized_state</span></span>(<span>self, op_code, status_enum, status_enum_exception)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def specialized_state(self, op_code, status_enum, status_enum_exception):
+    tmp = self.set_generic(op_code, self.GENERIC_RESPONSE_LENGTH, [op_code])  
+    status_int = int.from_bytes(tmp[1:2], byteorder=&#39;big&#39;)  
+    try:
+        return status_enum(status_int)
+    except ValueError:
+        raise status_enum_exception(f&#34;No enum member with value {status_int}&#34;)                     </code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.wait_for_calibration"><code class="name flex">
+<span>def <span class="ident">wait_for_calibration</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Waits until the calibration procedure completes.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>CalibrationResult</code></dt>
+<dd>The success result of the command. It should be "CalibratedSuccess" or "CalibratingFail".</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.
+</dd>
+<dt><code>calibration_timeout_error</code></dt>
+<dd>If the calibration took longer than the expected time.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def wait_for_calibration(self):
+    &#34;&#34;&#34;
+    Waits until the calibration procedure completes.
+
+    Returns:
+        CalibrationResult: The success result of the command. It should be &#34;CalibratedSuccess&#34; or &#34;CalibratingFail&#34;.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.    
+        calibration_timeout_error: If the calibration took longer than the expected time.
+    &#34;&#34;&#34;     
+    if self._calibration_status == CalibrationResult.Unkown:
+        raise calibration_not_running(&#34;&#34;)
+
+    start_time = time.perf_counter()
+    while (time.perf_counter() - start_time &lt; self.MAX_CALIBRATION_TIME) and self._calibration_status == CalibrationResult.Calibrating:
+        time.sleep(0.1)  # Small sleep to prevent busy waiting
+
+    if not self._calibration_status == CalibrationResult.CalibratedSuccess and not self._calibration_status == CalibrationResult.CalibratingFail:
+        raise calibration_timeout_error(&#34;&#34;)      
+    
+    return self._calibration_status</code></pre>
+</details>
+</dd>
+<dt id="mks-servo-can.mks_servo.MksServo.wait_for_motor_idle"><code class="name flex">
+<span>def <span class="ident">wait_for_motor_idle</span></span>(<span>self, timeout)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Waits until the motor stops running or the timeout time is meet.</p>
+<p>Args:
+<br>
+timeout (double): Maximum number of seconds to wait for the motor to stop.
+</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>boolean</code></dt>
+<dd>The running state of the motor at the end of this method.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>can.CanError</code></dt>
+<dd>If there is an error in sending the CAN message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def wait_for_motor_idle(self, timeout):    
+    &#34;&#34;&#34;
+    Waits until the motor stops running or the timeout time is meet.
+
+    Args:        
+        timeout (double): Maximum number of seconds to wait for the motor to stop.        
+
+    Returns:
+        boolean: The running state of the motor at the end of this method.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.    
+    &#34;&#34;&#34;     
+    start_time = time.perf_counter()
+    while (time.perf_counter() - start_time &lt; timeout) and self.is_motor_running():
+        time.sleep(0.1)  # Small sleep to prevent busy waiting
+    return self.is_motor_running()</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="mks-servo-can.mks_servo.ResponseTimeoutError"><code class="flex name class">
+<span>class <span class="ident">ResponseTimeoutError</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Raised when response is not received within the expected timeout.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ResponseTimeoutError(Exception):
+    &#34;&#34;&#34;Raised when response is not received within the expected timeout.&#34;&#34;&#34;
+    pass</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="mks-servo-can.mks_servo.UnexpectedResponseLengthError"><code class="flex name class">
+<span>class <span class="ident">UnexpectedResponseLengthError</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Raised for unexpected response data length.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class UnexpectedResponseLengthError(Exception):
+    &#34;&#34;&#34;Raised for unexpected response data length.&#34;&#34;&#34;
+    pass</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="mks-servo-can" href="index.html">mks-servo-can</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="mks-servo-can.mks_servo.CanMessageError" href="#mks-servo-can.mks_servo.CanMessageError">CanMessageError</a></code></h4>
+</li>
+<li>
+<h4><code><a title="mks-servo-can.mks_servo.InvalidCRCError" href="#mks-servo-can.mks_servo.InvalidCRCError">InvalidCRCError</a></code></h4>
+</li>
+<li>
+<h4><code><a title="mks-servo-can.mks_servo.InvalidResponseError" href="#mks-servo-can.mks_servo.InvalidResponseError">InvalidResponseError</a></code></h4>
+</li>
+<li>
+<h4><code><a title="mks-servo-can.mks_servo.MksServo" href="#mks-servo-can.mks_servo.MksServo">MksServo</a></code></h4>
+<ul class="">
+<li><code><a title="mks-servo-can.mks_servo.MksServo.CalibrationResult" href="#mks-servo-can.mks_servo.MksServo.CalibrationResult">CalibrationResult</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.CanBitrate" href="#mks-servo-can.mks_servo.MksServo.CanBitrate">CanBitrate</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.DEFAULT_TIMEOUT" href="#mks-servo-can.mks_servo.MksServo.DEFAULT_TIMEOUT">DEFAULT_TIMEOUT</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.Direction" href="#mks-servo-can.mks_servo.MksServo.Direction">Direction</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.EnPinEnable" href="#mks-servo-can.mks_servo.MksServo.EnPinEnable">EnPinEnable</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.Enable" href="#mks-servo-can.mks_servo.MksServo.Enable">Enable</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.EndStopLevel" href="#mks-servo-can.mks_servo.MksServo.EndStopLevel">EndStopLevel</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.GENERIC_RESPONSE_LENGTH" href="#mks-servo-can.mks_servo.MksServo.GENERIC_RESPONSE_LENGTH">GENERIC_RESPONSE_LENGTH</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.GoHomeResult" href="#mks-servo-can.mks_servo.MksServo.GoHomeResult">GoHomeResult</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.HoldingStrength" href="#mks-servo-can.mks_servo.MksServo.HoldingStrength">HoldingStrength</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.MAX_ACCELERATION" href="#mks-servo-can.mks_servo.MksServo.MAX_ACCELERATION">MAX_ACCELERATION</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.MAX_CALIBRATION_TIME" href="#mks-servo-can.mks_servo.MksServo.MAX_CALIBRATION_TIME">MAX_CALIBRATION_TIME</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.MAX_PULSES" href="#mks-servo-can.mks_servo.MksServo.MAX_PULSES">MAX_PULSES</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.MAX_SPEED" href="#mks-servo-can.mks_servo.MksServo.MAX_SPEED">MAX_SPEED</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.Mode0" href="#mks-servo-can.mks_servo.MksServo.Mode0">Mode0</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.MotorStatus" href="#mks-servo-can.mks_servo.MksServo.MotorStatus">MotorStatus</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.RunMotorResult" href="#mks-servo-can.mks_servo.MksServo.RunMotorResult">RunMotorResult</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.SaveCleanState" href="#mks-servo-can.mks_servo.MksServo.SaveCleanState">SaveCleanState</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.StatusCommand8" href="#mks-servo-can.mks_servo.MksServo.StatusCommand8">StatusCommand8</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.StatusCommand9" href="#mks-servo-can.mks_servo.MksServo.StatusCommand9">StatusCommand9</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.SuccessStatus" href="#mks-servo-can.mks_servo.MksServo.SuccessStatus">SuccessStatus</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.WorkMode" href="#mks-servo-can.mks_servo.MksServo.WorkMode">WorkMode</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.b_calibrate_encoder" href="#mks-servo-can.mks_servo.MksServo.b_calibrate_encoder">b_calibrate_encoder</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.check_msg_crc" href="#mks-servo-can.mks_servo.MksServo.check_msg_crc">check_msg_crc</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.create_can_msg" href="#mks-servo-can.mks_servo.MksServo.create_can_msg">create_can_msg</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.emergency_stop_motor" href="#mks-servo-can.mks_servo.MksServo.emergency_stop_motor">emergency_stop_motor</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.enable_motor" href="#mks-servo-can.mks_servo.MksServo.enable_motor">enable_motor</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.go_home" href="#mks-servo-can.mks_servo.MksServo.go_home">go_home</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.invalid_aceleration_error" href="#mks-servo-can.mks_servo.MksServo.invalid_aceleration_error">invalid_aceleration_error</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.invalid_direction_error" href="#mks-servo-can.mks_servo.MksServo.invalid_direction_error">invalid_direction_error</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.invalid_pulses_error" href="#mks-servo-can.mks_servo.MksServo.invalid_pulses_error">invalid_pulses_error</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.invalid_speed_error" href="#mks-servo-can.mks_servo.MksServo.invalid_speed_error">invalid_speed_error</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.is_motor_running" href="#mks-servo-can.mks_servo.MksServo.is_motor_running">is_motor_running</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.motor_status_error" href="#mks-servo-can.mks_servo.MksServo.motor_status_error">motor_status_error</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.nb_calibrate_encoder" href="#mks-servo-can.mks_servo.MksServo.nb_calibrate_encoder">nb_calibrate_encoder</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.query_motor_status" href="#mks-servo-can.mks_servo.MksServo.query_motor_status">query_motor_status</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.read_en_pins_status" href="#mks-servo-can.mks_servo.MksServo.read_en_pins_status">read_en_pins_status</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.read_encoder_value_addition" href="#mks-servo-can.mks_servo.MksServo.read_encoder_value_addition">read_encoder_value_addition</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.read_encoder_value_carry" href="#mks-servo-can.mks_servo.MksServo.read_encoder_value_carry">read_encoder_value_carry</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.read_go_back_to_zero_status_when_power_on" href="#mks-servo-can.mks_servo.MksServo.read_go_back_to_zero_status_when_power_on">read_go_back_to_zero_status_when_power_on</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.read_io_port_status" href="#mks-servo-can.mks_servo.MksServo.read_io_port_status">read_io_port_status</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.read_motor_shaft_angle_error" href="#mks-servo-can.mks_servo.MksServo.read_motor_shaft_angle_error">read_motor_shaft_angle_error</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.read_motor_shaft_protection_state" href="#mks-servo-can.mks_servo.MksServo.read_motor_shaft_protection_state">read_motor_shaft_protection_state</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.read_motor_speed" href="#mks-servo-can.mks_servo.MksServo.read_motor_speed">read_motor_speed</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.read_num_pulses_received" href="#mks-servo-can.mks_servo.MksServo.read_num_pulses_received">read_num_pulses_received</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.release_motor_shaft_locked_protection_state" href="#mks-servo-can.mks_servo.MksServo.release_motor_shaft_locked_protection_state">release_motor_shaft_locked_protection_state</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.restore_default_parameters" href="#mks-servo-can.mks_servo.MksServo.restore_default_parameters">restore_default_parameters</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.run_motor_absolute_motion_by_axis" href="#mks-servo-can.mks_servo.MksServo.run_motor_absolute_motion_by_axis">run_motor_absolute_motion_by_axis</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.run_motor_absolute_motion_by_pulses" href="#mks-servo-can.mks_servo.MksServo.run_motor_absolute_motion_by_pulses">run_motor_absolute_motion_by_pulses</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.run_motor_in_speed_mode" href="#mks-servo-can.mks_servo.MksServo.run_motor_in_speed_mode">run_motor_in_speed_mode</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.run_motor_relative_motion_by_axis" href="#mks-servo-can.mks_servo.MksServo.run_motor_relative_motion_by_axis">run_motor_relative_motion_by_axis</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.run_motor_relative_motion_by_pulses" href="#mks-servo-can.mks_servo.MksServo.run_motor_relative_motion_by_pulses">run_motor_relative_motion_by_pulses</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.save_clean_in_speed_mode" href="#mks-servo-can.mks_servo.MksServo.save_clean_in_speed_mode">save_clean_in_speed_mode</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_auto_turn_off_screen" href="#mks-servo-can.mks_servo.MksServo.set_auto_turn_off_screen">set_auto_turn_off_screen</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_can_bitrate" href="#mks-servo-can.mks_servo.MksServo.set_can_bitrate">set_can_bitrate</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_can_id" href="#mks-servo-can.mks_servo.MksServo.set_can_id">set_can_id</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_current_axis_to_zero" href="#mks-servo-can.mks_servo.MksServo.set_current_axis_to_zero">set_current_axis_to_zero</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_en_pin_config" href="#mks-servo-can.mks_servo.MksServo.set_en_pin_config">set_en_pin_config</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_generic" href="#mks-servo-can.mks_servo.MksServo.set_generic">set_generic</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_generic_status" href="#mks-servo-can.mks_servo.MksServo.set_generic_status">set_generic_status</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_group_id" href="#mks-servo-can.mks_servo.MksServo.set_group_id">set_group_id</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_holding_current" href="#mks-servo-can.mks_servo.MksServo.set_holding_current">set_holding_current</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_home" href="#mks-servo-can.mks_servo.MksServo.set_home">set_home</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_key_lock" href="#mks-servo-can.mks_servo.MksServo.set_key_lock">set_key_lock</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_limit_port_remap" href="#mks-servo-can.mks_servo.MksServo.set_limit_port_remap">set_limit_port_remap</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_mode0" href="#mks-servo-can.mks_servo.MksServo.set_mode0">set_mode0</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_motor_rotation_direction" href="#mks-servo-can.mks_servo.MksServo.set_motor_rotation_direction">set_motor_rotation_direction</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_motor_shaft_locked_rotor_protection" href="#mks-servo-can.mks_servo.MksServo.set_motor_shaft_locked_rotor_protection">set_motor_shaft_locked_rotor_protection</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_slave_respond_active" href="#mks-servo-can.mks_servo.MksServo.set_slave_respond_active">set_slave_respond_active</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_subdivision_interpolation" href="#mks-servo-can.mks_servo.MksServo.set_subdivision_interpolation">set_subdivision_interpolation</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_subdivisions" href="#mks-servo-can.mks_servo.MksServo.set_subdivisions">set_subdivisions</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_work_mode" href="#mks-servo-can.mks_servo.MksServo.set_work_mode">set_work_mode</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.set_working_current" href="#mks-servo-can.mks_servo.MksServo.set_working_current">set_working_current</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.specialized_state" href="#mks-servo-can.mks_servo.MksServo.specialized_state">specialized_state</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.wait_for_calibration" href="#mks-servo-can.mks_servo.MksServo.wait_for_calibration">wait_for_calibration</a></code></li>
+<li><code><a title="mks-servo-can.mks_servo.MksServo.wait_for_motor_idle" href="#mks-servo-can.mks_servo.MksServo.wait_for_motor_idle">wait_for_motor_idle</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="mks-servo-can.mks_servo.ResponseTimeoutError" href="#mks-servo-can.mks_servo.ResponseTimeoutError">ResponseTimeoutError</a></code></h4>
+</li>
+<li>
+<h4><code><a title="mks-servo-can.mks_servo.UnexpectedResponseLengthError" href="#mks-servo-can.mks_servo.UnexpectedResponseLengthError">UnexpectedResponseLengthError</a></code></h4>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
