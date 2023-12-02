@@ -1,6 +1,8 @@
 import time
 import can
 
+QUERY_READ_ENCODED_VALUE_ADDITION_COMMAND = 0x31
+
 def read_encoder_value_carry(self):
     """
     Reads encoder values from a CAN self.bus using a specific CAN ID and operation code.
@@ -41,7 +43,7 @@ def read_encoder_value_carry(self):
 
 # Command 02: 
 def read_encoder_value_addition(self):    
-    op_code = 0x31
+    op_code = QUERY_READ_ENCODED_VALUE_ADDITION_COMMAND
     response_length = 8
 
     data = self.set_generic(op_code, response_length, [op_code])

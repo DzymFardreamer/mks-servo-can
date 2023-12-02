@@ -13,7 +13,13 @@ from mks_enums import CanBitrate
 from mks_enums import EndStopLevel
 from mks_enums import GoHomeResult, Mode0
 
+MOTOR_CALIBRATION_COMMAND = 0x80
+
 class gohome_status_error(Exception):
+    """Exception raised for invalid gohome status."""
+    pass
+
+class calibration_error(Exception):
     """Exception raised for invalid gohome status."""
     pass
 
@@ -21,19 +27,49 @@ class current_error(Exception):
     """Exception raised for invalid motor status."""
     pass
 
+class calibration_not_running(Exception):
+    """Exception raised for calibration not running status."""
+    pass
+
+class calibration_timeout_error(Exception):
+    """Exception raised for calibraton timeout status."""
+    pass
+
 def _validate_current(self, current):
     if current < 0 or current > 5200:
         raise current_error("Current is outside the valid range from 0 to 5200")
     
 # TODO: It is a continuous call until result is 1 or 2?
-def calibrate_encoder(self):
-    rslt = self.set_generic(0x80, 0x00)
+def nb_calibrate_encoder(self):
+    tmp = self.set_generic(self.MOTOR_CALIBRATION_COMMAND, self.GENERIC_RESPONSE_LENGTH, 0x00)
+    status_int = int.from_bytes(tmp[1:2], byteorder='big')  
+    rslt = {}
     try:
-        rslt.status = CalibrationResult(rslt.status)
+        rslt['status'] = CalibrationResult(status_int)
+        self._calibration_status = rslt['status']
     except ValueError:
-        print(f"No enum member with value {rslt.status}")     
-        return None                   
-    return rslt    
+        raise calibration_error(f"No enum member with value {status_int}")                     
+    return rslt   
+
+def b_calibrate_encoder(self):
+    nb_calibrate_encoder(self) 
+    wait_for_calibration(self)
+    rslt = {}
+    rslt['status'] = self._calibration_status
+    return rslt
+
+def wait_for_calibration(self):
+    if self._calibration_status == CalibrationResult.Unkown:
+        raise calibration_not_running("")
+
+    start_time = time.perf_counter()
+    while (time.perf_counter() - start_time < self.MAX_CALIBRATION_TIME) and self._calibration_status == CalibrationResult.Calibrating:
+        time.sleep(0.1)  # Small sleep to prevent busy waiting
+
+    if not self._calibration_status == CalibrationResult.CalibratedSuccess and not self._calibration_status == CalibrationResult.CalibratingFail:
+        raise calibration_timeout_error("")      
+    
+    return self._calibration_status
 
 def set_work_mode(self, mode: WorkMode):
     return self.set_generic_status(0x82, mode.value)

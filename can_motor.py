@@ -1,4 +1,5 @@
 from mks_enums import Direction, Enable, SaveCleanState, RunMotorResult, MotorStatus
+import time
 
 # constants
 QUERY_MOTOR_STATUS_COMMAND = 0xF1
@@ -32,6 +33,10 @@ class invalid_pulses_error(Exception):
 
 class motor_status_error(Exception):
     """Exception raised for invalid motor status."""
+    pass
+
+class motor_already_running_error(Exception):
+    """Exception raised for motor already running."""
     pass
 
 def _validate_direction(self, direction):
@@ -84,7 +89,18 @@ def run_motor_in_speed_mode(self, direction: Direction, speed, acceleration, pul
 def save_clean_in_speed_mode(self, state: SaveCleanState):
     return self.set_generic_status(SAVE_CLEAN_IN_SPEED_MODE_COMMAND)   
 
+def is_motor_running(self):
+    return self._motor_run_status == RunMotorResult.RunStarting
+
+def wait_for_motor_idle(self, timeout):    
+    start_time = time.perf_counter()
+    while (time.perf_counter() - start_time < timeout) and self.is_motor_running():
+        time.sleep(0.1)  # Small sleep to prevent busy waiting
+    return self.is_motor_running()
+
 def run_motor_relative_motion_by_pulses(self, direction: Direction, speed, acceleration, pulses):
+    if self.is_motor_running:
+        raise motor_already_running_error("")    
     self._validate_direction(direction)
     self._validate_speed(speed)
     self._validate_pulses(pulses)
@@ -109,6 +125,8 @@ def run_motor_relative_motion_by_pulses(self, direction: Direction, speed, accel
     return rslt   
 
 def run_motor_absolute_motion_by_pulses(self, speed, acceleration, pulses):
+    if self.is_motor_running:
+        raise motor_already_running_error("")    
     self._validate_speed(speed)
     self._validate_pulses(pulses)
   
@@ -132,6 +150,8 @@ def run_motor_absolute_motion_by_pulses(self, speed, acceleration, pulses):
 
 
 def run_motor_relative_motion_by_axis(self, speed, acceleration, relativeAxis):
+    if self.is_motor_running:
+        raise motor_already_running_error("")    
     self._validate_speed(speed)
     self._validate_acceleration(acceleration)
 
@@ -143,7 +163,7 @@ def run_motor_relative_motion_by_axis(self, speed, acceleration, relativeAxis):
         (relativeAxis >> 8) & 0xFF,
         (relativeAxis >> 0) & 0xFF,
     ]
-    rslt = self.set_generic(RUN_MOTOR_RELATIVE_MOTION_BY_AXIS_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)  
+    tmp = self.set_generic(RUN_MOTOR_RELATIVE_MOTION_BY_AXIS_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)  
     status_int = int.from_bytes(tmp[1:2], byteorder='big')  
     rslt = {}    
     try:
@@ -153,6 +173,8 @@ def run_motor_relative_motion_by_axis(self, speed, acceleration, relativeAxis):
     return rslt    
 
 def run_motor_absolute_motion_by_axis(self, speed, acceleration, absoluteAxis):
+    if self.is_motor_running():
+        raise motor_already_running_error("")    
     self._validate_speed(speed)
     self._validate_acceleration(acceleration)
   
@@ -164,7 +186,7 @@ def run_motor_absolute_motion_by_axis(self, speed, acceleration, absoluteAxis):
         (absoluteAxis >> 8) & 0xFF,
         (absoluteAxis >> 0) & 0xFF,
     ]
-    rslt = self.set_generic(RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)  
+    tmp = self.set_generic(RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)  
     status_int = int.from_bytes(tmp[1:2], byteorder='big')  
     rslt = {}    
     try:
@@ -172,3 +194,4 @@ def run_motor_absolute_motion_by_axis(self, speed, acceleration, absoluteAxis):
     except ValueError:
         raise motor_status_error(f"No enum member with value {status_int}")                                     
     return rslt    
+

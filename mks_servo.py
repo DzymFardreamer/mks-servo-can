@@ -28,6 +28,7 @@ class InvalidResponseError(Exception):
 
 class MksServo:
     from can_commands import (
+        QUERY_READ_ENCODED_VALUE_ADDITION_COMMAND,
         read_encoder_value_carry,
         read_encoder_value_addition,
         read_motor_speed,
@@ -66,13 +67,19 @@ class MksServo:
         emergency_stop_motor,
         run_motor_in_speed_mode,
         save_clean_in_speed_mode,
+        is_motor_running,
+        wait_for_motor_idle,        
         run_motor_relative_motion_by_pulses,
+        run_motor_absolute_motion_by_pulses,
         run_motor_relative_motion_by_axis,
         run_motor_absolute_motion_by_axis
     )
     from can_set import (
+        MOTOR_CALIBRATION_COMMAND,
         _validate_current,
-        calibrate_encoder,
+        nb_calibrate_encoder,
+        b_calibrate_encoder,
+        wait_for_calibration,
         set_work_mode,
         set_working_current,
         set_holding_current,
@@ -129,6 +136,10 @@ class MksServo:
     """
     GENERIC_RESPONSE_LENGTH = 3
     DEFAULT_TIMEOUT = 1
+    MAX_CALIBRATION_TIME = 20
+
+    _calibration_status = CalibrationResult.Unkown
+    _motor_run_status = RunMotorResult.RunComplete
 
     def __init__ (self, bus, notifier, id):
         """Inits MksServo with the CAN bus and servo ID.
@@ -136,11 +147,41 @@ class MksServo:
         Args:
             bus (can.interface.Bus): The CAN bus instance to be used.
             can_id (int): The CAN ID for this servo.
-        """        
+        """     
+
+        def monitor_incomming_messages(message):
+            try:
+                if message.arbitration_id == self.can_id:
+                    self.check_msg_crc(message)
+
+                    if (message.data[0] == self.MOTOR_CALIBRATION_COMMAND and len(message.data) == self.GENERIC_RESPONSE_LENGTH):
+                        status_int = int.from_bytes(message.data[1:2], byteorder='big')  
+                        try:
+                            self._calibration_status = self.CalibrationResult(status_int)                            
+                        except ValueError:
+                            logging.warning(f"No enum member with value {status_int}")                                                       
+                    elif (message.data[0] == self.RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND and len(message.data) == self.GENERIC_RESPONSE_LENGTH):
+                        status_int = int.from_bytes(message.data[1:2], byteorder='big')  
+                        try:
+                            self._motor_run_status = self.RunMotorResult(status_int)                            
+                        except ValueError:
+                            logging.warning(f"No enum member with value {status_int}")                                                       
+                    elif message.data[0] == self.QUERY_MOTOR_STATUS_COMMAND:
+                        a = 1
+                    elif message.data[0] == self.QUERY_READ_ENCODED_VALUE_ADDITION_COMMAND:
+                        a = 1                       
+                    else:                    
+                        print("New message")
+                        print(message, flush=True)                                       
+            except InvalidCRCError:
+                logging.error(f"CRC check failed for the message: {e}")                    
+            return True
+                   
         self.can_id = id
         self.bus = bus
         self.notifier = notifier
         self.timeout = MksServo.DEFAULT_TIMEOUT
+        self.notifier.add_listener(monitor_incomming_messages)
 
     def _bool_to_int(self, value):
         """
@@ -158,7 +199,8 @@ class MksServo:
             return [1] if value else [0]
         else:
             return value
-            
+
+    
     def create_can_msg(self, msg):
         """Creates a CAN message with a CRC byte appended at the end.
 
@@ -221,14 +263,12 @@ class MksServo:
 
         def receive_message(message):
             nonlocal status
-
             if not status:
                 try:
                     self.check_msg_crc(message)
                     if message.arbitration_id == self.can_id:
                         if not (message.data[0] == op_code and len(message.data) == response_length):
-                            logging.error(f"Unexpected response length or opcode.")
-                        
+                            logging.error(f"Unexpected response length or opcode.")                        
                         status = message.data                                                                
                 except InvalidCRCError:
                     logging.error(f"CRC check failed for the message: {e}")            
@@ -240,8 +280,8 @@ class MksServo:
             raise CanMessageError(f"Error sending message: {e}")            
 
         # Wait for response (with a timeout)
-        start_time = time.time()
-        while time.time() - start_time < self.timeout and not status:
+        start_time = time.perf_counter()
+        while (time.perf_counter() - start_time < self.timeout) and status == None:
             time.sleep(0.1)  # Small sleep to prevent busy waiting
         self.notifier.remove_listener(receive_message)
 
@@ -258,13 +298,15 @@ class MksServo:
             dict: Modified result dictionary with 'status' key, None on error.
         """        
         tmp = self.set_generic(op_code, MksServo.GENERIC_RESPONSE_LENGTH, data)
-        status_int = int.from_bytes(tmp[1:2], byteorder='big')  
+        if not tmp == None:
+            status_int = int.from_bytes(tmp[1:2], byteorder='big')  
 
-        result = {}
-        try:            
-            result['status'] = SuccessStatus(status_int)
-        except ValueError:
-            raise InvalidResponseError(f"No enum member with value {status_int}")
-               
-        return result
+            result = {}
+            try:            
+                result['status'] = SuccessStatus(status_int)
+            except ValueError:
+                raise InvalidResponseError(f"No enum member with value {status_int}")
+                
+            return result
+        return None
     

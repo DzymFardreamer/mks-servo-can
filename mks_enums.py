@@ -27,7 +27,8 @@ class StatusCommand9(Enum):
     Protected = 1
 
 class CalibrationResult(Enum):
-    Calibrating = 0,
+    Unkown = 500    
+    Calibrating = 0
     CalibratedSuccess = 1
     CalibratingFail = 2
 
