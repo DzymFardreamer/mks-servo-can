@@ -301,13 +301,11 @@ class MksServo:
         if not tmp == None:
             status_int = int.from_bytes(tmp[1:2], byteorder='big')  
 
-            result = {}
             try:            
-                result['status'] = SuccessStatus(status_int)
+                return SuccessStatus(status_int)
             except ValueError:
                 raise InvalidResponseError(f"No enum member with value {status_int}")
                 
-            return result
         return None
     
     def specialized_state(self, op_code, status_enum, status_enum_exception):
