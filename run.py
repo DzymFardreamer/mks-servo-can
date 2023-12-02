@@ -1,13 +1,73 @@
 import can 
 import time
 from mks_servo import MksServo
+import logging
 
 # Stock slcan firmware on Windows
 bus = can.interface.Bus(bustype='slcan', channel='COM3', bitrate=500000)
 notifier = can.Notifier(bus, [])
 
+def wait_for_motor_idle2(timeout):    
+    start_time = time.perf_counter()
+    while (time.perf_counter() - start_time < timeout) and servo.is_motor_running():
+        print(servo.read_motor_speed(), flush=True)
+        time.sleep(0.1)  # Small sleep to prevent busy waiting
+    return servo.is_motor_running()
+
+#class ServoAxis(Enum):
+#    ServoX = 0,
+#    ServoY = 1
+def move_motor(absolute_position):  
+    print(f"Moving motor to absolute position {absolute_position}", flush=True)
+    print(servo.run_motor_absolute_motion_by_axis(600, 0, absolute_position), flush=True)
+    wait_for_motor_idle2(30)
+    value = servo.read_encoder_value_addition()['value']
+    error = absolute_position - value
+    print(f"Movement at {absolute_position} with error {error}")    
+    print(f"", flush=True)
+    print()
+
+    while False:
+        status = servo.query_motor_status()
+        #print(servo.read_encoder_value_carry())
+        print(servo.read_encoder_value_addition())
+
+
+        # Check if the status is MotorStop
+        if status['status'] == MksServo.MotorStatus.MotorStop:
+            print("Motor has stopped.", flush=True)
+            break
+
+        # Wait for 100 ms
+        time.sleep(0.1)  
+
 servo = MksServo(bus, notifier, 1)
-msg = servo.create_can_msg([1])
+servo_y = MksServo(bus, notifier, 2)
+
+#print(servo.set_work_mode(MksServo.WorkMode.SrvFoc))
+
+#if not servo.b_calibrate_encoder()['status'] == MksServo.CalibrationResult.CalibratedSuccess:
+#   logging.error("Calibration failed")
+
+print(servo.emergency_stop_motor())
+
+print(servo.set_work_mode(MksServo.WorkMode.SrvFoc))
+print(servo.set_subdivision(16))
+print(servo.set_working_current(2000))
+print(servo.set_current_axis_to_zero())
+
+while True:
+    move_motor(0x4000*13)
+    move_motor(0)
+
+#print(servo.run_motor_relative_motion_by_pulses(MksServo.Direction.CW, 50, 1, 0x000A000))
+#print(servo.run_motor_absolute_motion_by_pulses(400, 2, 0x0FA00))
+
+move_motor(0x4000)
+move_motor(-0x4000)
+move_motor(0x4000)
+
+asd
 
 # Test command 01:
 print ("---- 5.1.1 Read the encoder value (carry)----")
@@ -47,7 +107,7 @@ print ("---- 5.2.2 Set the work mode ----")
 print(servo.set_work_mode(MksServo.WorkMode.SrOpen))
 
 print ("---- 5.2.3 Set the working current ----")
-print(servo.set_working_current(500))
+print(servo.set_working_current(1000))
 
 print ("---- 5.2.4 Set the holding current percentage ----")
 #print(servo.set_holding_current(MksServo.HoldingStrength.FIFTHTY_PERCENT))
@@ -90,13 +150,13 @@ print ("---- 5.3.1 Set the parameter of home ----")
 #print(servo.set_home(MksServo.EndStopLevel.High, MksServo.Direction.CW, 5, MksServo.Enable.Enabled))
 
 print ("---- 5.3.2 Go home ----")
-print(servo.go_home())
+#print(servo.go_home())
 
 print ("---- 5.3.3 Set Current Axis to Zero ----")
-print(servo.set_current_axis_to_zero())
+#print(servo.set_current_axis_to_zero())
 
 print ("---- 5.3.4 Set limit port remap ----")
-print(servo.set_limit_port_remap(MksServo.Enable.Enabled))
+#print(servo.set_limit_port_remap(MksServo.Enable.Enabled))
 
 print ("---- 5.4 Set the parameter of 0_mode ----")
 #print(servo.set_mode0(MksServo.Mode0.NearMode, MksServo.Enable.Enabled, MksServo.Direction.CW))
@@ -112,7 +172,7 @@ print ("---- 6.2.2 Enable motor command ----")
 print(servo.enable_motor(True))
 
 print ("---- 6.2.3 Emergency stop the motor ----")
-print(servo.emergency_stop_motor())
+#print(servo.emergency_stop_motor())
 
 print ("---- 6.4.1 Speed mode command ----")
 #print(run_motor_speed_mode(Direction.CW, 320, 2))
@@ -121,7 +181,7 @@ print ("---- 6.4.3 Save/Clean the parameter in speed mode  ----")
 #print(servo.save_clean_in_speed_mode(MksServo.SaveCleanState.Clean))
 
 print ("---- 6.5.1 position mode1: relative motion by pulses ----")
-print(servo.run_motor_relative_motion_by_pulses(MksServo.Direction.CW, 400, 1, 0x000A000))
+print(servo.run_motor_relative_motion_by_pulses(MksServo.Direction.CW, 200, 1, 0x055A000))
 
 print ("---- 6.6.1 Position mode 2: absolute motion by pulses ----")
 #print(servo.run_motor_absolute_motion_by_pulses(400, 2, 0x0FA00))
@@ -131,6 +191,30 @@ print ("---- 6.7.1 Position mode 3: relative motion by axis ----")
 
 print ("---- 6.8.1 Position mode 4: Absolute motion by axis ----")
 #print(servo.run_motor_absolute_motion_by_axis())
+
+
+#def get_servo(id, value):
+#    if id == ServoAxis.ServoX:
+#       return servo       
+#    elif id == ServoAxis.ServoY:
+#        return servo_y
+#        
+#def move_motor(id, value):
+#    selected_servo = get_servo(id)
+#    print(selected_servo.run_motor_relative_motion_by_pulses(MksServo.Direction.CW, 400, 1, 0x000A000)) 
+#
+#    while True:
+#        status = servo.query_motor_status()
+#        print(status, flush=True)
+#
+#        # Check if the status is MotorStop
+#        if status['status'] == MksServo.MotorStatus.MotorStop:
+#            print("Motor has stopped.")
+#            break
+
+
+def move_motors(x, y):
+    return 1
 
 while True:
     status = servo.query_motor_status()
