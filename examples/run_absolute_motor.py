@@ -28,7 +28,7 @@ def move_motor(absolute_position):
 servo = MksServo(bus, notifier, 1)
 
 print(servo.set_work_mode(MksServo.WorkMode.SrvFoc))
-print(servo.set_subdivision(16))
+print(servo.set_subdivisions(16))
 print(servo.set_working_current(2000))
 print(servo.set_current_axis_to_zero())
 

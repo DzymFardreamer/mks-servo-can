@@ -53,7 +53,7 @@ servo_y = MksServo(bus, notifier, 2)
 print(servo.emergency_stop_motor())
 
 print(servo.set_work_mode(MksServo.WorkMode.SrvFoc))
-print(servo.set_subdivision(16))
+print(servo.set_subdivisions(16))
 print(servo.set_working_current(2000))
 print(servo.set_current_axis_to_zero())
 

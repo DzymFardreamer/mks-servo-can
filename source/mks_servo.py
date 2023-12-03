@@ -3,8 +3,9 @@
 import can
 import time
 import logging
+from enum import Enum
 
-from mks_enums import Enable, SuccessStatus
+from mks_enums import Enable, SuccessStatus, MksCommands
 
 class CanMessageError(Exception):
     """Raised for errors related to CAN messaging."""
@@ -85,7 +86,9 @@ class MksServo:
         set_key_lock,
         set_group_id,
         set_home,
-        go_home,
+        nb_go_home,
+        b_go_home,
+        wait_for_go_home,
         set_current_axis_to_zero,
         set_limit_port_remap,
         set_mode0,
@@ -126,8 +129,10 @@ class MksServo:
     GENERIC_RESPONSE_LENGTH = 3
     DEFAULT_TIMEOUT = 1
     MAX_CALIBRATION_TIME = 20
+    MAX_HOMING_TIME = 20
 
     _calibration_status = CalibrationResult.Unkown
+    _homing_status = GoHomeResult.Unkown
     _motor_run_status = RunMotorResult.RunComplete
 
     def __init__ (self, bus, notifier, id):
@@ -139,28 +144,50 @@ class MksServo:
         """     
 
         def monitor_incomming_messages(message):
-            try:
+            try:                                  
                 if message.arbitration_id == self.can_id:
                     self.check_msg_crc(message)
-
-                    if (message.data[0] == self.MOTOR_CALIBRATION_COMMAND and len(message.data) == self.GENERIC_RESPONSE_LENGTH):
+                    if (message.data[0] == MksCommands.MOTOR_CALIBRATION_COMMAND.value and len(message.data) == self.GENERIC_RESPONSE_LENGTH):
                         status_int = int.from_bytes(message.data[1:2], byteorder='big')  
                         try:
                             self._calibration_status = self.CalibrationResult(status_int)                            
                         except ValueError:
-                            logging.warning(f"No enum member with value {status_int}")                                                       
-                    elif (message.data[0] == self.RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND and len(message.data) == self.GENERIC_RESPONSE_LENGTH):
+                            logging.warning(f"No enum member with value {status_int}")    
+                    elif (message.data[0] == MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_PULSES_COMMAND.value and len(message.data) == self.GENERIC_RESPONSE_LENGTH):
+                        status_int = int.from_bytes(message.data[1:2], byteorder='big')  
+                        try:
+                            self._motor_run_status = self.RunMotorResult(status_int)                            
+                        except ValueError:
+                            logging.warning(f"No enum member with value {status_int}")      
+                    elif (message.data[0] == MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_PULSES_COMMAND.value and len(message.data) == self.GENERIC_RESPONSE_LENGTH):
+                        status_int = int.from_bytes(message.data[1:2], byteorder='big')  
+                        try:
+                            self._motor_run_status = self.RunMotorResult(status_int)                            
+                        except ValueError:
+                            logging.warning(f"No enum member with value {status_int}")  
+                    elif (message.data[0] == MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_AXIS_COMMAND.value and len(message.data) == self.GENERIC_RESPONSE_LENGTH):
+                        status_int = int.from_bytes(message.data[1:2], byteorder='big')  
+                        try:
+                            self._motor_run_status = self.RunMotorResult(status_int)                            
+                        except ValueError:
+                            logging.warning(f"No enum member with value {status_int}")                                                                                                                                      
+                    elif (message.data[0] == MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND.value and len(message.data) == self.GENERIC_RESPONSE_LENGTH):
                         status_int = int.from_bytes(message.data[1:2], byteorder='big')  
                         try:
                             self._motor_run_status = self.RunMotorResult(status_int)                            
                         except ValueError:
                             logging.warning(f"No enum member with value {status_int}")                                                       
-                    elif message.data[0] == self.QUERY_MOTOR_STATUS_COMMAND:
+                    elif (message.data[0] == MksCommands.GO_HOME_COMMAND.value and len(message.data) == self.GENERIC_RESPONSE_LENGTH):
+                        status_int = int.from_bytes(message.data[1:2], byteorder='big')  
+                        try:
+                            self._homing_status = self.GoHomeResult(status_int)                            
+                        except ValueError:
+                            logging.warning(f"No enum member with value {status_int}")                          
+                    elif message.data[0] == MksCommands.QUERY_MOTOR_STATUS_COMMAND.value:
                         a = 1
-                    elif message.data[0] == self.QUERY_READ_ENCODED_VALUE_ADDITION_COMMAND:
+                    elif message.data[0] == MksCommands.READ_ENCODED_VALUE_ADDITION.value:
                         a = 1                       
-                    else:                    
-                        print("New message")
+                    else:           
                         print(message, flush=True)                                       
             except InvalidCRCError:
                 logging.error(f"CRC check failed for the message")                    
@@ -238,6 +265,8 @@ class MksServo:
         Returns:
             dict: A dictionary with 'status' key if successful, None otherwise.
         """      
+        if isinstance(op_code, Enum):
+            op_code = op_code.value
 
         # Check if data is an integer and convert it to a list if it is
         if isinstance(data, int):
@@ -298,7 +327,7 @@ class MksServo:
         return None
     
     def specialized_state(self, op_code, status_enum, status_enum_exception):
-        tmp = self.set_generic(op_code, self.GENERIC_RESPONSE_LENGTH, [op_code])  
+        tmp = self.set_generic(op_code, self.GENERIC_RESPONSE_LENGTH, [op_code.value])  
         status_int = int.from_bytes(tmp[1:2], byteorder='big')  
         try:
             return status_enum(status_int)

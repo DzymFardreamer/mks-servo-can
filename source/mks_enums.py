@@ -5,7 +5,7 @@ class MksCommands(Enum):
     SET_WORK_MODE_COMMAND = 0x82
     SET_WORKING_CURRENT_COMMAND = 0x83
     SET_HOLDING_CURRENT = 0x9B
-    SET_SUBDIVISIONS = 0x84
+    SET_SUBDIVISIONS_COMMAND = 0x84
     SET_EN_PIN_CONFIG_COMMAND = 0x85
     SET_MOTOR_ROTATION_DIRECTION = 0x86
     SET_AUTO_TURN_OFF_SCREEN_COMMAND = 0x87
@@ -43,8 +43,8 @@ class MksCommands(Enum):
 
 
 class Direction(Enum):
-    CW = 1  # Clockwise
-    CCW = 2  # Counter-Clockwise
+    CW = 0  # Clockwise
+    CCW = 1  # Counter-Clockwise
 
 class Enable(Enum):
     Disable = 0
@@ -112,6 +112,7 @@ class EndStopLevel(Enum):
     High = 1
 
 class GoHomeResult(Enum):
+    Unkown = 500    
     Fail = 0
     Start = 1
     Success = 2

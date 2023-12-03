@@ -72,7 +72,7 @@ def read_encoder_value_addition(self):
     op_code = MksCommands.READ_ENCODED_VALUE_ADDITION
     response_length = 8
 
-    data = self.set_generic(op_code, response_length, [op_code])
+    data = self.set_generic(op_code, response_length, [op_code.value])
 
     if data:
         return int.from_bytes(data[1:7], byteorder='big', signed=True)                                
@@ -97,7 +97,7 @@ def read_motor_speed(self):
     op_code = MksCommands.READ_MOTOR_SPEED
     response_length = 4
 
-    data = self.set_generic(op_code, response_length, [op_code])
+    data = self.set_generic(op_code, response_length, [op_code.value])
 
     # TODO: Raise an exception here  if there is a problem parsing the response
     if data:
@@ -119,7 +119,7 @@ def read_num_pulses_received(self):
     op_code = MksCommands.READ_NUM_PULSES_RECEIVED
     response_length = 6
 
-    data = self.set_generic(op_code, response_length, [op_code])
+    data = self.set_generic(op_code, response_length, [op_code.value])
 
     # TODO: Raise an exception here  if there is a problem parsing the response
     if data:
@@ -140,7 +140,7 @@ def read_io_port_status(self):
     """        
     op_code = MksCommands.READ_NUM_PULSES_RECEIVED
     response_length = 3
-    data = self.set_generic(op_code, response_length, [op_code])
+    data = self.set_generic(op_code, response_length, [op_code.value])
 
     # TODO: Parse the response and return the data in a dictionary for each of the pins
     if data:
@@ -169,7 +169,7 @@ def read_motor_shaft_angle_error(self):
     """     
     op_code = MksCommands.READ_MOTOR_SHAFT_ANGLE_ERROR
     response_length = 6
-    data = self.set_generic(op_code, response_length, [op_code])
+    data = self.set_generic(op_code, response_length, [op_code.value])
 
     # TODO: Raise an exception here  if there is a problem parsing the response
     if data:

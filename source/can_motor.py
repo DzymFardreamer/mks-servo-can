@@ -123,7 +123,7 @@ def is_motor_running(self):
     Returns:
         boolean: The running state of the motor. 
     """       
-    return self._motor_run_status == RunMotorResult.RunStarting
+    return self.query_motor_status() != MotorStatus.MotorStop
 
 def wait_for_motor_idle(self, timeout):    
     """
@@ -163,7 +163,7 @@ def run_motor_relative_motion_by_pulses(self, direction: Direction, speed, accel
     
     Note: If the motor is rotating more than 1000 RPM, it is not a good idea to stop the motor inmediately.
     """        
-    if self.is_motor_running:
+    if self.is_motor_running():
         raise motor_already_running_error("")    
     self._validate_direction(direction)
     self._validate_speed(speed)
@@ -181,12 +181,10 @@ def run_motor_relative_motion_by_pulses(self, direction: Direction, speed, accel
     ]
     tmp = self.set_generic(MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_PULSES_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)  
     status_int = int.from_bytes(tmp[1:2], byteorder='big')  
-    rslt = {}
     try:
-        rslt['status'] = RunMotorResult(status_int)
+        return RunMotorResult(status_int)
     except ValueError:
         raise motor_status_error(f"No enum member with value {status_int}")                     
-    return rslt   
 
 def run_motor_absolute_motion_by_pulses(self, speed, acceleration, absolute_pulses):
     """
@@ -207,7 +205,7 @@ def run_motor_absolute_motion_by_pulses(self, speed, acceleration, absolute_puls
     
     Note: If the motor is rotating more than 1000 RPM, it is not a good idea to stop the motor inmediately.
     """        
-    if self.is_motor_running:
+    if self.is_motor_running():
         raise motor_already_running_error("")    
     self._validate_speed(speed)
     self._validate_pulses(absolute_pulses)
@@ -222,12 +220,10 @@ def run_motor_absolute_motion_by_pulses(self, speed, acceleration, absolute_puls
     ]
     tmp = self.set_generic(MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_PULSES_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)  
     status_int = int.from_bytes(tmp[1:2], byteorder='big')  
-    rslt = {}
     try:
-        rslt['status'] = RunMotorResult(status_int)
+        return RunMotorResult(status_int)
     except ValueError:
-        raise motor_status_error(f"No enum member with value {status_int}")                     
-    return rslt      
+        raise motor_status_error(f"No enum member with value {status_int}")                               
 
 
 
@@ -252,7 +248,7 @@ def run_motor_relative_motion_by_axis(self, speed, acceleration, relative_axis):
     Note: In this mode, the axis error is about +-15. It is suggested running with 64 subdivisions.    
     Note: If the motor is rotating more than 1000 RPM, it is not a good idea to stop the motor inmediately.
     """    
-    if self.is_motor_running:
+    if self.is_motor_running():
         raise motor_already_running_error("")    
     self._validate_speed(speed)
     self._validate_acceleration(acceleration)
@@ -267,13 +263,11 @@ def run_motor_relative_motion_by_axis(self, speed, acceleration, relative_axis):
         (relative_axis >> 0) & 0xFF,
     ]
     tmp = self.set_generic(MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_AXIS_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)  
-    status_int = int.from_bytes(tmp[1:2], byteorder='big')  
-    rslt = {}    
+    status_int = int.from_bytes(tmp[1:2], byteorder='big')   
     try:
-        rslt['status'] = RunMotorResult(status_int)
+        return RunMotorResult(status_int)
     except ValueError:
         raise motor_status_error(f"No enum member with value {status_int}")                                       
-    return rslt    
 
 def run_motor_absolute_motion_by_axis(self, speed, acceleration, absolute_axis):
     """

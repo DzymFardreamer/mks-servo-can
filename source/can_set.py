@@ -34,6 +34,10 @@ class calibration_timeout_error(Exception):
     """Exception raised for calibraton timeout status."""
     pass
 
+class go_home_timeout_error(Exception):
+    """Exception raised for go home timeout status."""
+    pass
+
 def _validate_current(self, current):
     if current < 0 or current > 5200:
         raise current_error("Current is outside the valid range from 0 to 5200")
@@ -349,9 +353,9 @@ def set_home(self, homeTrig : EndStopLevel, homeDir: Direction, homeSpeed, endLi
 
     Note: When first time to using the endLimit function or changing the limit paramters, it is necessary to go home.
     """       
-    return self.set_generic_status(MksCommands.SET_HOME_COMMAND, [homeTrig, homeDir, (homeSpeed >> 8) & 0xF, homeSpeed & 0xFF, endLimit])
+    return self.set_generic_status(MksCommands.SET_HOME_COMMAND, [homeTrig.value, homeDir.value, (homeSpeed >> 8) & 0xF, homeSpeed & 0xFF, endLimit.value])
 
-def go_home(self):
+def nb_go_home(self):
     """
     Goes home
 
@@ -365,12 +369,49 @@ def go_home(self):
     """       
     tmp = self.set_generic(MksCommands.GO_HOME_COMMAND, self.GENERIC_RESPONSE_LENGTH)
     status_int = int.from_bytes(tmp[1:2], byteorder='big')  
-    rslt = {}
     try:
-        rslt['status'] = GoHomeResult(status_int)
+        rslt = GoHomeResult(status_int)
+        self._homing_status = rslt
     except ValueError:
         raise gohome_status_error(f"No enum member with value {status_int}")                     
     return rslt   
+
+def b_go_home(self):
+    """
+    Does the calibration procedure of the encoder. It blocks until the procedure completes.
+
+    Returns:
+        GoHomeResult: The success result of the command. It should be "Success" or "Fail".
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.    
+    """      
+    nb_go_home(self) 
+    wait_for_go_home(self)
+    return self._homing_status
+
+def wait_for_go_home(self):
+    """
+    Waits until the go home procedure completes.
+
+    Returns:
+        GoHomeResult: The success result of the command. It should be "Success" or "Fail".
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.    
+        go_home_timeout_error: If the go home operation took longer than the expected time.
+    """     
+    if self._homing_status == GoHomeResult.Unkown:
+        raise calibration_not_running("")
+
+    start_time = time.perf_counter()
+    while (time.perf_counter() - start_time < self.MAX_HOMING_TIME) and self._homing_status == GoHomeResult.Start:
+        time.sleep(0.1)  # Small sleep to prevent busy waiting
+
+    if not self._homing_status == GoHomeResult.Success and not self._homing_status == GoHomeResult.Fail:
+        raise go_home_timeout_error("")      
+    
+    return self._homing_status
 
 def set_current_axis_to_zero(self):
     """
