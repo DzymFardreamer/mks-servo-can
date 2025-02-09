@@ -1,18 +1,20 @@
 import can
 import time
 
-# from mks_servo import MksServo
-from mks_enums import CalibrationResult
-from mks_enums import WorkMode
-from mks_enums import SuccessStatus
-from mks_enums import HoldingStrength
-from mks_enums import EnPinEnable
-from mks_enums import Direction
-from mks_enums import Enable
-from mks_enums import CanBitrate
-from mks_enums import EndStopLevel
-from mks_enums import MksCommands
-from mks_enums import GoHomeResult, Mode0
+from .mks_enums import (
+    CalibrationResult,
+    WorkMode,
+    SuccessStatus,
+    HoldingStrength,
+    EnPinEnable,
+    Direction,
+    Enable,
+    CanBitrate,
+    EndStopLevel,
+    MksCommands,
+    GoHomeResult,
+    Mode0,
+)
 
 
 class gohome_status_error(Exception):
@@ -312,7 +314,7 @@ def set_can_id(self, can_id):
     return self.set_generic_status(MksCommands.SET_CAN_ID_COMMAND, [(can_id >> 8) & 0xF, can_id & 0xFF])
 
 
-def set_slave_respond_active(self, respon, active):
+def set_slave_respond_active(self, respon: Enable, active: Enable):
     """
     Sets the slave respond and active
 
@@ -398,7 +400,7 @@ def set_home(self, homeTrig: EndStopLevel, homeDir: Direction, homeSpeed, endLim
 
 def nb_go_home(self):
     """
-    Goes home
+    Goes home. (Non blocked)
 
     Returns:
         SuccessStatus: The success result of the command.
@@ -491,7 +493,7 @@ def set_limit_port_remap(self, enable: Enable):
     return self.set_generic_status(MksCommands.SET_LIMIT_PORT_REMAP_COMMAND, enable.value)
 
 
-def set_mode0(self, mode: Mode0, enable: Enable, speed, direction: Direction):
+def set_mode0(self, mode: Mode0, enable: Enable, speed: int, direction: Direction):
     """
     Sets mode 0 where the motor can automatically return to the 0 point position when power on.
     The maximum angle is 359 degrees.
@@ -508,9 +510,9 @@ def set_mode0(self, mode: Mode0, enable: Enable, speed, direction: Direction):
     Raises:
         can.CanError: If there is an error in sending the CAN message.
     """
-    cmd = [mode, enable.value, speed, direction.value]
     return self.set_generic_status(
-        MksCommands.SET_MODE0_COMMAND, [mode, enable, speed, direction]
+        MksCommands.SET_MODE0_COMMAND,
+        [mode.value, enable.value, speed, direction.value],
     )
 
 

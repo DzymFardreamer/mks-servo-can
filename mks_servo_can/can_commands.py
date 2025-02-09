@@ -1,12 +1,13 @@
 import time
 import can
 
-from mks_enums import (
+from .mks_enums import (
     MksCommands,
     MotorShaftProtectionStatus,
     SuccessStatus,
     GoBackToZeroStatus,
     EnableStatus,
+    LockedRotor,
 )
 
 
@@ -60,7 +61,7 @@ def read_encoder_value_carry(self):
     op_code = MksCommands.READ_ENCODER_VALUE_CARRY
     response_length = 8
 
-    data = self.set_generic(op_code, response_length, [op_code])
+    data = self.set_generic(op_code, response_length, [op_code.value])
 
     if data:
         carry = int.from_bytes(data[1:5], byteorder="big", signed=True)
@@ -158,7 +159,7 @@ def read_io_port_status(self):
     Raises:
         can.CanError: If there is an error in sending the CAN message.
     """
-    op_code = MksCommands.READ_NUM_PULSES_RECEIVED
+    op_code = MksCommands.READ_IO_PORT_STATUS
     response_length = 3
     data = self.set_generic(op_code, response_length, [op_code.value])
 
@@ -226,7 +227,7 @@ def read_go_back_to_zero_status_when_power_on(self):
         can.CanError: If there is an error in sending the CAN message.
     """
     return self.specialized_state(
-        self.READ_GO_BACK_TO_ZERO_STATUS_WHEN_POWER_ON,
+        MksCommands.READ_GO_BACK_TO_ZERO_STATUS_WHEN_POWER_ON,
         GoBackToZeroStatus,
         go_back_to_zero_status_error,
     )
@@ -245,8 +246,8 @@ def release_motor_shaft_locked_protection_state(self):
         can.CanError: If there is an error in sending the CAN message.
     """
     return self.specialized_state(
-        self.RELEASE_MOTOR_SHAFT_LOCKED_PROTECTION_STATE,
-        SuccessStatus,
+        MksCommands.RELEASE_MOTOR_SHAFT_LOCKED_PROTECTION_STATE,
+        LockedRotor,
         success_status_error,
     )
 
@@ -264,7 +265,7 @@ def read_motor_shaft_protection_state(self):
         can.CanError: If there is an error in sending the CAN message.
     """
     return self.specialized_state(
-        self.READ_MOTOR_SHAFT_PROTECTION_STATE,
+        MksCommands.READ_MOTOR_SHAFT_PROTECTION_STATE,
         MotorShaftProtectionStatus,
         motor_shaft_protection_status_error,
     )

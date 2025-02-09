@@ -1,6 +1,6 @@
 import time
 
-from mks_enums import (
+from .mks_enums import (
     Direction,
     Enable,
     SaveCleanState,
@@ -73,10 +73,16 @@ def _validate_pulses(self, pulses):
 
 def query_motor_status(self):
     """
-    Runs the emergency motor stop
+    Query the motor status
 
     Returns:
-        SuccessStatus: The success result of the command.
+        Status = 0 query fail
+                 1 motor stop
+                 2 motor speed up
+                 3 motor speed down
+                 4 motor full speed
+                 5 motor is homing
+                 6 motor is calibrating
 
     Raises:
         can.CanError: If there is an error in sending the CAN message.
@@ -151,7 +157,7 @@ def is_motor_running(self):
     return self.query_motor_status() != MotorStatus.MotorStop
 
 
-def wait_for_motor_idle(self, timeout):
+def wait_for_motor_idle(self, timeout=0):
     """
     Waits until the motor stops running or the timeout time is meet.
 
@@ -183,7 +189,7 @@ def run_motor_relative_motion_by_pulses(self, direction: Direction, speed, accel
     Returns:
         int: If successful, returns the status of the motor, at the end of the command execution.
         None: If there's an error in sending the message, a self.timeout occurs, or the response is
-    invalid.
+        invalid.
 
     Raises:
         can.CanError: If there is an error in sending the CAN message.

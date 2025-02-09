@@ -5,7 +5,7 @@ class MksCommands(Enum):
     MOTOR_CALIBRATION_COMMAND = 0x80
     SET_WORK_MODE_COMMAND = 0x82
     SET_WORKING_CURRENT_COMMAND = 0x83
-    SET_HOLDING_CURRENT = 0x9B
+    SET_HOLDING_CURRENT_COMMAND = 0x9B
     SET_SUBDIVISIONS_COMMAND = 0x84
     SET_EN_PIN_CONFIG_COMMAND = 0x85
     SET_MOTOR_ROTATION_DIRECTION = 0x86
@@ -69,14 +69,9 @@ class GoBackToZeroStatus(Enum):
     GoBackToZeroFail = 2
 
 
-class StatusCommand8(Enum):
+class LockedRotor(Enum):  # StatusCommand8
     ReleaseFails = 0
     ReleaseSuccess = 1
-
-
-class StatusCommand9(Enum):
-    NoProtected = (0,)
-    Protected = 1
 
 
 class CalibrationResult(Enum):
@@ -160,6 +155,6 @@ class MotorStatus(Enum):
     MotorIsCalibrating = 6
 
 
-class MotorShaftProtectionStatus(Enum):
+class MotorShaftProtectionStatus(Enum):  # StatusCommand9
     Protected = 1
     NotProtected = 0

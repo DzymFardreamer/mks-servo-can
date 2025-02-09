@@ -3,7 +3,7 @@ import time
 import logging
 
 from enum import Enum
-from mks_enums import Enable, SuccessStatus, MksCommands
+from .mks_enums import Enable, SuccessStatus, MksCommands
 
 
 class CanMessageError(Exception):
@@ -37,7 +37,7 @@ class InvalidResponseError(Exception):
 
 
 class MksServo:
-    from can_commands import (
+    from .can_commands import (
         read_encoder_value_carry,
         read_encoder_value_addition,
         read_motor_speed,
@@ -50,7 +50,7 @@ class MksServo:
         read_motor_shaft_protection_state,
     )
 
-    from can_motor import (
+    from .can_motor import (
         MAX_SPEED,
         MAX_ACCELERATION,
         MAX_PULSES,
@@ -75,7 +75,7 @@ class MksServo:
         run_motor_relative_motion_by_axis,
         run_motor_absolute_motion_by_axis,
     )
-    from can_set import (
+    from .can_set import (
         _validate_current,
         nb_calibrate_encoder,
         b_calibrate_encoder,
@@ -104,12 +104,11 @@ class MksServo:
         restore_default_parameters,
     )
 
-    from mks_enums import (
+    from .mks_enums import (
         Direction,
         Enable,
         SuccessStatus,
-        StatusCommand8,
-        StatusCommand9,
+        LockedRotor,
         CalibrationResult,
         WorkMode,
         HoldingStrength,
