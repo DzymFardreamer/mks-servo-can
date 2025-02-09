@@ -1,10 +1,11 @@
 from enum import Enum
 
+
 class MksCommands(Enum):
     MOTOR_CALIBRATION_COMMAND = 0x80
     SET_WORK_MODE_COMMAND = 0x82
     SET_WORKING_CURRENT_COMMAND = 0x83
-    SET_HOLDING_CURRENT = 0x9B
+    SET_HOLDING_CURRENT_COMMAND = 0x9B
     SET_SUBDIVISIONS_COMMAND = 0x84
     SET_EN_PIN_CONFIG_COMMAND = 0x85
     SET_MOTOR_ROTATION_DIRECTION = 0x86
@@ -39,43 +40,46 @@ class MksCommands(Enum):
     RUN_MOTOR_RELATIVE_MOTION_BY_PULSES_COMMAND = 0xFD
     RUN_MOTOR_ABSOLUTE_MOTION_BY_PULSES_COMMAND = 0xFE
     RUN_MOTOR_RELATIVE_MOTION_BY_AXIS_COMMAND = 0xF4
-    RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND = 0xF5    
+    RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND = 0xF5
 
 
 class Direction(Enum):
     CW = 0  # Clockwise
     CCW = 1  # Counter-Clockwise
 
+
 class Enable(Enum):
     Disable = 0
     Enable = 1
 
+
 class EnableStatus(Enum):
     Disabled = 0
-    Enabled = 1    
+    Enabled = 1
+
 
 class SuccessStatus(Enum):
     Fail = 0
-    Success = 1    
+    Success = 1
+
 
 class GoBackToZeroStatus(Enum):
     GoingToZero = 0
     GoBackToZeroSuccess = 1
     GoBackToZeroFail = 2
 
-class StatusCommand8(Enum):
+
+class LockedRotor(Enum):  # StatusCommand8
     ReleaseFails = 0
     ReleaseSuccess = 1
 
-class StatusCommand9(Enum):
-    NoProtected = 0,
-    Protected = 1
 
 class CalibrationResult(Enum):
-    Unkown = 500    
+    Unkown = 500
     Calibrating = 0
     CalibratedSuccess = 1
     CalibratingFail = 2
+
 
 class WorkMode(Enum):
     CrOpen = 0
@@ -85,8 +89,9 @@ class WorkMode(Enum):
     SrClose = 4
     SrvFoc = 5
 
+
 class HoldingStrength(Enum):
-    TEN_PERCENT = 0    
+    TEN_PERCENT = 0
     TWENTLY_PERCENT = 1
     THIRTY_PERCENT = 2
     FOURTY_PERCENT = 3
@@ -96,10 +101,12 @@ class HoldingStrength(Enum):
     EIGHTY_PERCENT = 7
     NIGHTY_PERCENT = 8
 
+
 class EnPinEnable(Enum):
-    ActiveLow = 0,
+    ActiveLow = (0,)
     ActiveHigh = 1
     ActiveAlways = 2
+
 
 class CanBitrate(Enum):
     Rate125K = 0
@@ -107,30 +114,36 @@ class CanBitrate(Enum):
     Rate500K = 2
     Rate1M = 3
 
+
 class EndStopLevel(Enum):
     Low = 0
     High = 1
 
+
 class GoHomeResult(Enum):
-    Unkown = 500    
+    Unkown = 500
     Fail = 0
     Start = 1
     Success = 2
+
 
 class Mode0(Enum):
     Disable = 0
     DirMode = 1
     NearMode = 2
 
+
 class SaveCleanState(Enum):
     Save = 0xC8
     Clean = 0xCA
+
 
 class RunMotorResult(Enum):
     RunFail = 0
     RunStarting = 1
     RunComplete = 2
     RunEndLimitStoped = 3
+
 
 class MotorStatus(Enum):
     Fail = 0
@@ -141,6 +154,7 @@ class MotorStatus(Enum):
     MotorHoming = 5
     MotorIsCalibrating = 6
 
-class MotorShaftProtectionStatus(Enum):
+
+class MotorShaftProtectionStatus(Enum):  # StatusCommand9
     Protected = 1
     NotProtected = 0
