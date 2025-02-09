@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="mks_servo_can",
-    version="0.1",
-    packages=find_packages(),
+    name="mks-servo-can",
+    version="0.2.0",
+    packages=find_packages(include=["mks_servo_can"]),
     install_requires=["python-can"],
     # Optional metadata
     author="Dzym Fardreamer",
