@@ -311,7 +311,7 @@ class MksServo:
 
         # Wait for response (with a timeout)
         start_time = time.perf_counter()
-        while (time.perf_counter() - start_time < self.timeout) and status == None:
+        while (time.perf_counter() - start_time < self.timeout) and status is None:
             time.sleep(0.1)  # Small sleep to prevent busy waiting
         self.notifier.remove_listener(receive_message)
 
@@ -328,18 +328,19 @@ class MksServo:
             dict: Modified result dictionary with 'status' key, None on error.
         """
         tmp = self.set_generic(op_code, MksServo.GENERIC_RESPONSE_LENGTH, data)
-        if not tmp == None:
-            status_int = int.from_bytes(tmp[1:2], byteorder="big")
+        if tmp is None:
+            return None
+        status_int = int.from_bytes(tmp[1:2], byteorder="big")
 
-            try:
-                return SuccessStatus(status_int)
-            except ValueError:
-                raise InvalidResponseError(f"No enum member with value {status_int}")
-
-        return None
+        try:
+            return SuccessStatus(status_int)
+        except ValueError:
+            raise InvalidResponseError(f"No enum member with value {status_int}")
 
     def specialized_state(self, op_code, status_enum, status_enum_exception):
         tmp = self.set_generic(op_code, self.GENERIC_RESPONSE_LENGTH, [op_code.value])
+        if tmp is None:
+            return None
         status_int = int.from_bytes(tmp[1:2], byteorder="big")
         try:
             return status_enum(status_int)
