@@ -67,6 +67,7 @@ class MksServo:
         enable_motor,
         emergency_stop_motor,
         run_motor_in_speed_mode,
+        stop_motor_in_speed_mode,
         save_clean_in_speed_mode,
         is_motor_running,
         wait_for_motor_idle,
@@ -74,6 +75,10 @@ class MksServo:
         run_motor_absolute_motion_by_pulses,
         run_motor_relative_motion_by_axis,
         run_motor_absolute_motion_by_axis,
+        stop_motor_relative_motion_by_pulses,
+        stop_motor_absolute_motion_by_pulses,
+        stop_motor_relative_motion_by_axis,
+        stop_motor_absolute_motion_by_axis,
     )
     from .can_set import (
         _validate_current,

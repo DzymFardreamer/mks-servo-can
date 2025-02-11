@@ -5,6 +5,7 @@ from .mks_enums import (
     Enable,
     SaveCleanState,
     RunMotorResult,
+    StopMotorResult,
     MotorStatus,
     MksCommands,
 )
@@ -76,13 +77,7 @@ def query_motor_status(self):
     Query the motor status
 
     Returns:
-        Status = 0 query fail
-                 1 motor stop
-                 2 motor speed up
-                 3 motor speed down
-                 4 motor full speed
-                 5 motor is homing
-                 6 motor is calibrating
+        MotorStatus: The motor process status.
 
     Raises:
         can.CanError: If there is an error in sending the CAN message.
@@ -130,6 +125,10 @@ def run_motor_in_speed_mode(self, direction: Direction, speed, acceleration):
 
     cmd = [direction_value + ((speed >> 8) & 0b1111), speed & 0xFF, acceleration]
     return self.set_generic_status(MksCommands.RUN_MOTOR_SPEED_MODE_COMMAND, cmd)
+
+
+def stop_motor_in_speed_mode(self, acceleration):
+    return self.specialized_state(MksCommands.RUN_MOTOR_SPEED_MODE_COMMAND, StopMotorResult, motor_status_error, [0, 0, acceleration])
 
 
 def save_clean_in_speed_mode(self, state: SaveCleanState):
@@ -220,6 +219,10 @@ def run_motor_relative_motion_by_pulses(self, direction: Direction, speed, accel
         raise motor_status_error(f"No enum member with value {status_int}")
 
 
+def stop_motor_relative_motion_by_pulses(self, acceleration):
+    return self.specialized_state(MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_PULSES_COMMAND, StopMotorResult, motor_status_error, [0, 0, acceleration, 0, 0, 0])
+
+
 def run_motor_absolute_motion_by_pulses(self, speed, acceleration, absolute_pulses):
     """
     The motor runs to the specified position with the set acceleration and speed.
@@ -258,6 +261,10 @@ def run_motor_absolute_motion_by_pulses(self, speed, acceleration, absolute_puls
         return RunMotorResult(status_int)
     except ValueError:
         raise motor_status_error(f"No enum member with value {status_int}")
+
+
+def stop_motor_absolute_motion_by_pulses(self, acceleration):
+    return self.specialized_state(MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_PULSES_COMMAND, StopMotorResult, motor_status_error, [0, 0, acceleration, 0, 0, 0])
 
 
 def run_motor_relative_motion_by_axis(self, speed, acceleration, relative_axis):
@@ -303,6 +310,10 @@ def run_motor_relative_motion_by_axis(self, speed, acceleration, relative_axis):
         raise motor_status_error(f"No enum member with value {status_int}")
 
 
+def stop_motor_relative_motion_by_axis(self, acceleration):
+    return self.specialized_state(MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_AXIS_COMMAND, StopMotorResult, motor_status_error, [0, 0, acceleration, 0, 0, 0])
+
+
 def run_motor_absolute_motion_by_axis(self, speed, acceleration, absolute_axis):
     """
     The motor runs to the specified axis with the set acceleration and speed. The axis is the encoder value in
@@ -344,3 +355,7 @@ def run_motor_absolute_motion_by_axis(self, speed, acceleration, absolute_axis):
         return RunMotorResult(status_int)
     except ValueError:
         raise motor_status_error(f"No enum member with value {status_int}")
+
+
+def stop_motor_absolute_motion_by_axis(self, acceleration):
+    return self.specialized_state(MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND, StopMotorResult, motor_status_error, [0, 0, acceleration, 0, 0, 0])
