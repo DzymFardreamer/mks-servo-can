@@ -212,11 +212,7 @@ def run_motor_relative_motion_by_pulses(self, direction: Direction, speed, accel
         (pulses >> 8) & 0xFF,
         (pulses >> 0) & 0xFF,
     ]
-    tmp = self.set_generic(
-        MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_PULSES_COMMAND,
-        self.GENERIC_RESPONSE_LENGTH,
-        cmd,
-    )
+    tmp = self.set_generic(MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_PULSES_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)
     status_int = int.from_bytes(tmp[1:2], byteorder="big")
     try:
         return RunMotorResult(status_int)
@@ -256,11 +252,7 @@ def run_motor_absolute_motion_by_pulses(self, speed, acceleration, absolute_puls
         (absolute_pulses >> 8) & 0xFF,
         (absolute_pulses >> 0) & 0xFF,
     ]
-    tmp = self.set_generic(
-        MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_PULSES_COMMAND,
-        self.GENERIC_RESPONSE_LENGTH,
-        cmd,
-    )
+    tmp = self.set_generic(MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_PULSES_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)
     status_int = int.from_bytes(tmp[1:2], byteorder="big")
     try:
         return RunMotorResult(status_int)
@@ -303,11 +295,7 @@ def run_motor_relative_motion_by_axis(self, speed, acceleration, relative_axis):
         (relative_axis >> 8) & 0xFF,
         (relative_axis >> 0) & 0xFF,
     ]
-    tmp = self.set_generic(
-        MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_AXIS_COMMAND,
-        self.GENERIC_RESPONSE_LENGTH,
-        cmd,
-    )
+    tmp = self.set_generic(MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_AXIS_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)
     status_int = int.from_bytes(tmp[1:2], byteorder="big")
     try:
         return RunMotorResult(status_int)
@@ -350,11 +338,7 @@ def run_motor_absolute_motion_by_axis(self, speed, acceleration, absolute_axis):
         (absolute_axis >> 8) & 0xFF,
         (absolute_axis >> 0) & 0xFF,
     ]
-    tmp = self.set_generic(
-        MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND,
-        self.GENERIC_RESPONSE_LENGTH,
-        cmd,
-    )
+    tmp = self.set_generic(MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)
     status_int = int.from_bytes(tmp[1:2], byteorder="big")
     try:
         return RunMotorResult(status_int)
