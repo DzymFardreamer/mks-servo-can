@@ -160,47 +160,91 @@ class MksServo:
             try:
                 if message.arbitration_id == self.can_id:
                     self.check_msg_crc(message)
-                    if message.data[0] == MksCommands.MOTOR_CALIBRATION_COMMAND.value and len(message.data) == self.GENERIC_RESPONSE_LENGTH:
+                    op_code = MksCommands(message.data[0])
+                    if op_code == MksCommands.MOTOR_CALIBRATION_COMMAND and len(message.data) == self.GENERIC_RESPONSE_LENGTH:
                         status_int = int.from_bytes(message.data[1:2], byteorder="big")
                         try:
                             self._calibration_status = self.CalibrationResult(status_int)
                         except ValueError:
                             logging.warning(f"No enum member with value {status_int}")
-                    elif message.data[0] == MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_PULSES_COMMAND.value and len(message.data) == self.GENERIC_RESPONSE_LENGTH:
+                    elif (
+                        op_code
+                        in [
+                            MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_PULSES_COMMAND,
+                            MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_PULSES_COMMAND,
+                            MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_AXIS_COMMAND,
+                            MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND,
+                            MksCommands.RUN_MOTOR_SPEED_MODE_COMMAND,
+                        ]
+                        and len(message.data) == self.GENERIC_RESPONSE_LENGTH
+                    ):
                         status_int = int.from_bytes(message.data[1:2], byteorder="big")
                         try:
                             self._motor_run_status = self.RunMotorResult(status_int)
                         except ValueError:
                             logging.warning(f"No enum member with value {status_int}")
-                    elif message.data[0] == MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_PULSES_COMMAND.value and len(message.data) == self.GENERIC_RESPONSE_LENGTH:
-                        status_int = int.from_bytes(message.data[1:2], byteorder="big")
-                        try:
-                            self._motor_run_status = self.RunMotorResult(status_int)
-                        except ValueError:
-                            logging.warning(f"No enum member with value {status_int}")
-                    elif message.data[0] == MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_AXIS_COMMAND.value and len(message.data) == self.GENERIC_RESPONSE_LENGTH:
-                        status_int = int.from_bytes(message.data[1:2], byteorder="big")
-                        try:
-                            self._motor_run_status = self.RunMotorResult(status_int)
-                        except ValueError:
-                            logging.warning(f"No enum member with value {status_int}")
-                    elif message.data[0] == MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND.value and len(message.data) == self.GENERIC_RESPONSE_LENGTH:
-                        status_int = int.from_bytes(message.data[1:2], byteorder="big")
-                        try:
-                            self._motor_run_status = self.RunMotorResult(status_int)
-                        except ValueError:
-                            logging.warning(f"No enum member with value {status_int}")
-                    elif message.data[0] == MksCommands.GO_HOME_COMMAND.value and len(message.data) == self.GENERIC_RESPONSE_LENGTH:
+                    elif op_code == MksCommands.GO_HOME_COMMAND and len(message.data) == self.GENERIC_RESPONSE_LENGTH:
                         status_int = int.from_bytes(message.data[1:2], byteorder="big")
                         try:
                             self._homing_status = self.GoHomeResult(status_int)
+                            print("self._homing_status", self._homing_status)
                         except ValueError:
                             logging.warning(f"No enum member with value {status_int}")
-                    elif message.data[0] == MksCommands.QUERY_MOTOR_STATUS_COMMAND.value:
-                        a = 1
-                    elif message.data[0] == MksCommands.READ_ENCODED_VALUE_ADDITION.value:
-                        a = 1
+                    elif op_code == MksCommands.QUERY_MOTOR_STATUS_COMMAND:
+                        # a = 1
+                        pass
+                    elif op_code in [
+                        MksCommands.READ_ENCODED_VALUE_ADDITION,
+                        MksCommands.READ_ENCODER_VALUE_CARRY,
+                        MksCommands.READ_RAW_ENCODED_VALUE_ADDITION,
+                        MksCommands.READ_NUM_PULSES_RECEIVED,
+                        MksCommands.READ_IO_PORT_STATUS,
+                        MksCommands.READ_MOTOR_SHAFT_ANGLE_ERROR,
+                        MksCommands.READ_EN_PINS_STATUS,
+                        MksCommands.READ_GO_BACK_TO_ZERO_STATUS_WHEN_POWER_ON,
+                        MksCommands.RELEASE_MOTOR_SHAFT_LOCKED_PROTECTION_STATE,
+                        MksCommands.READ_MOTOR_SHAFT_PROTECTION_STATE,
+                    ]:
+                        # a = 1
+                        pass
+                    elif op_code == MksCommands.READ_MOTOR_SPEED:
+                        # speed = int.from_bytes(message.data[1:3], byteorder="big", signed=True)
+                        # print("???", op_code, speed, "!!!")
+                        pass
+                    elif (
+                        op_code
+                        in [  # All set_generic_status() commands
+                            MksCommands.ENABLE_MOTOR_COMMAND,
+                            MksCommands.EMERGENCY_STOP_COMMAND,
+                            MksCommands.SAVE_CLEAN_IN_SPEED_MODE_COMMAND,
+                            MksCommands.SET_WORK_MODE_COMMAND,
+                            MksCommands.SET_WORKING_CURRENT_COMMAND,
+                            MksCommands.SET_HOLDING_CURRENT_COMMAND,
+                            MksCommands.SET_SUBDIVISIONS_COMMAND,
+                            MksCommands.SET_EN_PIN_CONFIG_COMMAND,
+                            MksCommands.SET_MOTOR_ROTATION_DIRECTION,
+                            MksCommands.SET_AUTO_TURN_OFF_SCREEN_COMMAND,
+                            MksCommands.SET_MOTOR_SHAFT_LOCKED_ROTOR_PROTECTION_COMMAND,
+                            MksCommands.SET_SUBDIVISION_INTERPOLATION_COMMAND,
+                            MksCommands.SET_CAN_BITRATE_COMMAND,
+                            MksCommands.SET_CAN_ID_COMMAND,
+                            MksCommands.SET_SLAVE_RESPOND_ACTIVE_COMMAND,
+                            MksCommands.SET_KEY_LOCK_ENABLE_COMMAND,
+                            MksCommands.SET_GROUP_ID_COMMAND,
+                            MksCommands.SET_HOME_COMMAND,
+                            MksCommands.SET_CURRENT_AXIS_TO_ZERO_COMMAND,
+                            MksCommands.SET_LIMIT_PORT_REMAP_COMMAND,
+                            MksCommands.SET_MODE0_COMMAND,
+                            MksCommands.RESTORE_DEFAULT_PARAMETERS_COMMAND,
+                        ]
+                        and len(message.data) == self.GENERIC_RESPONSE_LENGTH
+                    ):
+                        # status_int = int.from_bytes(message.data[1:2], byteorder="big")
+                        # print("???", op_code, SuccessStatus(status_int), "!!!", flush=True)
+                        pass
                     else:
+                        print("message.data:", message.data)
+                        print("op_code:", op_code)
                         print(message, flush=True)
             except InvalidCRCError:
                 logging.error(f"CRC check failed for the message")
@@ -297,10 +341,13 @@ class MksServo:
                 try:
                     self.check_msg_crc(message)
                     if message.arbitration_id == self.can_id:
-                        if not (message.data[0] == op_code and len(message.data) == response_length):
-                            logging.error(f"Unexpected response length or opcode.")
+                        if message.data[0] != op_code or len(message.data) != response_length:
+                            logging.error(f"Unexpected opcode or response length.")
+                            logging.error(f"op_code:0x{op_code:X}")
+                            logging.error(f"message.data:{message.data}")
+                            logging.error(message)
                         status = message.data
-                except InvalidCRCError:
+                except InvalidCRCError as e:
                     logging.error(f"CRC check failed for the message: {e}")
 
         try:
