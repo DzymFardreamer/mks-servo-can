@@ -267,7 +267,7 @@ class MksServo:
 
         return True
 
-    def set_generic(self, op_code, response_length, data=[]):
+    def set_generic(self, op_code: MksCommands, response_length, data=[]):
         """Sends a generic command via CAN bus and waits for a response.
 
         Args:
@@ -317,7 +317,7 @@ class MksServo:
 
         return status
 
-    def set_generic_status(self, op_code, data=[]):
+    def set_generic_status(self, op_code: MksCommands, data=[]) -> SuccessStatus | None:
         """Sends a generic status command and processes the response.
 
         Args:
@@ -337,8 +337,8 @@ class MksServo:
         except ValueError:
             raise InvalidResponseError(f"No enum member with value {status_int}")
 
-    def specialized_state(self, op_code, status_enum, status_enum_exception):
-        tmp = self.set_generic(op_code, self.GENERIC_RESPONSE_LENGTH, [op_code.value])
+    def specialized_state(self, op_code: MksCommands, status_enum, status_enum_exception, data=None):
+        tmp = self.set_generic(op_code, self.GENERIC_RESPONSE_LENGTH, [op_code.value] if data is None else data)
         if tmp is None:
             return None
         status_int = int.from_bytes(tmp[1:2], byteorder="big")
