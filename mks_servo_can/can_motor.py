@@ -161,7 +161,7 @@ def wait_for_motor_idle(self, timeout=0):
     Waits until the motor stops running or the timeout time is meet.
 
     Args:
-        timeout (double): Maximum number of seconds to wait for the motor to stop.
+        timeout (double): Maximum number of seconds to wait for the motor to stop, 0 - without waits, None - wait until the motor stops running.
 
     Returns:
         boolean: The running state of the motor at the end of this method.
@@ -170,7 +170,7 @@ def wait_for_motor_idle(self, timeout=0):
         can.CanError: If there is an error in sending the CAN message.
     """
     start_time = time.perf_counter()
-    while (time.perf_counter() - start_time < timeout) and self.is_motor_running():
+    while ((time.perf_counter() - start_time < timeout) if timeout else True) and self.is_motor_running():
         time.sleep(0.1)  # Small sleep to prevent busy waiting
     return self.is_motor_running()
 
