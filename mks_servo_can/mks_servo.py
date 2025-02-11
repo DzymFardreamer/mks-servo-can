@@ -141,7 +141,7 @@ class MksServo:
     """
     GENERIC_RESPONSE_LENGTH = 3
     DEFAULT_TIMEOUT = 1
-    MAX_CALIBRATION_TIME = 20
+    MAX_CALIBRATION_TIME = 30
     MAX_HOMING_TIME = 20
 
     _calibration_status = CalibrationResult.Unkown
