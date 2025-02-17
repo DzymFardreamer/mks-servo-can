@@ -10,9 +10,10 @@ notifier = can.Notifier(bus, [])
 
 
 def wait_for_motor_idle2(timeout):
+    print("Speed:", end="", flush=True)
     start_time = time.perf_counter()
     while (time.perf_counter() - start_time < timeout) and servo.is_motor_running():
-        print(servo.read_motor_speed(), flush=True)
+        print(servo.read_motor_speed(), end=" ", flush=True)
         time.sleep(0.1)  # Small sleep to prevent busy waiting
     return servo.is_motor_running()
 
@@ -21,14 +22,12 @@ def wait_for_motor_idle2(timeout):
 #    ServoX = 0,
 #    ServoY = 1
 def move_motor(absolute_position):
-    print(f"Moving motor to absolute position {absolute_position}", flush=True)
+    print(f"\nMoving motor to absolute position {absolute_position}", flush=True)
     print(servo.run_motor_absolute_motion_by_axis(600, 1, absolute_position), flush=True)
     wait_for_motor_idle2(30)
     value = servo.read_encoder_value_addition()
     error = absolute_position - value
-    print(f"Movement at {absolute_position} with error {error}")
-    print(f"", flush=True)
-    print()
+    print(f"\nMovement at {absolute_position} with error {error}", flush=True)
 
     while False:
         status = servo.query_motor_status()
@@ -45,14 +44,17 @@ def move_motor(absolute_position):
 
 
 servo = MksServo(bus, notifier, 1)
-servo_y = MksServo(bus, notifier, 2)
-
-# print(servo.set_work_mode(MksServo.WorkMode.SrvFoc))
 
 # if not servo.b_calibrate_encoder()['status'] == MksServo.CalibrationResult.CalibratedSuccess:
 #   logging.error("Calibration failed")
 
-print(servo.emergency_stop_motor())
+print(servo.set_slave_respond_active(MksServo.Enable.Enable, MksServo.Enable.Enable))
+
+try:
+    print("emergency_stop_motor")
+    print(servo.emergency_stop_motor())
+except:
+    pass
 
 print(servo.set_work_mode(MksServo.WorkMode.SrvFoc))
 print(servo.set_subdivisions(16))
@@ -172,64 +174,28 @@ print(servo.emergency_stop_motor())
 
 print("---- 6.4.1 Speed mode command ----")
 print(servo.run_motor_in_speed_mode(MksServo.Direction.CW, 320, 2))
-print(servo.wait_for_motor_idle(10))
+print(servo.wait_for_motor_idle())
 
 print("---- 6.4.3 Save/Clean the parameter in speed mode  ----")
 print(servo.save_clean_in_speed_mode(MksServo.SaveCleanState.Clean))
 
 print("---- 6.5.1 position mode1: relative motion by pulses ----")
 print(servo.run_motor_relative_motion_by_pulses(MksServo.Direction.CW, 200, 1, 0x4000))
-print(servo.wait_for_motor_idle(10))
+print(servo.wait_for_motor_idle())
 
 print("---- 6.6.1 Position mode 2: absolute motion by pulses ----")
 print(servo.run_motor_absolute_motion_by_pulses(400, 2, 0x4000))
-print(servo.wait_for_motor_idle(10))
+print(servo.wait_for_motor_idle())
 
 print("---- 6.7.1 Position mode 3: relative motion by axis ----")
 print(servo.run_motor_relative_motion_by_axis(200, 1, 0x4000))
-print(servo.wait_for_motor_idle(10))
+print(servo.wait_for_motor_idle())
 
 print("---- 6.8.1 Position mode 4: Absolute motion by axis ----")
 print(servo.run_motor_absolute_motion_by_axis(200, 1, -0x4000))
 print(servo.query_motor_status())
-print(servo.wait_for_motor_idle(10))
+print(servo.wait_for_motor_idle())
 print(servo.query_motor_status())
-
-# def get_servo(id, value):
-#    if id == ServoAxis.ServoX:
-#       return servo
-#    elif id == ServoAxis.ServoY:
-#        return servo_y
-#
-# def move_motor(id, value):
-#    selected_servo = get_servo(id)
-#    print(selected_servo.run_motor_relative_motion_by_pulses(MksServo.Direction.CW, 400, 1, 0x000A000))
-#
-#    while True:
-#        status = servo.query_motor_status()
-#        print(status, flush=True)
-#
-#        # Check if the status is MotorStop
-#        if status['status'] == MksServo.MotorStatus.MotorStop:
-#            print("Motor has stopped.")
-#            break
-
-
-def move_motors(x, y):
-    return 1
-
-
-# while True:
-#     status = servo.query_motor_status()
-#     print(status, flush=True)
-#
-#     # Check if the status is MotorStop
-#     if status == MksServo.MotorStatus.MotorStop:
-#         print("Motor has stopped.")
-#         break
-#
-#     # Wait for 100 ms
-#     time.sleep(0.1)
 
 try:
     while True:

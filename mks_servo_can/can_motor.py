@@ -5,6 +5,7 @@ from .mks_enums import (
     Enable,
     SaveCleanState,
     RunMotorResult,
+    StopMotorResult,
     MotorStatus,
     MksCommands,
 )
@@ -76,13 +77,7 @@ def query_motor_status(self):
     Query the motor status
 
     Returns:
-        Status = 0 query fail
-                 1 motor stop
-                 2 motor speed up
-                 3 motor speed down
-                 4 motor full speed
-                 5 motor is homing
-                 6 motor is calibrating
+        MotorStatus: The motor process status.
 
     Raises:
         can.CanError: If there is an error in sending the CAN message.
@@ -132,6 +127,10 @@ def run_motor_in_speed_mode(self, direction: Direction, speed, acceleration):
     return self.set_generic_status(MksCommands.RUN_MOTOR_SPEED_MODE_COMMAND, cmd)
 
 
+def stop_motor_in_speed_mode(self, acceleration):
+    return self.specialized_state(MksCommands.RUN_MOTOR_SPEED_MODE_COMMAND, StopMotorResult, motor_status_error, [0, 0, acceleration])
+
+
 def save_clean_in_speed_mode(self, state: SaveCleanState):
     """
     Sets the save/clean parameter state in speed mode
@@ -162,7 +161,7 @@ def wait_for_motor_idle(self, timeout=0):
     Waits until the motor stops running or the timeout time is meet.
 
     Args:
-        timeout (double): Maximum number of seconds to wait for the motor to stop.
+        timeout (double): Maximum number of seconds to wait for the motor to stop, 0 - without waits, None - wait until the motor stops running.
 
     Returns:
         boolean: The running state of the motor at the end of this method.
@@ -171,7 +170,7 @@ def wait_for_motor_idle(self, timeout=0):
         can.CanError: If there is an error in sending the CAN message.
     """
     start_time = time.perf_counter()
-    while (time.perf_counter() - start_time < timeout) and self.is_motor_running():
+    while ((time.perf_counter() - start_time < timeout) if timeout else True) and self.is_motor_running():
         time.sleep(0.1)  # Small sleep to prevent busy waiting
     return self.is_motor_running()
 
@@ -212,16 +211,18 @@ def run_motor_relative_motion_by_pulses(self, direction: Direction, speed, accel
         (pulses >> 8) & 0xFF,
         (pulses >> 0) & 0xFF,
     ]
-    tmp = self.set_generic(
-        MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_PULSES_COMMAND,
-        self.GENERIC_RESPONSE_LENGTH,
-        cmd,
-    )
+    tmp = self.set_generic(MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_PULSES_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)
+    if tmp is None:
+        return None
     status_int = int.from_bytes(tmp[1:2], byteorder="big")
     try:
         return RunMotorResult(status_int)
     except ValueError:
         raise motor_status_error(f"No enum member with value {status_int}")
+
+
+def stop_motor_relative_motion_by_pulses(self, acceleration):
+    return self.specialized_state(MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_PULSES_COMMAND, StopMotorResult, motor_status_error, [0, 0, acceleration, 0, 0, 0])
 
 
 def run_motor_absolute_motion_by_pulses(self, speed, acceleration, absolute_pulses):
@@ -256,16 +257,18 @@ def run_motor_absolute_motion_by_pulses(self, speed, acceleration, absolute_puls
         (absolute_pulses >> 8) & 0xFF,
         (absolute_pulses >> 0) & 0xFF,
     ]
-    tmp = self.set_generic(
-        MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_PULSES_COMMAND,
-        self.GENERIC_RESPONSE_LENGTH,
-        cmd,
-    )
+    tmp = self.set_generic(MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_PULSES_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)
+    if tmp is None:
+        return None
     status_int = int.from_bytes(tmp[1:2], byteorder="big")
     try:
         return RunMotorResult(status_int)
     except ValueError:
         raise motor_status_error(f"No enum member with value {status_int}")
+
+
+def stop_motor_absolute_motion_by_pulses(self, acceleration):
+    return self.specialized_state(MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_PULSES_COMMAND, StopMotorResult, motor_status_error, [0, 0, acceleration, 0, 0, 0])
 
 
 def run_motor_relative_motion_by_axis(self, speed, acceleration, relative_axis):
@@ -303,16 +306,18 @@ def run_motor_relative_motion_by_axis(self, speed, acceleration, relative_axis):
         (relative_axis >> 8) & 0xFF,
         (relative_axis >> 0) & 0xFF,
     ]
-    tmp = self.set_generic(
-        MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_AXIS_COMMAND,
-        self.GENERIC_RESPONSE_LENGTH,
-        cmd,
-    )
+    tmp = self.set_generic(MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_AXIS_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)
+    if tmp is None:
+        return None
     status_int = int.from_bytes(tmp[1:2], byteorder="big")
     try:
         return RunMotorResult(status_int)
     except ValueError:
         raise motor_status_error(f"No enum member with value {status_int}")
+
+
+def stop_motor_relative_motion_by_axis(self, acceleration):
+    return self.specialized_state(MksCommands.RUN_MOTOR_RELATIVE_MOTION_BY_AXIS_COMMAND, StopMotorResult, motor_status_error, [0, 0, acceleration, 0, 0, 0])
 
 
 def run_motor_absolute_motion_by_axis(self, speed, acceleration, absolute_axis):
@@ -350,13 +355,15 @@ def run_motor_absolute_motion_by_axis(self, speed, acceleration, absolute_axis):
         (absolute_axis >> 8) & 0xFF,
         (absolute_axis >> 0) & 0xFF,
     ]
-    tmp = self.set_generic(
-        MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND,
-        self.GENERIC_RESPONSE_LENGTH,
-        cmd,
-    )
+    tmp = self.set_generic(MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND, self.GENERIC_RESPONSE_LENGTH, cmd)
+    if tmp is None:
+        return None
     status_int = int.from_bytes(tmp[1:2], byteorder="big")
     try:
         return RunMotorResult(status_int)
     except ValueError:
         raise motor_status_error(f"No enum member with value {status_int}")
+
+
+def stop_motor_absolute_motion_by_axis(self, acceleration):
+    return self.specialized_state(MksCommands.RUN_MOTOR_ABSOLUTE_MOTION_BY_AXIS_COMMAND, StopMotorResult, motor_status_error, [0, 0, acceleration, 0, 0, 0])

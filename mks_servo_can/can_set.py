@@ -327,10 +327,8 @@ def set_slave_respond_active(self, respon: Enable, active: Enable):
 
     Raises:
         can.CanError: If there is an error in sending the CAN message.
-
-    Note: Not implemented
     """
-    print("Not implemented")
+    return self.set_generic_status(MksCommands.SET_SLAVE_RESPOND_ACTIVE_COMMAND, [respon.value, active.value])
 
 
 def set_key_lock(self, enable: Enable):
