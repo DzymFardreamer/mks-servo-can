@@ -40,6 +40,7 @@ class MksServo:
     from .can_commands import (
         read_encoder_value_carry,
         read_encoder_value_addition,
+        read_raw_encoder_value_addition,
         read_motor_speed,
         read_num_pulses_received,
         read_io_port_status,
@@ -144,8 +145,8 @@ class MksServo:
     MAX_CALIBRATION_TIME = 30
     MAX_HOMING_TIME = 20
 
-    _calibration_status = CalibrationResult.Unkown
-    _homing_status = GoHomeResult.Unkown
+    _calibration_status = CalibrationResult.Unknown
+    _homing_status = GoHomeResult.Unknown
     _motor_run_status = RunMotorResult.RunComplete
 
     def __init__(self, bus, notifier, id):

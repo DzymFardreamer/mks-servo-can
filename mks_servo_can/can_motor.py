@@ -156,7 +156,7 @@ def is_motor_running(self):
     return self.query_motor_status() != MotorStatus.MotorStop
 
 
-def wait_for_motor_idle(self, timeout=0):
+def wait_for_motor_idle(self, timeout=15):
     """
     Waits until the motor stops running or the timeout time is meet.
 
