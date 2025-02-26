@@ -24,6 +24,11 @@ cd mks-servo-can
 pip install .
 ```
 
+- To install this library from the GitHub:
+```
+pip install git+https://github.com/DzymFardreamer/mks-servo-can.git
+```
+
 ## Requirements
 - Python 3.x
 - python-can library
