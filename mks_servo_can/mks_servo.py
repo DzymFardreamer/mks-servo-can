@@ -64,6 +64,7 @@ class MksServo:
         _validate_speed,
         _validate_acceleration,
         _validate_pulses,
+        _validate_axis,
         query_motor_status,
         enable_motor,
         emergency_stop_motor,
@@ -342,9 +343,16 @@ class MksServo:
                 try:
                     self.check_msg_crc(message)
                     if message.arbitration_id == self.can_id:
-                        if message.data[0] != op_code or len(message.data) != response_length:
-                            logging.error(f"Unexpected opcode or response length.")
+                        if message.data[0] != op_code:
+                            logging.error(f"Unexpected opcode.")
                             logging.error(f"op_code:0x{op_code:X}")
+                            logging.error(f"message.data[0]:0x{int(message.data[0]):X}")
+                            logging.error(f"message.data:{message.data}")
+                            logging.error(message)
+                        if len(message.data) != response_length:
+                            logging.error(f"Unexpected response length.")
+                            logging.error(f"len(message.data):{len(message.data)}")
+                            logging.error(f"response_length:{response_length}")
                             logging.error(f"message.data:{message.data}")
                             logging.error(message)
                         status = message.data

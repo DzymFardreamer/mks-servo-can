@@ -14,6 +14,8 @@ from .mks_enums import (
 MAX_SPEED = 3000
 MAX_ACCELERATION = 255
 MAX_PULSES = 0xFFFFFF
+MAX_AXIS = +8388607  # 0x7FFFFF
+MIN_AXIS = -8388608  # 0x800000  # ??? -8388607 ???
 
 
 class invalid_direction_error(Exception):
@@ -36,6 +38,12 @@ class invalid_aceleration_error(Exception):
 
 class invalid_pulses_error(Exception):
     """Exception raised for invalid pulse count."""
+
+    pass
+
+
+class invalid_axis_error(Exception):
+    """Exception raised for invalid axis coordinate."""
 
     pass
 
@@ -69,7 +77,12 @@ def _validate_acceleration(self, acceleration):
 
 def _validate_pulses(self, pulses):
     if pulses < 0 or pulses > MAX_PULSES:
-        raise invalid_pulses_error("Pulses must be between 0 and 16777215")
+        raise invalid_pulses_error(f"Pulses must be between 0 and {MAX_PULSES}")
+
+
+def _validate_axis(self, axis):
+    if axis < MIN_AXIS or axis > MAX_AXIS:
+        raise invalid_axis_error(f"Must be between {MIN_AXIS} and {MAX_AXIS}")
 
 
 def query_motor_status(self):
@@ -247,7 +260,7 @@ def run_motor_absolute_motion_by_pulses(self, speed, acceleration, absolute_puls
     if self.is_motor_running():
         raise motor_already_running_error("")
     self._validate_speed(speed)
-    self._validate_pulses(absolute_pulses)
+    self._validate_axis(absolute_pulses)
 
     cmd = [
         (speed >> 8),
@@ -296,6 +309,7 @@ def run_motor_relative_motion_by_axis(self, speed, acceleration, relative_axis):
         raise motor_already_running_error("")
     self._validate_speed(speed)
     self._validate_acceleration(acceleration)
+    self._validate_axis(relative_axis)
 
     # TODO: Should we add a check to avoid stopping the motor inmediately when running at more than 1000 RPMs?
     cmd = [
@@ -345,6 +359,7 @@ def run_motor_absolute_motion_by_axis(self, speed, acceleration, absolute_axis):
         raise motor_already_running_error("")
     self._validate_speed(speed)
     self._validate_acceleration(acceleration)
+    self._validate_axis(absolute_axis)
 
     # TODO: Should we add a check to avoid stopping the motor inmediately when running at more than 1000 RPMs?
     cmd = [
