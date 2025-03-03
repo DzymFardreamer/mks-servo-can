@@ -40,6 +40,7 @@ class MksServo:
     from .can_commands import (
         read_encoder_value_carry,
         read_encoder_value_addition,
+        read_raw_encoder_value_addition,
         read_motor_speed,
         read_num_pulses_received,
         read_io_port_status,
@@ -63,6 +64,7 @@ class MksServo:
         _validate_speed,
         _validate_acceleration,
         _validate_pulses,
+        _validate_axis,
         query_motor_status,
         enable_motor,
         emergency_stop_motor,
@@ -144,8 +146,8 @@ class MksServo:
     MAX_CALIBRATION_TIME = 30
     MAX_HOMING_TIME = 20
 
-    _calibration_status = CalibrationResult.Unkown
-    _homing_status = GoHomeResult.Unkown
+    _calibration_status = CalibrationResult.Unknown
+    _homing_status = GoHomeResult.Unknown
     _motor_run_status = RunMotorResult.RunComplete
 
     def __init__(self, bus, notifier, id):
@@ -341,9 +343,16 @@ class MksServo:
                 try:
                     self.check_msg_crc(message)
                     if message.arbitration_id == self.can_id:
-                        if message.data[0] != op_code or len(message.data) != response_length:
-                            logging.error(f"Unexpected opcode or response length.")
+                        if message.data[0] != op_code:
+                            logging.error(f"Unexpected opcode.")
                             logging.error(f"op_code:0x{op_code:X}")
+                            logging.error(f"message.data[0]:0x{int(message.data[0]):X}")
+                            logging.error(f"message.data:{message.data}")
+                            logging.error(message)
+                        if len(message.data) != response_length:
+                            logging.error(f"Unexpected response length.")
+                            logging.error(f"len(message.data):{len(message.data)}")
+                            logging.error(f"response_length:{response_length}")
                             logging.error(f"message.data:{message.data}")
                             logging.error(message)
                         status = message.data

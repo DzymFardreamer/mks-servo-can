@@ -1,4 +1,3 @@
-import can
 import time
 
 from .mks_enums import (

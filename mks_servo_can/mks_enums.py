@@ -82,7 +82,7 @@ class LockedRotor(Enum):  # StatusCommand8
 
 
 class CalibrationResult(Enum):
-    Unkown = 500
+    Unknown = 500
     Calibrating = 0
     CalibratedSuccess = 1
     CalibratingFail = 2
@@ -128,7 +128,7 @@ class EndStopLevel(Enum):
 
 
 class GoHomeResult(Enum):
-    Unkown = 500
+    Unknown = 500
     Fail = 0
     Start = 1
     Success = 2

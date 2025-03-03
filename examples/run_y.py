@@ -15,7 +15,7 @@ notifier = can.Notifier(bus, [])
 
 
 def wait_for_motor_idle2(timeout=None):
-    print("Speed:", end="", flush=True)
+    print("Speed:", servo.read_motor_speed(), end=" ", flush=True)
     start_time = time.perf_counter()
     while ((time.perf_counter() - start_time < timeout) if timeout else True) and servo.is_motor_running():
         print(servo.read_motor_speed(), end=" ", flush=True)
@@ -39,6 +39,7 @@ try:
     print(servo.emergency_stop_motor())
 except:
     pass
+
 print("set_slave_respond_active")
 print(servo.set_slave_respond_active(MksServo.Enable.Enable, MksServo.Enable.Enable))
 
@@ -62,6 +63,17 @@ print(servo.set_current_axis_to_zero())
 # print("Go home")
 # print(servo.set_home(MksServo.EndStopLevel.High, MksServo.Direction.CW, 200, MksServo.Enable.Disable))
 # print(servo.b_go_home())
+
+print("servo.query_motor_status()")
+print(servo.query_motor_status())
+
+print("servo.is_motor_running()")
+print(servo.is_motor_running())
+
+print("servo.read_encoder_value_carry()")
+print(servo.read_encoder_value_carry())
+print("servo.read_encoder_value_addition()")
+print(servo.read_encoder_value_addition())
 
 print("Position 1")
 print(servo.read_encoder_value_addition())

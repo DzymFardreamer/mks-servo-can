@@ -1,5 +1,4 @@
 import time
-import can
 
 from .mks_enums import (
     MksCommands,
@@ -91,6 +90,32 @@ def read_encoder_value_addition(self):
     response_length = 8
 
     data = self.set_generic(op_code, response_length, [op_code.value])
+
+    if data:
+        return int.from_bytes(data[1:7], byteorder="big", signed=True)
+    return None
+
+
+def read_raw_encoder_value_addition(self):
+    """
+    Reads the encoder value in addition mode
+
+    Returns:
+        int: If successful, returns the current value of the encoder (range from 0 to +-0x7FFFFFFFFFFF).
+        None: if there's an error in sending the message, a self.timeout occurs, or the response is
+        invalid.
+
+    Raises:
+        can.CanError: If there is an error in sending the CAN message.
+
+    Examples:
+        if the current value is 0x3FF0, after one turn CCW, the carry is 1 and value is 0x7FF0.
+        if the current value is 0x3FF0, after one turn CW, the carry is -1 and value is -0x10.
+    """
+    op_code = MksCommands.READ_RAW_ENCODED_VALUE_ADDITION
+    response_length = 8
+
+    data = self.set_generic(op_code, response_length, [op_code])
 
     if data:
         return int.from_bytes(data[1:7], byteorder="big", signed=True)
